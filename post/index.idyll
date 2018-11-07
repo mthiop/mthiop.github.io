@@ -1,10 +1,11 @@
-[meta title:"Post" description:"Short description of your project" /]
+[meta title:"Potential Fields" description:"Pfadplanung mit Potential Fields" /]
+
 
 [Header
-  title:"Post"
-  subtitle:"Welcome to Idyll. Open index.idyll to start writing"
-  author:"Your Name Here"
-  authorLink:"https://idyll-lang.org" /]
+  title:"Pfadplanung mit Potential Fields"
+  subtitle:"Eine Erklaerung des Algorithmus"
+  author:"Us" /]
+[image style:`{width: '100%'}` src:"/static/images/pfo.gif" /]
 
 This is an Idyll file. Write text
 as you please in here. To add interactivity,
@@ -41,7 +42,6 @@ You can also load files from your `static/` directory.
   src:'static/images/quill.svg'
   style:`{ width: 75, display: 'block', margin: '30px auto' }`
   /]
-
 [Fixed]
 
 [var name:"state" value:0 /]
