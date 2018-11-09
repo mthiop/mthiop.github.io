@@ -3,9 +3,32 @@
 
 [Header
   title:"Pfadplanung mit Potential Fields"
-  subtitle:"Eine Erklaerung des Algorithmus"
-  author:"Us" /]
+  subtitle:""
+  author:"" /]
+
+## Das Team
+
+* A
+* B
+* C
+
+## Der Algorithmus
+
+Attractive Goal:
+[image style:`{width: '100%'}` src:"/static/images/noobstacle.gif" /]
+Repulsive Obstacle:
 [image style:`{width: '100%'}` src:"/static/images/pfo.gif" /]
+More Repulsive Obstacles:
+[image style:`{width: '100%'}` src:"/static/images/threeobstacles.gif" /]
+With other parameters:
+[image style:`{width: '100%'}` src:"/static/images/threeobstaclesotherparam.gif" /]
+
+## Die Aufgabe
+
+* Blackbox Playground
+* Whitebox Explanation ?
+* Problems
+* Extensions
 
 This is an Idyll file. Write text
 as you please in here. To add interactivity,
@@ -42,7 +65,7 @@ You can also load files from your `static/` directory.
   src:'static/images/quill.svg'
   style:`{ width: 75, display: 'block', margin: '30px auto' }`
   /]
-[Fixed]
+//[Fixed]
 
 [var name:"state" value:0 /]
 
@@ -53,4 +76,4 @@ This component is implemented using D3:
   Click Me.
 [/button]
 
-[/Fixed]
+//[/Fixed]
