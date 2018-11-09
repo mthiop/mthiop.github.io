@@ -3,17 +3,19 @@ graphics_toolkit("gnuplot")
 q = [0,0]
 qG = [10,10]
 
-# Obstacle
+# Obstacles
+#no obstacle = too far away
+qC = [];
 #very simple case
-qC = [4.1,4]
+#qC = [4.1,4]
 # simple case
-#qC = [6,4; 2,3;4,4]
+qC = [6,4; 2,3;4,4]
 # this breaks for some reason
 #qC = [5,0;5,1;5,2;5,3;5,4;5,5;  9,12;9,11;9,10;9,9]
 # cool curve
 #qC = [5,0;5,1;5,2;5,3;5,4;5,5;  8,9;7,10]
 
-# ATTRACTOR
+# ATTRACTIVE
 function F_Att = F_AttFunc(q,qG)
 	e = 0.3;
 	#F_Att = -e * (q-qG) / norm(q-qG); #linear
@@ -22,8 +24,9 @@ endfunction
 
 # REPULSIVE
 function F_Rep = F_RepFunc(q, qC)
-	n = 0.8;
-	pq = norm(q-qC);
+	n = 0.1;
+	radius = 0.2;
+	pq = norm(q-qC)- radius;
 	p0 = 5; # influence range
 	if (pq > p0)
 		F_Rep = [0,0];
@@ -38,7 +41,9 @@ endfunction
 Q = q
 hold on
 # plot obstacles
-plot(qC(:,1),qC(:,2), 'marker', 's', 'linestyle', 'none')
+if (rows(qC) > 0)
+	plot(qC(:,1),qC(:,2), 'marker', 's', 'linestyle', 'none')
+endif
 # plot goal
 plot(10,10, 'marker', '*')
 
