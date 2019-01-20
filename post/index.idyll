@@ -6,43 +6,43 @@
   subtitle:""
   author:"" /]
 
-## Das Team
-
-* Anahid
-* Michael
-* Till
-
-## Der Algorithmus
-
-Attraktives Ziel
-[image style:`{width: '100%'}` src:"/static/images/noobstacle.gif" /]
-
-Repulsives Hinderniss:
-[image style:`{width: '100%'}` src:"/static/images/pfo.gif" /]
-
-Mehrere Hindernisse:
-[image style:`{width: '100%'}` src:"/static/images/threeobstacles.gif" /]
-
-Verschiedene Parameter:
-[image style:`{width: '100%'}` src:"/static/images/threeobstaclesotherparam.gif" /]
-
-## Die Aufgabe
-
-### Blackbox Playground
-* Robot
-* Static World
-* Static Obstacles
-
-### Whitebox Explanation
-* Forces
-* Parameter
-
-### Problems
-* Local Minima
-
-### Optional:
-* Extensions
-* Dynamic Obstacles ?
+//## Das Team
+//
+//* Anahid
+//* Michael
+//* Till
+//
+//## Der Algorithmus
+//
+//Attraktives Ziel
+//[image style:`{width: '100%'}` src:"/static/images/noobstacle.gif" /]
+//
+//Repulsives Hinderniss:
+//[image style:`{width: '100%'}` src:"/static/images/pfo.gif" /]
+//
+//Mehrere Hindernisse:
+//[image style:`{width: '100%'}` src:"/static/images/threeobstacles.gif" /]
+//
+//Verschiedene Parameter:
+//[image style:`{width: '100%'}` src:"/static/images/threeobstaclesotherparam.gif" /]
+//
+//## Die Aufgabe
+//
+//### Blackbox Playground
+//* Robot
+//* Static World
+//* Static Obstacles
+//
+//### Whitebox Explanation
+//* Forces
+//* Parameter
+//
+//### Problems
+//* Local Minima
+//
+//### Optional:
+//* Extensions
+//* Dynamic Obstacles ?
 
 //This is an Idyll file. Write text
 //as you please in here. To add interactivity,
@@ -64,9 +64,9 @@ Verschiedene Parameter:
 //```
 //
 //And here is a custom component:
-//
+
 //[CustomComponent /]
-//
+
 //You can use standard html tags if a
 //component with the same name
 //doesn't exist.
@@ -79,17 +79,25 @@ Verschiedene Parameter:
 //  src:'static/images/quill.svg'
 //  style:`{ width: 75, display: 'block', margin: '30px auto' }`
 //  /]
-////[Fixed]
-//
-//[var name:"state" value:0 /]
-//
-//This component is implemented using D3:
-//
-//[var name:"rad" value: 15 /]
-//[Range value: rad min:0 max:50 /]
-//[CustomD3Component className:"d3-component" state:state radius: rad /]
-//[button onClick:`state++`]
-//  Click Me.
-//[/button]
-//
-////[/Fixed]
+//[Fixed]
+
+[var name:"state" value: 0 /]
+
+Blackbox:
+
+Attraction:
+
+[var name:"attr_factor" value: 20 /]
+[Range value: attr_factor min:0 max:50 /]
+
+Repulsion:
+
+[var name:"rep_factor" value:20 /]
+[Range value: rep_factor min:0 max:100 /]
+
+[CustomD3Component className:"d3-component" rep_factor:rep_factor attr_factor:attr_factor state:state /]
+[button onClick:`state++`]
+Toggle Animation
+[/button]
+
+//[/Fixed]
