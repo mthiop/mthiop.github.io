@@ -121,20 +121,34 @@ updateRobotPosition()
 	  .attr("cx", (d) => { return  d[0];})
 	  .attr("cy", (d) => { return  d[1];})
 	  .attr("id", "robot")
-	  .style("fill", "red");
+	  .style("fill", "green");
 
-	const obstacleData = this.obstacleData = [[200,202],[200,300],[200,400],[400,300],[100,200]];
+	//const obstacleData = this.obstacleData = [[200,202],[200,300],[200,400],[400,300],[100,200]];
+	const obstacleData = this.obstacleData = [[50,100],[400,100],[450,400],[50,400],[200,202],[200,300],[200,400],[400,300],[100,200]];
 
-	  svg.append("g")
-	  .selectAll("circle")
-	  .data(obstacleData)
-	  .enter()
-	  .append("circle")
-	  .attr("r", circleRadius)
-	  .attr("cx", (d) => { return  d[0];})
-	  .attr("cy", (d) => { return  d[1];})
-	  .attr("id", "obstacle")
-	  .style("fill", "steelblue");
+//	  svg.append("g")
+//	  .selectAll("circle")
+//	  .data(obstacleData)
+//	  .enter()
+//	  .append("circle")
+//	  .attr("r", circleRadius)
+//	  .attr("cx", (d) => { return  d[0];})
+//	  .attr("cy", (d) => { return  d[1];})
+//	  .attr("id", "obstacle")
+//	  .style("fill", "steelblue");
+var arc = d3.symbol().type(d3.symbolTriangle).size(300);
+
+var line = svg.selectAll('path')
+  .data(obstacleData)
+  .enter()
+  .append('path')
+  .attr('d', arc)
+  .attr('fill', 'steelblue')
+  .attr('stroke', '#000')
+  .attr('stroke-width', 1)
+  .attr('transform', function(d) {
+    return "translate(" + d[0] + "," + d[1] + ")";
+  });
 
 	var goalData = [[size-50, size-50]];
 
