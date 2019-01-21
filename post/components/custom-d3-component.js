@@ -153,7 +153,7 @@ var line = svg.selectAll('path')
 	var goalData = [[size-50, size-50]];
 
 	const goalPos = this.goalPos = new Vector(goalData[0]);
-	svg.select("g").append("g").selectAll("circle")
+	svg.append("g").selectAll("circle")
 	  .data(goalData)
 	  .enter()
 	  .append("circle")
@@ -161,7 +161,7 @@ var line = svg.selectAll('path')
 	  .attr("cx", (d) => { return  d[0];})
 	  .attr("cy", (d) => { return  d[1];})
 	  .attr("id", "goal")
-	  .style("fill", "green");
+	  .style("fill", "red");
   }
 
 update(props, oldProps) {
