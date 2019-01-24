@@ -88,14 +88,24 @@ Blackbox:
 Attraction:
 
 [var name:"attr_factor" value: 20 /]
-[Range value: attr_factor min:0 max:50 /]
+[Range value: attr_factor min:0 max:100 /]
 
 Repulsion:
 
 [var name:"rep_factor" value:20 /]
 [Range value: rep_factor min:0 max:100 /]
 
-[CustomD3Component className:"d3-component" rep_factor:rep_factor attr_factor:attr_factor state:state /]
+Influence Range:
+
+[var name:"influence_range" value:100 /]
+[Range value: influence_range min:0 max:1000 /]
+
+Step size:
+
+[var name:"step_size" value:10 /]
+[Range value: step_size min:0 max:100 /]
+
+[CustomD3Component className:"d3-component" rep_factor:rep_factor attr_factor:attr_factor state:state step_size:step_size influence_range:influence_range /]
 [button onClick:`state++`]
 Toggle Animation
 [/button]
