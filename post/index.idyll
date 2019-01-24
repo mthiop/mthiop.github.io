@@ -85,6 +85,13 @@
 
 Blackbox:
 
+[Aside]
+[CustomD3Component className:"d3-component" rep_factor:rep_factor attr_factor:attr_factor state:state step_size:step_size influence_range:influence_range /]
+[button onClick:`state++`]
+Toggle Animation
+[/button]
+[/Aside]
+
 Attraction:
 
 [var name:"attr_factor" value: 20 /]
@@ -105,9 +112,5 @@ Step size:
 [var name:"step_size" value:10 /]
 [Range value: step_size min:0 max:100 /]
 
-[CustomD3Component className:"d3-component" rep_factor:rep_factor attr_factor:attr_factor state:state step_size:step_size influence_range:influence_range /]
-[button onClick:`state++`]
-Toggle Animation
-[/button]
 
 //[/Fixed]

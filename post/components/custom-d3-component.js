@@ -6,8 +6,8 @@ var v = require('vectorious/withoutblas'),
 Vector = v.Vector;
 
 const size = 500;
-const circleRadius = 15;
-const transitionDuration = 250;//ms
+const circleRadius = 10;
+const transitionDuration = 450;//ms
 const timerFrequency = 500;//ms
 
 class CustomD3Component extends D3Component {
@@ -97,24 +97,39 @@ updateRobotPosition()
 	if (Vector.subtract(robotPosition, this.goalPos).magnitude() < circleRadius) {
 		robotPosition.x = Math.random() * size;
 		robotPosition.y = Math.random() * size;
+		this.robotPathData = [];
 	}
 
-	  // render it
+	  // render robot position
 	this.svg.select("#robot")
 		.transition()
 		.duration(transitionDuration)
 		.attr("cx", Math.ceil(robotPosition.x))
 		.attr("cy", Math.ceil(robotPosition.y));
+
+	// render robot path
+	var oldRobotPathData = this.robotPathData.slice(); // copy data
+	this.robotPathData.push([robotPosition.x, robotPosition.y]);// update real path data
+	oldRobotPathData.push(oldRobotPathData[oldRobotPathData.length-1]);// copy element to match path length
+	// https://bocoup.com/blog/improving-d3-path-animation
+	d3.select("#robotPath").attr('d', oldRobotPathData).transition().duration(transitionDuration).attr('d', this.lineFunction(this.robotPathData));
+
+	//var t = this;
+	// d3.interpolatePath is not working:(
+	//.attrTween("d",function() {return d3.interpolatePath(t.lineFunction(oldRobotPathData), t.lineFunction(t.robotPathData));});
+
 }
 
   initialize(node, props) {
 
+	  // Parameters
 	const inAnimationRunning = this.inAnimationRunning = 0;
 	const inAttractionFactor = this.inAttractionFactor = props.attr_factor;
 	const inRepulsiveFactor = this.inRepulsiveFactor = props.rep_factor;
 	const inStepSize = this.inStepSize = props.step_size;
 	const inInfluenceRange = this.inInfluenceRange= props.influence_range;
 
+	  // SVG setup
     const svg = this.svg = d3.select(node).append('svg');
 	svg
 	  .attr("width", size)
@@ -123,8 +138,9 @@ updateRobotPosition()
       .style('width', '100%')
       .style('height', 'auto');
 
+	  // Robot setup
 	const robotData = this.robotData = [[50,50]];
-	svg.selectAll("circle")
+	svg.selectAll("#robot")
 	  .data(robotData)
 	  .enter()
 	  .append("circle")
@@ -134,22 +150,26 @@ updateRobotPosition()
 	  .attr("id", "robot")
 	  .style("fill", "green");
 
-	//const obstacleData = this.obstacleData = [[200,202],[200,300],[200,400],[400,300],[100,200]];
+	  // Path setup
+	const robotPathData = this.robotPathData = [[50,50]];
+	const lineFunction = this.lineFunction = d3.line()
+	.x(function(d) { return d[0]; })
+	.y(function(d) { return d[1]; })
+	.curve(d3.curveLinear);
+
+	svg.append("path")
+      .attr("d", lineFunction(robotPathData))
+      .attr("stroke", "steelblue")
+      .attr("stroke-width", "2")
+	  .attr("id", "robotPath")
+      .attr("fill", "none");
+
+	  // Obstacle setup
 	const obstacleData = this.obstacleData = [[50,100],[400,100],[450,400],[50,400],[200,202],[200,300],[200,400],[400,300],[100,200]];
 
-//	  svg.append("g")
-//	  .selectAll("circle")
-//	  .data(obstacleData)
-//	  .enter()
-//	  .append("circle")
-//	  .attr("r", circleRadius)
-//	  .attr("cx", (d) => { return  d[0];})
-//	  .attr("cy", (d) => { return  d[1];})
-//	  .attr("id", "obstacle")
-//	  .style("fill", "steelblue");
 var arc = d3.symbol().type(d3.symbolTriangle).size(300);
 
-var line = svg.selectAll('path')
+svg.selectAll('#obstacle')
   .data(obstacleData)
   .enter()
   .append('path')
@@ -162,10 +182,11 @@ var line = svg.selectAll('path')
     return "translate(" + d[0] + "," + d[1] + ")";
   });
 
+	  // Goal setup
 	var goalData = [[size-50, size-50]];
 
 	const goalPos = this.goalPos = new Vector(goalData[0]);
-	svg.append("g").selectAll("circle")
+	svg.append("g").selectAll("#goal")
 	  .data(goalData)
 	  .enter()
 	  .append("circle")
@@ -202,6 +223,10 @@ update(props, oldProps) {
 
 	if (oldProps.influence_range != props.influence_range) {
 		this.inInfluenceRange = props.influence_range;
+	}
+
+	if (oldProps.step_size != props.step_size) {
+		this.inStepSize = props.step_size;
 	}
 
 }
