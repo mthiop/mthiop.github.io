@@ -16,7 +16,7 @@ class CustomD3Component extends D3Component {
 attractiveForce(robot,goal) 
 {
 	// Scaling factor
-	var e = this.inAttrationFactor; 
+	var e = this.inAttractionFactor;
 	var direction = Vector.subtract(robot, goal);
 	//F_Att = -e * (robot-qG) / norm(robot-goal); #quadratic
 	var normTerm = direction.magnitude();
@@ -27,8 +27,8 @@ attractiveForce(robot,goal)
 repulsiveForce(robot, obstacle) 
 {
 	var n = this.inRepulsiveFactor * 10000;// We need to scale the factor because the distances are to high since we use pixel values.
-	var radius = 15;// TODO param from outside
-	var influenceRange = 300;// TODO param from outside
+	var radius = circleRadius; // We assume a circle for obstacles.
+	var influenceRange = this.inInfluenceRange;
 
 	var direction = Vector.subtract(robot, obstacle);
 	var distance = direction.magnitude() - radius;
@@ -54,8 +54,6 @@ updateRobotPosition()
 
 	// Calculate attractive force
 	var attractiveVector = this.attractiveForce(robotPosition, this.goalPos);
-	attractiveVector.x = Math.ceil(attractiveVector.x);
-	attractiveVector.y = Math.ceil(attractiveVector.y);
 	
 	// Find closest obstacle
 	var closestLength = 999999999;
@@ -69,20 +67,31 @@ updateRobotPosition()
 		}
 	});
 	
-
-
 	// Calculate repulsiveForce
 	var repulsiveVector = this.repulsiveForce(robotPosition, closestObstacle);
-	repulsiveVector.x = Math.floor(repulsiveVector.x);
-	repulsiveVector.y = Math.floor(repulsiveVector.y);
-
-	// Apply repulsiveForce
-	robotPosition.add(repulsiveVector);
-
 
 	// Apply attractive force
-	robotPosition.add(attractiveVector);
+	repulsiveVector.add(attractiveVector);
 
+	// Apply step size
+	repulsiveVector.scale(this.inStepSize / repulsiveVector.magnitude());
+
+	// Add to position
+	robotPosition.add(repulsiveVector);
+
+	// Clip to size of playground
+	if (robotPosition.x > size) {
+		robotPosition.x = size;
+	}
+	if (robotPosition.y > size) {
+		robotPosition.y = size;
+	}
+	if (robotPosition.x < 0) {
+		robotPosition.x = 0;
+	}
+	if (robotPosition.y < 0) {
+		robotPosition.y = 0;
+	}
 
 	// Check whether we reached the goal
 	if (Vector.subtract(robotPosition, this.goalPos).magnitude() < circleRadius) {
@@ -100,9 +109,11 @@ updateRobotPosition()
 
   initialize(node, props) {
 
-	const animationRunning = this.animationRunning = 0;
-	const inAttrationFactor = this.inAttrationFactor = props.attr_factor;
+	const inAnimationRunning = this.inAnimationRunning = 0;
+	const inAttractionFactor = this.inAttractionFactor = props.attr_factor;
 	const inRepulsiveFactor = this.inRepulsiveFactor = props.rep_factor;
+	const inStepSize = this.inStepSize = props.step_size;
+	const inInfluenceRange = this.inInfluenceRange= props.influence_range;
 
     const svg = this.svg = d3.select(node).append('svg');
 	svg
@@ -146,6 +157,7 @@ var line = svg.selectAll('path')
   .attr('fill', 'steelblue')
   .attr('stroke', '#000')
   .attr('stroke-width', 1)
+  .attr('id', 'obstacle')
   .attr('transform', function(d) {
     return "translate(" + d[0] + "," + d[1] + ")";
   });
@@ -167,25 +179,29 @@ var line = svg.selectAll('path')
 update(props, oldProps) {
 	// Toggle animation
 	if (oldProps.state != props.state) {
-		if (this.runningAnimation) {
-			this.runningAnimation = 0;
+		if (this.inAnimationRunning) {
+			this.inAnimationRunning = 0;
 			clearInterval(this.timer);
 		} else {
 			// We need to write this in a strange way because js doens't know what 'this' in the function is.
 			var t = this;
 			const timer = this.timer = setInterval(function(){t.updateRobotPosition();}, timerFrequency);
-			this.runningAnimation = 1;
+			this.inAnimationRunning = 1;
 		}
 	}
 
 	// Update algorithm properties
 	
 	if (oldProps.attr_factor != props.attr_factor) {
-		this.inAttrationFactor = props.attr_factor;
+		this.inAttractionFactor = props.attr_factor;
 	}
 
 	if (oldProps.rep_factor != props.rep_factor) {
 		this.inRepulsiveFactor = props.rep_factor;
+	}
+
+	if (oldProps.influence_range != props.influence_range) {
+		this.inInfluenceRange = props.influence_range;
 	}
 
 }
