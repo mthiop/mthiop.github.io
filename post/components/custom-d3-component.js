@@ -53,19 +53,32 @@ updateRobotPosition()
 	var robotPosition = new Vector([xRobot, yRobot]);
 
 	// Calculate attractive force
-	var attractiveVector = this.attractiveForce(robotPosition, this.goalPos);
+	var xGoal = parseInt(this.svg.select("#goal").attr("cx"));
+	var yGoal = parseInt(this.svg.select("#goal").attr("cy"));
+	var goalPosition = new Vector([xGoal, yGoal]);
+	var attractiveVector = this.attractiveForce(robotPosition, goalPosition);
 	
 	// Find closest obstacle
 	var closestLength = 999999999;
 	var closestObstacle = new Vector([-1,-1]);
-	this.obstacleData.forEach(function(position){
-		var obstacle = new Vector(position);
+	this.svg.selectAll("#obstacle").each(function(){
+		// Parse transform string to numbers
+		var str = (d3.select(this).attr("transform"));
+		var beginBracket = str.indexOf('(');
+		var komma = str.indexOf(',');
+		var endBracket = str.indexOf(')');
+
+		var x = str.substring(beginBracket+1, komma);
+		var y = str.substring(komma+1, endBracket);
+
+		var obstacle = new Vector([parseInt(x), parseInt(y)]);
 		var distance = Vector.subtract(obstacle, robotPosition).magnitude();
 		if (distance < closestLength) {
 			closestLength = distance;
 			closestObstacle = obstacle;
 		}
 	});
+	console.log(closestObstacle, " ", closestLength);
 	
 	// Calculate repulsiveForce
 	var repulsiveVector = this.repulsiveForce(robotPosition, closestObstacle);
@@ -94,7 +107,7 @@ updateRobotPosition()
 	}
 
 	// Check whether we reached the goal
-	if (Vector.subtract(robotPosition, this.goalPos).magnitude() < circleRadius) {
+	if (Vector.subtract(robotPosition, goalPosition).magnitude() < circleRadius) {
 		robotPosition.x = Math.random() * size;
 		robotPosition.y = Math.random() * size;
 		this.robotPathData = [];
@@ -120,10 +133,23 @@ updateRobotPosition()
 
 }
 
-  initialize(node, props) {
+dragged(d) {
+	d3.select(this).attr("cx", d[0] = d3.event.x).attr("cy", d[1] = d3.event.y);
+}
+
+draggedObstacle(d) {
+	d3.select(this)
+  .attr('transform', function(d) {
+    return "translate(" + d3.event.x + "," + d3.event.y + ")";
+  });
+//	d3.select(this).attr("d", [parseInt(d3.event.x), parseInt(d3.event.y)]);
+}
+
+initialize(node, props) {
 
 	  // Parameters
 	const inAnimationRunning = this.inAnimationRunning = 0;
+	const inMovableObjects = this.inMovableObjects = props.movable_objects;
 	const inAttractionFactor = this.inAttractionFactor = props.attr_factor;
 	const inRepulsiveFactor = this.inRepulsiveFactor = props.rep_factor;
 	const inStepSize = this.inStepSize = props.step_size;
@@ -148,7 +174,13 @@ updateRobotPosition()
 	  .attr("cx", (d) => { return  d[0];})
 	  .attr("cy", (d) => { return  d[1];})
 	  .attr("id", "robot")
-	  .style("fill", "green");
+	  .style("fill", "green")
+
+	if (this.inMovableObjects) {
+		svg.select("#robot")
+	  .call(d3.drag()
+        .on("drag", this.dragged));
+	}
 
 	  // Path setup
 	const robotPathData = this.robotPathData = [[50,50]];
@@ -178,14 +210,22 @@ svg.selectAll('#obstacle')
   .attr('stroke', '#000')
   .attr('stroke-width', 1)
   .attr('id', 'obstacle')
+//  .attr('cx', (d) => {return d[0];})
+//  .attr('cy', (d) => {return d[1];});
   .attr('transform', function(d) {
     return "translate(" + d[0] + "," + d[1] + ")";
   });
 
+	if (this.inMovableObjects) {
+		svg.selectAll("#obstacle")
+	  .call(d3.drag()
+        .on("drag", this.draggedObstacle));
+	}
+
+
 	  // Goal setup
 	var goalData = [[size-50, size-50]];
 
-	const goalPos = this.goalPos = new Vector(goalData[0]);
 	svg.append("g").selectAll("#goal")
 	  .data(goalData)
 	  .enter()
@@ -195,6 +235,12 @@ svg.selectAll('#obstacle')
 	  .attr("cy", (d) => { return  d[1];})
 	  .attr("id", "goal")
 	  .style("fill", "red");
+
+	if (this.inMovableObjects) {
+		svg.select("#goal")
+	  .call(d3.drag()
+        .on("drag", this.dragged));
+	}
   }
 
 update(props, oldProps) {

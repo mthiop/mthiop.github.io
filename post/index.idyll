@@ -86,7 +86,7 @@
 Blackbox:
 
 [Aside]
-[CustomD3Component className:"d3-component" rep_factor:rep_factor attr_factor:attr_factor state:state step_size:step_size influence_range:influence_range /]
+[CustomD3Component className:"d3-component" rep_factor:rep_factor attr_factor:attr_factor state:state step_size:step_size influence_range:influence_range movable_objects:1 /]
 [button onClick:`state++`]
 Toggle Animation
 [/button]
