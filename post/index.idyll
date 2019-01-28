@@ -6,90 +6,14 @@
   subtitle:""
   author:"" /]
 
-//## Das Team
-//
-//* Anahid
-//* Michael
-//* Till
-//
-//## Der Algorithmus
-//
-//Attraktives Ziel
-//[image style:`{width: '100%'}` src:"/static/images/noobstacle.gif" /]
-//
-//Repulsives Hinderniss:
-//[image style:`{width: '100%'}` src:"/static/images/pfo.gif" /]
-//
-//Mehrere Hindernisse:
-//[image style:`{width: '100%'}` src:"/static/images/threeobstacles.gif" /]
-//
-//Verschiedene Parameter:
-//[image style:`{width: '100%'}` src:"/static/images/threeobstaclesotherparam.gif" /]
-//
-//## Die Aufgabe
-//
-//### Blackbox Playground
-//* Robot
-//* Static World
-//* Static Obstacles
-//
-//### Whitebox Explanation
-//* Forces
-//* Parameter
-//
-//### Problems
-//* Local Minima
-//
-//### Optional:
-//* Extensions
-//* Dynamic Obstacles ?
 
-//This is an Idyll file. Write text
-//as you please in here. To add interactivity,
-//you can add  different components to the text.
-//
-//
-//Here is how you can use a variable:
-//
-//[var name:"exampleVar" value:5 /]
-//
-//[Range min:0 max:10 value:exampleVar /]
-//[Display value:exampleVar /]
-//
-//```
-//[var name:"exampleVar" value:5 /]
-//
-//[Range min:0 max:10 value:exampleVar /]
-//[Display value:exampleVar /]
-//```
-//
-//And here is a custom component:
 
-//[CustomComponent /]
-
-//You can use standard html tags if a
-//component with the same name
-//doesn't exist.
-//
-//* *markdown* syntax is supported.
-//
-//
-//You can also load files from your `static/` directory.
-//[img
-//  src:'static/images/quill.svg'
-//  style:`{ width: 75, display: 'block', margin: '30px auto' }`
-//  /]
-//[Fixed]
-
-[var name:"state" value: 0 /]
-
-Static Blackbox:
 
 [Aside]
 [CustomD3Component className:"d3-component" rep_factor:20 attr_factor:20 state:0 step_size:10 influence_range:100 movable_objects:0 /]
 [/Aside]
 
-Static Whitebox:
+Static Blackbox:
 
 TODO
 
@@ -113,14 +37,52 @@ TODO
 
 
 TODO
+
 
 
 [Aside]
-[CustomD3Component className:"d3-component" rep_factor:rep_factor attr_factor:attr_factor state:state step_size:step_size influence_range:influence_range movable_objects:1 /]
+[var name:"state" value: 0 /]
+[CustomD3Component className:"d3-component" rep_factor:20 attr_factor:20 state:state step_size:10 influence_range:100 movable_objects:1 /]
 [button onClick:`state++`]
 Toggle Animation
 [/button]
 [/Aside]
+
+Interactive Whitebox:
+
+TODO
+
+
+TODO
+
+
+TODO
+
+
+TODO
+
+
+TODO
+
+
+TODO
+
+
+TODO
+
+
+TODO
+
+[Aside]
+[var name:"state2" value: 0 /]
+[CustomD3Component className:"d3-component" rep_factor:rep_factor attr_factor:attr_factor state:state2 step_size:step_size influence_range:influence_range movable_objects:1 /]
+[button onClick:`state2++`]
+Toggle Animation
+[/button]
+[/Aside]
+
+Whitebox:
+
 
 Attraction:
 
