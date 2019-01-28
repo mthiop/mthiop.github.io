@@ -107,8 +107,10 @@ updateRobotPosition()
 
 	// Check whether we reached the goal
 	if (Vector.subtract(robotPosition, goalPosition).magnitude() < circleRadius) {
-		robotPosition.x = Math.random() * size;
-		robotPosition.y = Math.random() * size;
+//		robotPosition.x = Math.random() * size;
+//		robotPosition.y = Math.random() * size;
+		robotPosition.x = 50;
+		robotPosition.y = 50;
 		this.robotPathData = [];
 	}
 
