@@ -78,7 +78,6 @@ updateRobotPosition()
 			closestObstacle = obstacle;
 		}
 	});
-	console.log(closestObstacle, " ", closestLength);
 	
 	// Calculate repulsiveForce
 	var repulsiveVector = this.repulsiveForce(robotPosition, closestObstacle);
@@ -125,7 +124,7 @@ updateRobotPosition()
 	this.robotPathData.push([robotPosition.x, robotPosition.y]);// update real path data
 	oldRobotPathData.push(oldRobotPathData[oldRobotPathData.length-1]);// copy element to match path length
 	// https://bocoup.com/blog/improving-d3-path-animation
-	d3.select("#robotPath").attr('d', oldRobotPathData).transition().duration(transitionDuration).attr('d', this.lineFunction(this.robotPathData));
+	this.svg.select("#robotPath").attr('d', oldRobotPathData).transition().duration(transitionDuration).attr('d', this.lineFunction(this.robotPathData));
 
 	//var t = this;
 	// d3.interpolatePath is not working:(
@@ -148,15 +147,17 @@ draggedObstacle(d) {
 initialize(node, props) {
 
 	  // Parameters
-	const inAnimationRunning = this.inAnimationRunning = 0;
+	const inAnimationRunning = this.inAnimationRunning = 1;
 	const inMovableObjects = this.inMovableObjects = props.movable_objects;
 	const inAttractionFactor = this.inAttractionFactor = props.attr_factor;
 	const inRepulsiveFactor = this.inRepulsiveFactor = props.rep_factor;
 	const inStepSize = this.inStepSize = props.step_size;
 	const inInfluenceRange = this.inInfluenceRange= props.influence_range;
 
+	// We need this idString to create a unique svg for each components, otherwise we get side effects!!!
+	const idString = this.idString = Math.floor(Math.random() * 999999).toString(2); 
 	  // SVG setup
-    const svg = this.svg = d3.select(node).append('svg');
+    const svg = this.svg = d3.select(node).append('svg').attr("id", idString);
 	svg
 	  .attr("width", size)
 	  .attr("height", size);
@@ -241,15 +242,22 @@ svg.selectAll('#obstacle')
 	  .call(d3.drag()
         .on("drag", this.dragged));
 	}
+
+	// We need to write this in a strange way because js doens't know what 'this' in the function is.
+	var t = this;
+	const timer = this.timer = setInterval(function(){t.updateRobotPosition();}, timerFrequency);
   }
 
 update(props, oldProps) {
 	// Toggle animation
 	if (oldProps.state != props.state) {
+		console.log("state is " ,props.state);
 		if (this.inAnimationRunning) {
 			this.inAnimationRunning = 0;
+			console.log("clear timer");
 			clearInterval(this.timer);
 		} else {
+			console.log("start timer");
 			// We need to write this in a strange way because js doens't know what 'this' in the function is.
 			var t = this;
 			const timer = this.timer = setInterval(function(){t.updateRobotPosition();}, timerFrequency);
