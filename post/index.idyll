@@ -75,7 +75,7 @@ TODO
 
 [Aside]
 [var name:"state2" value: 0 /]
-[CustomD3Component className:"d3-component" rep_factor:rep_factor attr_factor:attr_factor state:state2 step_size:step_size influence_range:influence_range movable_objects:1 /]
+[CustomD3Component className:"d3-component" rep_factor:rep_factor attr_factor:attr_factor state:state2 step_size:step_size influence_range:influence_range movable_objects:0 /]
 [button onClick:`state2++`]
 Toggle Animation
 [/button]
