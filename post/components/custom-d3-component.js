@@ -134,8 +134,27 @@ updateRobotPosition()
 
 }
 
-dragged(d) {
+selectCircle(d) {
+	console.log("selectCircle");
+	d3.select(this).style("stroke", "black");
+}
+
+deselectCircle(d) {
+	console.log("deselectCircle");
+	d3.select(this).style("stroke", "transparent");
+}
+
+draggedCircle(d) {
+	console.log("dragCircle");
 	d3.select(this).attr("cx", d[0] = d3.event.x).attr("cy", d[1] = d3.event.y);
+}
+
+selectObstacle(d) {
+	d3.select(this).attr("stroke-width", 3);
+}
+
+deselectObstacle(d) {
+	d3.select(this).attr("stroke-width", 1);
 }
 
 draggedObstacle(d) {
@@ -163,9 +182,11 @@ initialize(node, props) {
 	svg
 	  .attr("width", size)
 	  .attr("height", size);
-    svg.attr('viewBox', `0 0 ${size} ${size}`)
-      .style('width', '100%')
-      .style('height', 'auto');
+//    svg.attr('viewBox', `0 0 ${size} ${size}`)
+//      .style('width', '100%')
+//      .style('height', '100%');
+	// Outline
+	svg.append("rect").attr("width", size-2).attr("height", size-2).attr("stroke", "black").attr("fill", "transparent").attr('x', 1).attr('y',1);
 
 	  // Robot setup
 	const robotData = this.robotData = [[50,50]];
@@ -174,6 +195,8 @@ initialize(node, props) {
 	  .enter()
 	  .append("circle")
 	  .attr("r", circleRadius)
+	  .attr("stroke-width", 2)
+	  .attr("stroke", "transparent")
 	  .attr("cx", (d) => { return  d[0];})
 	  .attr("cy", (d) => { return  d[1];})
 	  .attr("id", "robot")
@@ -182,7 +205,9 @@ initialize(node, props) {
 	if (this.inMovableObjects) {
 		svg.select("#robot")
 	  .call(d3.drag()
-        .on("drag", this.dragged));
+        .on("drag", this.draggedCircle)
+		.on("start", this.selectCircle)
+		.on("end", this.deselectCircle));
 	}
 
 	  // Path setup
@@ -222,7 +247,10 @@ svg.selectAll('#obstacle')
 	if (this.inMovableObjects) {
 		svg.selectAll("#obstacle")
 	  .call(d3.drag()
-        .on("drag", this.draggedObstacle));
+        .on("drag", this.draggedObstacle)
+        .on("start", this.selectObstacle)
+        .on("end", this.deselectObstacle));
+
 	}
 
 
@@ -234,6 +262,8 @@ svg.selectAll('#obstacle')
 	  .enter()
 	  .append("circle")
 	  .attr("r", circleRadius)
+	  .attr("stroke-width", 2)
+	  .attr("stroke", "transparent")
 	  .attr("cx", (d) => { return  d[0];})
 	  .attr("cy", (d) => { return  d[1];})
 	  .attr("id", "goal")
@@ -242,7 +272,9 @@ svg.selectAll('#obstacle')
 	if (this.inMovableObjects) {
 		svg.select("#goal")
 	  .call(d3.drag()
-        .on("drag", this.dragged));
+        .on("drag", this.draggedCircle)
+        .on("start",this.selectCircle)
+        .on("end", this.deselectCircle));
 	}
 
 	// We need to write this in a strange way because js doens't know what 'this' in the function is.
@@ -253,13 +285,10 @@ svg.selectAll('#obstacle')
 update(props, oldProps) {
 	// Toggle animation
 	if (oldProps.state != props.state) {
-		console.log("state is " ,props.state);
 		if (this.inAnimationRunning) {
 			this.inAnimationRunning = 0;
-			console.log("clear timer");
 			clearInterval(this.timer);
 		} else {
-			console.log("start timer");
 			// We need to write this in a strange way because js doens't know what 'this' in the function is.
 			var t = this;
 			const timer = this.timer = setInterval(function(){t.updateRobotPosition();}, timerFrequency);
