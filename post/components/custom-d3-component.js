@@ -182,9 +182,11 @@ initialize(node, props) {
 	svg
 	  .attr("width", size)
 	  .attr("height", size);
-    svg.attr('viewBox', `0 0 ${size} ${size}`)
-      .style('width', '100%')
-      .style('height', '100%');
+//    svg.attr('viewBox', `0 0 ${size} ${size}`)
+//      .style('width', '100%')
+//      .style('height', '100%');
+	// Outline
+	svg.append("rect").attr("width", size-2).attr("height", size-2).attr("stroke", "black").attr("fill", "transparent").attr('x', 1).attr('y',1);
 
 	  // Robot setup
 	const robotData = this.robotData = [[50,50]];
