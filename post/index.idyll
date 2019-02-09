@@ -50,7 +50,6 @@ Toggle Animation
 [/button]
 [/Aside]
 
-//Static Blackbox
 
 Der Algorithmus Potential Fields nutzt einfache physikalische Elemente zur Wegfindung
 zum Ziel und Vermeidung von Kollision mit eiem Hindernis. Das Ziel hat anziehende Kräfte, daher
@@ -68,7 +67,6 @@ TODO
 TODO
 
 ## Erklärung
-// Interactive Whitebox:
 
 Der Roboter wird durch eine Kraft [Equation] F [/Equation] beeinflusst.
 Es existiert ein Konfigurationsraum in dem alle anfahrbaren Konfigurationen/Position
@@ -92,6 +90,12 @@ konisch:
 Damit der Roboter zum Ziel kommt,aber nicht mit möglichen Hinernissen kollidiert,
 geht von den Hindernissen die Kraft [Equation]F_{\text{abstoßend}}[/Equation] ab.
 
+
+
+Probiere einfach mit den folgenden Reglern aus, wie die einzelnen Paramter
+den Roboter, in der Darstellung rechts, beeinflussen.
+
+
 [Aside]
 [var name:"state2" value: 0 /]
 [CustomD3Component className:"d3-component" rep_factor:rep_factor attr_factor:attr_factor state:state2 step_size:step_size influence_range:influence_range movable_objects:0 /]
@@ -99,10 +103,6 @@ geht von den Hindernissen die Kraft [Equation]F_{\text{abstoßend}}[/Equation] a
 Toggle Animation
 [/button]
 [/Aside]
-
-//Whitebox:
-Rrobiere einfach mit den folgenden Reglern aus, wie die einzelnen Paramter
-den Roboter, in der Darstellung rechts, beeinflussen.
 
 Attraction / Anziehungskraft:
 
