@@ -5,10 +5,49 @@
   title:"Pfadplanung mit Potential Fields"
   subtitle:""
   author:"" /]
+lala
 
 
+lala
 
 
+lala
+
+
+lala
+
+
+lala
+
+
+TODO
+[var name:"hallo" value:10000 /]
+#[button onClick:`hallo += 1000`]Next[/button]
+#[Range value:hallo min:5000 max:20000 step:1000/]
+[Range value: rep_factor min:0 max:100 /]
+[CustomPlot rep_factor:rep_factor attr_factor:attr_factor influence_range:influence_range /]
+lala
+
+
+lala
+
+
+lala
+
+
+lala
+
+
+lala
+
+
+lala
+
+
+TODO
+
+
+TODOlala
 [Aside]
 [CustomD3Component className:"d3-component" rep_factor:20 attr_factor:20 state:0 step_size:10 influence_range:100 movable_objects:0 /]
 [/Aside]
@@ -86,8 +125,8 @@ Whitebox:
 
 Attraction:
 
-[var name:"attr_factor" value: 20 /]
-[Range value: attr_factor min:0 max:100 /]
+[var name:"attr_factor" value: 5 /]
+[Range value: attr_factor min:0 max:10 /]
 
 Repulsion:
 
@@ -96,8 +135,8 @@ Repulsion:
 
 Influence Range:
 
-[var name:"influence_range" value:100 /]
-[Range value: influence_range min:0 max:1000 /]
+[var name:"influence_range" value:50 /]
+[Range value: influence_range min:0 max:100 /]
 
 Step size:
 
