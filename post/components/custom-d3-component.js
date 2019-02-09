@@ -253,13 +253,10 @@ svg.selectAll('#obstacle')
 update(props, oldProps) {
 	// Toggle animation
 	if (oldProps.state != props.state) {
-		console.log("state is " ,props.state);
 		if (this.inAnimationRunning) {
 			this.inAnimationRunning = 0;
-			console.log("clear timer");
 			clearInterval(this.timer);
 		} else {
-			console.log("start timer");
 			// We need to write this in a strange way because js doens't know what 'this' in the function is.
 			var t = this;
 			const timer = this.timer = setInterval(function(){t.updateRobotPosition();}, timerFrequency);
