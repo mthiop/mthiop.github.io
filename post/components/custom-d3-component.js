@@ -150,19 +150,22 @@ updateRobotPosition()
 
 }
 
-selectCircle(d) {
-	console.log("selectCircle");
-	d3.select(this).style("stroke", "black");
+selectImage(d) {
+	console.log("select");
+	d3.select(this).style("stroke", "red");
 }
 
-deselectCircle(d) {
-	console.log("deselectCircle");
+deselectImage(d) {
+	console.log("deselect");
 	d3.select(this).style("stroke", "transparent");
 }
 
-draggedCircle(d) {
-	console.log("dragCircle");
-	d3.select(this).attr("cx", d[0] = d3.event.x).attr("cy", d[1] = d3.event.y);
+draggedGoal(d) {
+	d3.select(this).attr("x", d[0] = d3.event.x).attr("y", d[1] = d3.event.y);
+//	d3.select("#goalBackground").attr("cx", d3.event.x).attr("cy", d3.event.y);
+	console.log("set to ",d3.event.x);
+//	d3.select("#goalBackground").attr("cx", d3.event.x);
+	console.log("gB",d3.select("#goalBackground").attr("cx"));
 }
 
 selectObstacle(d) {
@@ -318,9 +321,13 @@ svg.append('g').selectAll('#obstacle')
 	if (this.inMovableObjects) {
 		svg.select("#goal")
 	  .call(d3.drag()
-        .on("drag", this.draggedCircle)
-        .on("start",this.selectCircle)
-        .on("end", this.deselectCircle));
+        .on("drag", function(d) {
+			
+			d3.select(this).attr("x", d[0] = d3.event.x - (circleRadius/2)).attr("y", d[1] = d3.event.y - (circleRadius/2));
+			self.svg.select("#goalBackground").attr("cx", d3.event.x).attr("cy", d3.event.y);
+		})
+        .on("start",this.selectImage)
+        .on("end", this.deselectImage));
 	}
 
 	// We need to write this in a strange way because js doens't know what 'this' in the function is.
