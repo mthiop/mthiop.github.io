@@ -104,7 +104,7 @@ den Roboter, in der Darstellung rechts, beeinflussen.
 [button onClick:`state2++`]
 Toggle Animation
 [/button]
-[/Aside]
+[/Aside]l
 
 Attraction / Anziehungskraft:
 
