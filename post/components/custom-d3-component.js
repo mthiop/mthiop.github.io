@@ -5,10 +5,18 @@ const d3 = require('d3');
 var v = require('vectorious/withoutblas'),
 Vector = v.Vector;
 
+// Size of svg
 const size = 500;
-const circleRadius = 10;
+// Radius of circles, used for rep force calculation
+const circleRadius = 30;
+// Image x,y are top left instead of center, so we need to apply this offset
+const imageOffset = circleRadius / 2;
+// How long does a transition (move robot, path) take
 const transitionDuration = 450;//ms
+// How often do we update the robot position
 const timerFrequency = 500;//ms
+// Obstacle images
+const obstacleImages = ["static/images/Star_Wars_Boba\ Fett.svg", "static/images/Star_Wars_Darth\ Vader.svg", "static/images/Star_Wars_Battle\ Droid.svg", "static/images/Star_Wars_Storm-Trooper-2.svg"];
 
 class CustomD3Component extends D3Component {
 
@@ -48,13 +56,13 @@ repulsiveForce(robot, obstacle)
 updateRobotPosition()
 {
 	// Update robot position
-	var xRobot = parseInt(this.svg.select("#robot").attr("cx"));
-	var yRobot = parseInt(this.svg.select("#robot").attr("cy"));
+	var xRobot = parseInt(this.svg.select("#robot").attr("x"));
+	var yRobot = parseInt(this.svg.select("#robot").attr("y"));
 	var robotPosition = new Vector([xRobot, yRobot]);
 
 	// Calculate attractive force
-	var xGoal = parseInt(this.svg.select("#goal").attr("cx"));
-	var yGoal = parseInt(this.svg.select("#goal").attr("cy"));
+	var xGoal = parseInt(this.svg.select("#goal").attr("x"));
+	var yGoal = parseInt(this.svg.select("#goal").attr("y"));
 	var goalPosition = new Vector([xGoal, yGoal]);
 	var attractiveVector = this.attractiveForce(robotPosition, goalPosition);
 	
@@ -62,14 +70,8 @@ updateRobotPosition()
 	var closestLength = 999999999;
 	var closestObstacle = new Vector([-1,-1]);
 	this.svg.selectAll("#obstacle").each(function(){
-		// Parse transform string to numbers
-		var str = (d3.select(this).attr("transform"));
-		var beginBracket = str.indexOf('(');
-		var komma = str.indexOf(',');
-		var endBracket = str.indexOf(')');
-
-		var x = str.substring(beginBracket+1, komma);
-		var y = str.substring(komma+1, endBracket);
+		var x = (d3.select(this).attr("x"));
+		var y = (d3.select(this).attr("y"));
 
 		var obstacle = new Vector([parseInt(x), parseInt(y)]);
 		var distance = Vector.subtract(obstacle, robotPosition).magnitude();
@@ -166,6 +168,8 @@ draggedObstacle(d) {
 }
 
 initialize(node, props) {
+	// We need the class-this for callbacks
+	var self = this;
 
 	  // Parameters
 	const inAnimationRunning = this.inAnimationRunning = 1;
@@ -187,31 +191,46 @@ initialize(node, props) {
 //      .style('height', '100%');
 	// Outline
 	svg.append("rect").attr("width", size-2).attr("height", size-2).attr("stroke", "black").attr("fill", "transparent").attr('x', 1).attr('y',1);
+	svg
 
 	  // Robot setup
 	const robotData = this.robotData = [[50,50]];
+	svg.append("circle")
+	  .attr("cx", robotData[0][0])
+	  .attr("cy", robotData[0][1])
+	.attr("id", "robotBackground")
+	.attr("fill", "cornflowerblue")
+	.attr("r", circleRadius)
+	.attr("opacity", .2);
+
 	svg.selectAll("#robot")
 	  .data(robotData)
 	  .enter()
-	  .append("circle")
-	  .attr("r", circleRadius)
-	  .attr("stroke-width", 2)
-	  .attr("stroke", "transparent")
-	  .attr("cx", (d) => { return  d[0];})
-	  .attr("cy", (d) => { return  d[1];})
+	  .append("svg:image")
+	  .attr("x", robotData[0][0])
+	  .attr("y", robotData[0][1])
 	  .attr("id", "robot")
-	  .style("fill", "green")
+	  .attr('width', circleRadius)
+	  .attr('height', circleRadius)
+	  .attr("transform", "translate(-"+(circleRadius/2)+",-"+(circleRadius/2)+")")
+	  .attr("xlink:href", "static/images/Star_Wars_R2D2.svg");
+
+
 
 	if (this.inMovableObjects) {
 		svg.select("#robot")
 	  .call(d3.drag()
-        .on("drag", this.draggedCircle)
+        .on("drag", function(d) {
+			
+			d3.select(this).attr("x", d[0] = d3.event.x ).attr("y", d[1] = d3.event.y );
+			self.svg.select("#robotBackground").attr("cx", d3.event.x).attr("cy", d3.event.y);
+		})
 		.on("start", this.selectCircle)
 		.on("end", this.deselectCircle));
 	}
 
 	  // Path setup
-	const robotPathData = this.robotPathData = [[50,50]];
+	const robotPathData = this.robotPathData = [[50-(circleRadius/2),50-(circleRadius/2)]];
 	const lineFunction = this.lineFunction = d3.line()
 	.x(function(d) { return d[0]; })
 	.y(function(d) { return d[1]; })
@@ -227,22 +246,20 @@ initialize(node, props) {
 	  // Obstacle setup
 	const obstacleData = this.obstacleData = [[50,100],[400,100],[450,400],[50,400],[200,202],[200,300],[200,400],[400,300],[100,200]];
 
-var arc = d3.symbol().type(d3.symbolTriangle).size(300);
+//var arc = d3.symbol().type(d3.symbolTriangle).size(300);
 
-svg.selectAll('#obstacle')
+svg.append('g').selectAll('#obstacle')
   .data(obstacleData)
   .enter()
-  .append('path')
-  .attr('d', arc)
-  .attr('fill', 'steelblue')
-  .attr('stroke', '#000')
-  .attr('stroke-width', 1)
-  .attr('id', 'obstacle')
-//  .attr('cx', (d) => {return d[0];})
-//  .attr('cy', (d) => {return d[1];});
-  .attr('transform', function(d) {
-    return "translate(" + d[0] + "," + d[1] + ")";
-  });
+	  .append("svg:image")
+	  .attr("x", (d) => {return d[0]-(circleRadius/2);})
+	  .attr("y", (d) => {return d[1]-(circleRadius/2);})
+	  .attr("id", "obstacle")
+	  .attr('width', circleRadius)
+	  .attr('height', circleRadius)
+	  .attr("transform", "translate(-"+(circleRadius/2)+",-"+(circleRadius/2)+")")
+	  .attr('id', 'obstacle')
+	  .attr("xlink:href", (d,i) => {return obstacleImages[i % obstacleImages.length];});
 
 	if (this.inMovableObjects) {
 		svg.selectAll("#obstacle")
@@ -250,7 +267,6 @@ svg.selectAll('#obstacle')
         .on("drag", this.draggedObstacle)
         .on("start", this.selectObstacle)
         .on("end", this.deselectObstacle));
-
 	}
 
 
@@ -260,14 +276,13 @@ svg.selectAll('#obstacle')
 	svg.append("g").selectAll("#goal")
 	  .data(goalData)
 	  .enter()
-	  .append("circle")
-	  .attr("r", circleRadius)
-	  .attr("stroke-width", 2)
-	  .attr("stroke", "transparent")
-	  .attr("cx", (d) => { return  d[0];})
-	  .attr("cy", (d) => { return  d[1];})
+	  .append("svg:image")
+	  .attr("x", size-50-(circleRadius/2))
+	  .attr("y", size-50-(circleRadius/2))
 	  .attr("id", "goal")
-	  .style("fill", "red");
+	  .attr('width', circleRadius)
+	  .attr('height', circleRadius)
+	  .attr("xlink:href", "static/images/Star_Wars_C3PO.svg");
 
 	if (this.inMovableObjects) {
 		svg.select("#goal")
