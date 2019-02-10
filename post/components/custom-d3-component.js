@@ -80,6 +80,18 @@ updateRobotPosition()
 			closestObstacle = obstacle;
 		}
 	});
+
+	if (closestLength < this.inInfluenceRange) {
+		this.svg.select("#obstacleBackground")
+		.attr("cx", closestObstacle.x)
+		.attr("cy", closestObstacle.y);
+	} else {
+		this.svg.select("#obstacleBackground")
+		.attr("cx", -500)
+		.attr("cy", -500);
+	}
+
+
 	
 	// Calculate repulsiveForce
 	var repulsiveVector = this.repulsiveForce(robotPosition, closestObstacle);
@@ -120,6 +132,11 @@ updateRobotPosition()
 	this.svg.select("#robot")
 		.transition()
 		.duration(transitionDuration)
+		.attr("x", Math.ceil(robotPosition.x))
+		.attr("y", Math.ceil(robotPosition.y));
+	this.svg.select("#robotBackground")
+		.transition()
+		.duration(transitionDuration)
 		.attr("cx", Math.ceil(robotPosition.x))
 		.attr("cy", Math.ceil(robotPosition.y));
 
@@ -130,9 +147,6 @@ updateRobotPosition()
 	// https://bocoup.com/blog/improving-d3-path-animation
 	this.svg.select("#robotPath").attr('d', oldRobotPathData).transition().duration(transitionDuration).attr('d', this.lineFunction(this.robotPathData));
 
-	//var t = this;
-	// d3.interpolatePath is not working:(
-	//.attrTween("d",function() {return d3.interpolatePath(t.lineFunction(oldRobotPathData), t.lineFunction(t.robotPathData));});
 
 }
 
@@ -269,11 +283,28 @@ svg.append('g').selectAll('#obstacle')
         .on("end", this.deselectObstacle));
 	}
 
+	svg.append("circle")
+	.attr("cx", -500)
+	.attr("cy", -500)
+	.attr("id", "obstacleBackground")
+	.attr("fill", "crimson")
+	.attr("r", circleRadius)
+	.attr("opacity", .1);
+
 
 	  // Goal setup
 	var goalData = [[size-50, size-50]];
 
-	svg.append("g").selectAll("#goal")
+
+	svg.append("circle")
+	.attr("cx", size-50)
+	.attr("cy", size-50)
+	.attr("id", "goalBackground")
+	.attr("fill", "gold")
+	.attr("r", circleRadius)
+	.attr("opacity", .3);
+
+	svg.selectAll("#goal")
 	  .data(goalData)
 	  .enter()
 	  .append("svg:image")
