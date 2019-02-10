@@ -108,21 +108,21 @@ Toggle Animation
 Attraction / Anziehungskraft:
 
 [var name:"attr_factor" value: 20 /]
-[Range value: attr_factor min:0 max:100 /]
+[Range value: attr_factor min:0.1 max:100 /]
 
 Repulsion / Abstoßungskraft:
 
 [var name:"rep_factor" value:20 /]
-[Range value: rep_factor min:0 max:100 /]
+[Range value: rep_factor min:0.1 max:100 /]
 
 Influence Range / ?:
 
 [var name:"influence_range" value:100 /]
-[Range value: influence_range min:0 max:1000 /]
+[Range value: influence_range min:0.1 max:1000 /]
 
 Step size / Schrittgröße:
 
 [var name:"step_size" value:10 /]
-[Range value: step_size min:0 max:100 /]
+[Range value: step_size min:0.1 max:100 /]
 
 //## Besondere Fälle
