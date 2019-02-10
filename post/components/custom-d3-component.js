@@ -17,6 +17,7 @@ const transitionDuration = 450;//ms
 const timerFrequency = 500;//ms
 // Obstacle images
 const obstacleImages = ["static/images/Star_Wars_Boba\ Fett.svg", "static/images/Star_Wars_Darth\ Vader.svg", "static/images/Star_Wars_Battle\ Droid.svg", "static/images/Star_Wars_Storm-Trooper-2.svg"];
+const NO_BACKGROUND = -500;
 
 class CustomD3Component extends D3Component {
 
@@ -87,8 +88,8 @@ updateRobotPosition()
 		.attr("cy", closestObstacle.y);
 	} else {
 		this.svg.select("#obstacleBackground")
-		.attr("cx", -500)
-		.attr("cy", -500);
+		.attr("cx", NO_BACKGROUND)
+		.attr("cy", NO_BACKGROUND);
 	}
 
 
@@ -150,39 +151,6 @@ updateRobotPosition()
 
 }
 
-selectImage(d) {
-	console.log("select");
-	d3.select(this).style("stroke", "red");
-}
-
-deselectImage(d) {
-	console.log("deselect");
-	d3.select(this).style("stroke", "transparent");
-}
-
-draggedGoal(d) {
-	d3.select(this).attr("x", d[0] = d3.event.x).attr("y", d[1] = d3.event.y);
-//	d3.select("#goalBackground").attr("cx", d3.event.x).attr("cy", d3.event.y);
-	console.log("set to ",d3.event.x);
-//	d3.select("#goalBackground").attr("cx", d3.event.x);
-	console.log("gB",d3.select("#goalBackground").attr("cx"));
-}
-
-selectObstacle(d) {
-	d3.select(this).attr("stroke-width", 3);
-}
-
-deselectObstacle(d) {
-	d3.select(this).attr("stroke-width", 1);
-}
-
-draggedObstacle(d) {
-	d3.select(this)
-  .attr('transform', function(d) {
-    return "translate(" + d3.event.x + "," + d3.event.y + ")";
-  });
-//	d3.select(this).attr("d", [parseInt(d3.event.x), parseInt(d3.event.y)]);
-}
 
 initialize(node, props) {
 	// We need the class-this for callbacks
@@ -216,6 +184,7 @@ initialize(node, props) {
 	  .attr("cx", robotData[0][0])
 	  .attr("cy", robotData[0][1])
 	.attr("id", "robotBackground")
+	.attr("stroke-width",3)
 	.attr("fill", "cornflowerblue")
 	.attr("r", circleRadius)
 	.attr("opacity", .2);
@@ -232,18 +201,20 @@ initialize(node, props) {
 	  .attr("transform", "translate(-"+(circleRadius/2)+",-"+(circleRadius/2)+")")
 	  .attr("xlink:href", "static/images/Star_Wars_R2D2.svg");
 
-
-
 	if (this.inMovableObjects) {
 		svg.select("#robot")
 	  .call(d3.drag()
         .on("drag", function(d) {
 			
-			d3.select(this).attr("x", d[0] = d3.event.x ).attr("y", d[1] = d3.event.y );
+			d3.select(this).attr("x", d3.event.x ).attr("y", d3.event.y );
 			self.svg.select("#robotBackground").attr("cx", d3.event.x).attr("cy", d3.event.y);
 		})
-		.on("start", this.selectCircle)
-		.on("end", this.deselectCircle));
+		.on("start", function(d) {
+			self.svg.select("#robotBackground").attr("stroke", "black");
+		})
+		.on("end", function(d) {
+			self.svg.select("#robotBackground").attr("stroke", "transparent");
+		}));
 	}
 
 	  // Path setup
@@ -261,9 +232,27 @@ initialize(node, props) {
       .attr("fill", "none");
 
 	  // Obstacle setup
-	const obstacleData = this.obstacleData = [[50,100],[400,100],[450,400],[50,400],[200,202],[200,300],[200,400],[400,300],[100,200]];
+	svg.append("circle")
+	.attr("cx", NO_BACKGROUND)
+	.attr("cy", NO_BACKGROUND)
+	.attr("id", "obstacleBackground")
+	.attr("stroke-width",3)
+	.attr("fill", "crimson")
+	.attr("r", circleRadius)
+	.attr("opacity", .1);
 
-//var arc = d3.symbol().type(d3.symbolTriangle).size(300);
+	svg.append("circle")
+	.attr("cx", NO_BACKGROUND)
+	.attr("cy", NO_BACKGROUND)
+	.attr("id", "obstacleRing")
+	.attr("fill", "transparent")
+	.attr("stroke-width",3)
+	.attr("stroke", "crimson")
+	.attr("r", circleRadius)
+	.attr("opacity", .0);
+
+
+	const obstacleData = this.obstacleData = [[50,100],[400,100],[450,400],[50,400],[200,202],[200,300],[200,400],[400,300],[100,200]];
 
 svg.append('g').selectAll('#obstacle')
   .data(obstacleData)
@@ -281,18 +270,35 @@ svg.append('g').selectAll('#obstacle')
 	if (this.inMovableObjects) {
 		svg.selectAll("#obstacle")
 	  .call(d3.drag()
-        .on("drag", this.draggedObstacle)
-        .on("start", this.selectObstacle)
-        .on("end", this.deselectObstacle));
-	}
+        .on("drag", function(d) {
+			
+			d3.select(this)
+				.attr("x", d3.event.x)
+				.attr("y", d3.event.y);
+			self.svg.select("#obstacleRing").attr("cx",d3.event.x).attr("cy",d3.event.y);
 
-	svg.append("circle")
-	.attr("cx", -500)
-	.attr("cy", -500)
-	.attr("id", "obstacleBackground")
-	.attr("fill", "crimson")
-	.attr("r", circleRadius)
-	.attr("opacity", .1);
+			var obstacleBackground = self.svg.select("#obstacleBackground");
+			// obstacleBackground active?
+			if (obstacleBackground.attr("x") != NO_BACKGROUND && obstacleBackground.attr("y") != NO_BACKGROUND) {
+				// obstacle with background selected?
+				var selected = new Vector([d3.event.x, d3.event.y]);
+				var background = new Vector([parseInt(obstacleBackground.attr("cx")), parseInt(obstacleBackground.attr("cy"))]);
+				
+				var dist = Vector.subtract(selected,background).magnitude();
+				if (dist < circleRadius*1.5) {
+					obstacleBackground
+						.attr("cx", d3.event.x)
+						.attr("cy", d3.event.y);
+				}
+			}
+		})
+        .on("start", function(d) {
+			self.svg.select("#obstacleRing").attr("opacity",.4);
+		})
+        .on("end", function(d) {
+			self.svg.select("#obstacleRing").attr("opacity",.0);
+		}));
+	}
 
 
 	  // Goal setup
@@ -303,6 +309,7 @@ svg.append('g').selectAll('#obstacle')
 	.attr("cx", size-50)
 	.attr("cy", size-50)
 	.attr("id", "goalBackground")
+	.attr("stroke-width",3)
 	.attr("fill", "gold")
 	.attr("r", circleRadius)
 	.attr("opacity", .3);
@@ -311,9 +318,10 @@ svg.append('g').selectAll('#obstacle')
 	  .data(goalData)
 	  .enter()
 	  .append("svg:image")
-	  .attr("x", size-50-(circleRadius/2))
-	  .attr("y", size-50-(circleRadius/2))
+	  .attr("x", size-50)
+	  .attr("y", size-50)
 	  .attr("id", "goal")
+	  .attr("transform", "translate(-"+(circleRadius/2)+",-"+(circleRadius/2)+")")
 	  .attr('width', circleRadius)
 	  .attr('height', circleRadius)
 	  .attr("xlink:href", "static/images/Star_Wars_C3PO.svg");
@@ -322,12 +330,15 @@ svg.append('g').selectAll('#obstacle')
 		svg.select("#goal")
 	  .call(d3.drag()
         .on("drag", function(d) {
-			
-			d3.select(this).attr("x", d[0] = d3.event.x - (circleRadius/2)).attr("y", d[1] = d3.event.y - (circleRadius/2));
+			d3.select(this).attr("x", d3.event.x).attr("y", d3.event.y);
 			self.svg.select("#goalBackground").attr("cx", d3.event.x).attr("cy", d3.event.y);
 		})
-        .on("start",this.selectImage)
-        .on("end", this.deselectImage));
+		.on("start", function(d) {
+			self.svg.select("#goalBackground").attr("stroke", "black");
+		})
+		.on("end", function(d) {
+			self.svg.select("#goalBackground").attr("stroke", "transparent");
+		}));
 	}
 
 	// We need to write this in a strange way because js doens't know what 'this' in the function is.
