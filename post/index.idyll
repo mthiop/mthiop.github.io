@@ -100,15 +100,22 @@ den Roboter, in der Darstellung rechts, beeinflussen.
 [Aside]
 [var name:"state2" value: 0 /]
 [CustomD3Component className:"d3-component" rep_factor:rep_factor attr_factor:attr_factor state:state2 step_size:step_size influence_range:influence_range movable_objects:0 /]
-[CustomPlot rep_factor:rep_factor attr_factor:attr_factor influence_range:influence_range /]
+
+//[Display value:clickCount /]
+[CustomPlot rep_factor:rep_factor attr_factor:attr_factor influence_range:influence_range steps:steps /]
 [button onClick:`state2++`]
 Toggle Animation
 [/button]
-[/Aside]l
+[/Aside].
+
+Steps:
+
+[var name:steps value:50 /]
+[Range value:steps min:1 max:100 /]
 
 Attraction / Anziehungskraft:
 
-[var name:"attr_factor" value: 50 /]
+[var name:"attr_factor" value: 5 /]
 [Range value: attr_factor min:0.1 max:10 /]
 
 Repulsion / Abstoßungskraft:
