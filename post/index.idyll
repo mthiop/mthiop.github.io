@@ -89,6 +89,14 @@ konisch:
 
 ----------
 
+[Equation]F_{\text{abstoßend}}(q_r)=\theta * F_{\text{Erkennung}} * F_{\text{Entfernung}} * \frac{qr-qz}{|qr-qz|}[/Equation]
+
+[Equation]F_{\text{abstoßend}}=(\frac{1}{|p(q_r)|} - \frac{1}{\phi})[/Equation]
+
+
+[Equation]F_{\text{Entfernung}}= \frac{1}{p(q_r)^2}[/Equation]
+
+
 Damit der Roboter zum Ziel kommt,aber nicht mit möglichen Hinernissen kollidiert,
 geht von den Hindernissen die Kraft [Equation]F_{\text{abstoßend}}[/Equation] ab.
 
