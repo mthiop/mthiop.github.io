@@ -68,7 +68,6 @@ einer x- und einer y- Koordinate, berechnet sich durch folgende Gleichung:
 
 [Equation]q_r=\sigma * \frac{F(q_r)}{|F(q_r)|}[/Equation]
 
-
 Dabei bezeichnet [Equation]\sigma [/Equation] die Schrittlänge des Roboters.
 Also kann mit diesem Paramter Einfluss auf die Entfernung, die der Roboter in
 einem Planungszyklus durchläuft, genommen werden.
@@ -76,11 +75,14 @@ einem Planungszyklus durchläuft, genommen werden.
 Wenn du den Regler verschiebst, kannst du die Schrittgröße beeinflussen.
 Fällt dir ein Problem auf, wenn du den Wert sehr hoch setzt?
 
-Schrittgröße: 
 [var name:"step_size" value:10 /]
-[Dynamic value: step_size min:0 max:100 step:1 /]
 
-[Range value: step_size min:0 max:100 /]
+[p]
+  [em]Schrittgröße [/em]
+	[Range value: step_size min:0 max:100 /]
+  [Display value:step_size /]
+[/p]
+
 
 
 Wie du vielleicht bemerkt hast, springt der Roboter durch Hindernisse und
@@ -90,7 +92,7 @@ eines Schrittes immer in die gleiche Richtung geht.
 Schauen wir uns nun an wie die Richtung bestimmt wird:
 
 
-[Equation]F(q_r)=F_{\text{anziehend}}(q_r)+F_{\text{abstoßend}}(q_r)[/Equation].
+[Equation]F(q_r)=F_{\text{anziehend}}(q_r)+F_{\text{abstoßend}}(q_r)[/Equation]
 
 Dabei ist [Equation]F_{\text{anziehend}}[/Equation] die anziehende Kraft des
 Roboters in die Richtung des Ziels. Das Ziel [Equation]q_z[/Equation], das der
@@ -110,14 +112,13 @@ Weg alle Hindernisse ignorieren würde, geht von den Hindernissen eine Abstoßun
 
 Mit Verschiebung des Regelers ändert sich die Anziehungskraft des Ziels zum Roboter.
 
- Anziehungskraft:
-[var name:"attr_factor" value: 5 /]
-[Dynamic value: attr_factor min:0 max:10 step:0.1 /]
+[var name:"attr_factor" value: 20 /]
+[p]
+  [em]Anziehungskraft[/em]
+	[Range value:attr_factor min:0 max:100 /]
+  [Display value:attr_factor /]
+[/p]
 
-[Range value: attr_factor min:0 max:10  /]
-
-
- TODO:
 
 
 [Equation]F_{\text{abstoßend}}(q_r)=\theta * F_{\text{Erkennung}} * F_{\text{Entfernung}} * \frac{qr-qz}{|qr-qz|}[/Equation]
@@ -156,17 +157,19 @@ Steps:
 
 
 
-Abstoßungskraft:
 [var name:"rep_factor" value:20 /]
-[Dynamic value: rep_factor min:0 max:100 step: 1/]
+[p]
+  [em]Abstoßungskraft[/em]
+	[Range value:rep_factor min:0 max:100 /]
+  [Display value:rep_factor /]
+[/p]
 
-[Range value: rep_factor min:0 max:100 /]
-
-Hindernisseinflussbereich:
-[var name:"influence_range" value:50 /]
-[Dynamic value: influence_range min:1 max:100 step:1/]
-
-[Range value: influence_range min:1 max:100 /]
+[var name:"influence_range" value:100 /]
+[p]
+  [em]Hindernisseinflussbereich[/em]
+	[Range value:influence_range min:0 max:400 /]
+  [Display value:influence_range/]
+[/p]
 
 
 
