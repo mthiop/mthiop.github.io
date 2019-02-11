@@ -6,7 +6,7 @@ var v = require('vectorious/withoutblas'),
 Vector = v.Vector;
 
 // Size of svg
-const size = 500;
+const size = 450;
 // Radius of circles, used for rep force calculation
 const circleRadius = 30;
 // Image x,y are top left instead of center, so we need to apply this offset
@@ -252,7 +252,7 @@ initialize(node, props) {
 	.attr("opacity", .0);
 
 
-	const obstacleData = this.obstacleData = [[50,100],[400,100],[450,400],[50,400],[200,202],[200,300],[200,400],[400,300],[100,200]];
+	const obstacleData = this.obstacleData = [[50,100],[400,100],[350,400],[50,390],[200,202],[200,300],[200,380],[350,300],[100,200]];
 
 svg.append('g').selectAll('#obstacle')
   .data(obstacleData)
