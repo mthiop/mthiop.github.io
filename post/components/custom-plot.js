@@ -170,7 +170,7 @@ var obstacle = new Vector([100, 100]);
     let dataPot = this.genPotentialForce(dataRep, dataAttr)
     return (
 <div {...props}>
-
+<Graph3D data={dataPot} options={options}/>
 <Graph3D data={dataAttr} options={options}/>
 <Graph3D data={dataRep} options={options}/>
 
