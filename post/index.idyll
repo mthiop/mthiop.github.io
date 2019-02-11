@@ -181,7 +181,7 @@ Verschiebe die Regler [em]Abstoßungskraft[/em] und [em]Hindernisseinflussbereic
 //[CustomD3Component className:"d3-component" rep_factor:rep_factor attr_factor:attr_factor state:state2 step_size:step_size influence_range:influence_range movable_objects:0 /]
 
 //[Display value:clickCount /]
-[CustomPlot rep_factor:rep_factor attr_factor:attr_factor influence_range:influence_range steps:steps /]
+[DebugComponent rep_factor:rep_factor attr_factor:attr_factor influence_range:influence_range steps:steps /]
 [button onClick:`state2++`]
 Toggle Animation
 [/button]
