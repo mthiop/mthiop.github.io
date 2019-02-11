@@ -62,15 +62,35 @@ sich der Roboter verhält. Leuchtet ein Hindernis rot beeinflusst es den Roboter
 
 Wie findet der Roboter den Weg zum Ziel ohne mit Hindernissen zu kollidieren?
 Der Roboter wird durch eine Kraft [Equation] F [/Equation] beeinflusst.
-Es existiert ein Konfigurationsraum in dem alle anfahrbaren Konfigurationen/Position
-enthalten sind.
-Der Roboter hat die Konfigurationen [Equation]q_r[/Equation] mit der Gleichung
+Im Bild rechts sieht man einen zweidimensionalen Raum mit allen anfahrbaren Positionen
+des Roboters. Die Position des Roboters [Equation]q_r[/Equation], bestehend aus
+einer x- und einer y- Koordinate, berechnet sich durch folgende Gleichung:
+
+[Equation]q_r=\sigma * \frac{F(q_r)}{|F(q_r)|}[/Equation]
+
+
+Dabei bezeichnet [Equation]\sigma [/Equation] die Schrittlänge des Roboters.
+Also kann mit diesem Paramter Einfluss auf die Entfernung, die der Roboter in
+einem Planungszyklus durchläuft, genommen werden.
+
+Wenn du den Regler verschiebst, kannst du die Schrittgröße beeinflussen.
+Fällt dir ein Problem auf, wenn du den Wert sehr hoch setzt?
+
+Schrittgröße:
+[var name:"step_size" value:10 /]
+[Dynamic value: step_size min:0 max:100 step:1 /]
+
+[Range value: step_size min:0 max:100 /]
+
 
 [Equation]F(q_r)=F_{\text{anziehend}}(q_r)+F_{\text{abstoßend}}(q_r)[/Equation].
 
 Dabei ist [Equation]F_{\text{anziehend}}[/Equation] die anziehende Kraft des
-Roboters in eine Richtung. Das Ziel [Equation]q_z[/Equation], dass der
-Roboter erreichen soll, strahlt diese Kraft aus. Eine Variante diese zu berechnen
+Roboters in die Richtung des Ziels. Das Ziel [Equation]q_z[/Equation], das der
+Roboter erreichen soll, strahlt diese Kraft aus.
+
+Verschiebe
+Eine Variante diese zu berechnen
 nennt man konisch:
 
 [Equation]F_{\text{anziehend}}(q_r)= -\epsilon * \frac{qr-qz}{|qr-qz|}[/Equation]
@@ -138,11 +158,6 @@ Hindernisseinflussbereich:
 
 [Range value: influence_range min:1 max:100 /]
 
-Schrittgröße:
-[var name:"step_size" value:10 /]
-[Dynamic value: step_size min:0 max:100 step:1 /]
-
-[Range value: step_size min:0 max:100 /]
 
 //## Besondere Fälle
 
