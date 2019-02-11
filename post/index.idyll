@@ -37,10 +37,6 @@ Bei dieser Methode werden einfache physikalische Kräfte verwendet.
 Diese berechneten Kräfte bzw. Potentiale weisen den Roboter zum Ziel hin. Das Ziel
 zieht den Roboter an und die Hindernisse stoßen ihn ab.
 
-.
-
-TODO
-
 ## Der Algorithmus
 
 [Aside]
@@ -61,14 +57,10 @@ In dieser Animation (rechts) kannst du die Posiiton des Roboters (grüner Kreis)
 die Hindernisse (Dreiecke) und das Ziel (roter Kreis) ändern und sehen, wie
 sich der Roboter verhält.
 
-TODO
-
-TODO
-
-TODO
 
 ## Erklärung
 
+Wie findet der Roboter den Weg zum Ziel ohne mit Hindernissen zu kollidieren?
 Der Roboter wird durch eine Kraft [Equation] F [/Equation] beeinflusst.
 Es existiert ein Konfigurationsraum in dem alle anfahrbaren Konfigurationen/Position
 enthalten sind.
@@ -76,17 +68,30 @@ Der Roboter hat die Konfigurationen [Equation]q_r[/Equation] mit der Gleichung
 
 [Equation]F(q_r)=F_{\text{anziehend}}(q_r)+F_{\text{abstoßend}}(q_r)[/Equation].
 
-Dabei ist
-[Equation]F_{\text{anziehend}}[/Equation] die anziehende Kraft des Roboters in eine Richtung,
-also das Ziel [Equation]q_z[/Equation], dass der Roboter erreichen soll.
-
----------
-
-konisch:
+Dabei ist [Equation]F_{\text{anziehend}}[/Equation] die anziehende Kraft des
+Roboters in eine Richtung. Das Ziel [Equation]q_z[/Equation], dass der
+Roboter erreichen soll, strahlt diese Kraft aus. Eine Variante diese zu berechnen
+nennt man konisch:
 
 [Equation]F_{\text{anziehend}}(q_r)= -\epsilon * \frac{qr-qz}{|qr-qz|}[/Equation]
 
-----------
+Es wird ein Vektor in Richtung des Ziels bestimmt und gewichtet.
+Der Parameter \epsilon verstärkt die anziehende Kraft oder schwächt sie ab.
+Da mit der Kraft [Equation]F_{\text{anziehend}}[/Equation] der Roboter auf seinem
+Weg alle Hindernisse ignorieren würde, geht von den Hindernissen eine Abstoßungskraft
+ [Equation]F_{\text{abstoßend}}(q_r)[/Equation] aus.
+
+ TODO:
+
+
+[Equation]F_{\text{abstoßend}}(q_r)=\theta * F_{\text{Erkennung}} * F_{\text{Entfernung}} * \frac{qr-qz}{|qr-qz|}[/Equation]
+
+
+[Equation]F_{\text{abstoßend}}=(\frac{1}{|p(q_r)|} - \frac{1}{\phi})[/Equation]
+
+
+[Equation]F_{\text{Entfernung}}= \frac{1}{p(q_r)^2}[/Equation]
+
 
 Damit der Roboter zum Ziel kommt,aber nicht mit möglichen Hinernissen kollidiert,
 geht von den Hindernissen die Kraft [Equation]F_{\text{abstoßend}}[/Equation] ab.
