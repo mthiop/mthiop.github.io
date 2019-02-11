@@ -89,26 +89,35 @@ Wie du vielleicht bemerkt hast, springt der Roboter durch Hindernisse und
 überspringt gegegenfalls das Ziel. Das liegt daran, dass der Roboter während
 eines Schrittes immer in die gleiche Richtung geht.
 
+[br /]
+
 Schauen wir uns nun an wie die Richtung bestimmt wird:
 
+[Equation]F(q_r)=F_{\text{anziehend}}(q_r)+F_{\text{abstoßend}}(q_r,q_o)[/Equation]
 
-[Equation]F(q_r)=F_{\text{anziehend}}(q_r)+F_{\text{abstoßend}}(q_r)[/Equation]
+[br /]
+[br /]
 
-Dabei ist [Equation]F_{\text{anziehend}}[/Equation] die anziehende Kraft des
-Roboters in die Richtung des Ziels. Das Ziel [Equation]q_z[/Equation], das der
-Roboter erreichen soll, strahlt diese Kraft aus.
 
-Verschiebe
-Eine Variante diese zu berechnen
-nennt man konisch:
+[Equation]F(q_r)[/Equation] besteht aus zwei Komponenten. Zum einen ist
+[Equation]F_{\text{anziehend}(q_r)}[/Equation] die anziehende Kraft des
+Roboters in die Richtung des Ziels. Das Ziel hat dabei die Position
+[Equation]q_z[/Equation].
+Zum anderen beschreibt [Equation]F_{\text{abstoßend}(q_r, q_o)}[/Equation] die
+abstoßende Kraft des nächsten Hindernisses. Das Hindernis hat dabei die Position [Equation]q_o[/Equation]. Es wird immer nur das Hindernis mit dem kleinsten Abstand zum Roboter betrachtet.
 
-[Equation]F_{\text{anziehend}}(q_r)= -\epsilon * \frac{qr-qz}{|qr-qz|}[/Equation]
 
+Die anziehende Kraft wird berechnet durch:
+
+[Equation]F_{\text{anziehend}}(q_r)= -\epsilon *\frac{qr-qz}{|qr-qz|}[/Equation]
+
+[br /]
+[br /]
+
+
+Du sieht, dass das Ergebnis nur vom Abstand des Roboters und des Ziels, sowie dem Skalierungsparameter [Equation]\epsilon[/Equation] abhängt.
 Es wird ein Vektor in Richtung des Ziels bestimmt und gewichtet.
-Der Parameter \epsilon verstärkt die anziehende Kraft oder schwächt sie ab.
-Da mit der Kraft [Equation]F_{\text{anziehend}}[/Equation] der Roboter auf seinem
-Weg alle Hindernisse ignorieren würde, geht von den Hindernissen eine Abstoßungskraft
- [Equation]F_{\text{abstoßend}}(q_r)[/Equation] aus.
+Der Parameter [Equation]\epsilon[/Equation] verstärkt die anziehende Kraft oder schwächt sie ab.
 
 Mit Verschiebung des Regelers ändert sich die Anziehungskraft des Ziels zum Roboter.
 
@@ -123,9 +132,13 @@ Mit Verschiebung des Regelers ändert sich die Anziehungskraft des Ziels zum Rob
 
 [Equation]F_{\text{abstoßend}}(q_r)=\theta * F_{\text{Erkennung}} * F_{\text{Entfernung}} * \frac{qr-qz}{|qr-qz|}[/Equation]
 
+[br /]
+[br /]
 
 [Equation]F_{\text{abstoßend}}=(\frac{1}{|p(q_r)|} - \frac{1}{\phi})[/Equation]
 
+[br /]
+[br /]
 
 [Equation]F_{\text{Entfernung}}= \frac{1}{p(q_r)^2}[/Equation]
 
