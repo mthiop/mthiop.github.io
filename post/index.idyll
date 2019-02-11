@@ -84,6 +84,13 @@ Schrittgröße:
 [Range value: step_size min:0 max:100 /]
 
 
+Wie du vielleicht bemerkt hast, springt der Roboter durch Hindernisse und
+überspringt gegegenfalls das Ziel. Das liegt daran, dass der Roboter während
+eines Schrittes immer in die gleiche Richtung geht.
+
+Schauen wir uns nun an wie die Richtung bestimmt wird:
+
+
 [Equation]F(q_r)=F_{\text{anziehend}}(q_r)+F_{\text{abstoßend}}(q_r)[/Equation].
 
 Dabei ist [Equation]F_{\text{anziehend}}[/Equation] die anziehende Kraft des
@@ -101,6 +108,15 @@ Der Parameter \epsilon verstärkt die anziehende Kraft oder schwächt sie ab.
 Da mit der Kraft [Equation]F_{\text{anziehend}}[/Equation] der Roboter auf seinem
 Weg alle Hindernisse ignorieren würde, geht von den Hindernissen eine Abstoßungskraft
  [Equation]F_{\text{abstoßend}}(q_r)[/Equation] aus.
+
+Mit Verschiebung des Regelers ändert sich die Anziehungskraft des Ziels zum Roboter.
+
+ Anziehungskraft:
+[var name:"attr_factor" value: 5 /]
+[Dynamic value: attr_factor min:0 max:10 step:0.1 /]
+
+[Range value: attr_factor min:0 max:10  /]
+
 
  TODO:
 
@@ -139,12 +155,6 @@ Steps:
 [var name:steps value:50 /]
 [Range value:steps min:1 max:100 /]
 
- Anziehungskraft:
-[var name:"attr_factor" value: 5 /]
-[Dynamic value: attr_factor min:0 max:10 step:0.1 /]
-
-
-[Range value: attr_factor min:0 max:10  /]
 
 
 Abstoßungskraft:
