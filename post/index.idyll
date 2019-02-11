@@ -55,7 +55,7 @@ abstoßende Kräfte haben.
 
 In dieser Animation (rechts) kannst du die Posiiton des Roboters (grüner Kreis),
 die Hindernisse (Dreiecke) und das Ziel (roter Kreis) ändern und sehen, wie
-sich der Roboter verhält.
+sich der Roboter verhält. Leuchtet ein Hindernis rot beeinflusst es den Roboter
 
 
 ## Erklärung
@@ -118,7 +118,7 @@ Steps:
 [var name:steps value:50 /]
 [Range value:steps min:1 max:100 /]
 
- Anziehungskraft: 
+ Anziehungskraft:
 [var name:"attr_factor" value: 5 /]
 [Dynamic value: attr_factor min:0 max:10 step:0.1 /]
 
@@ -126,19 +126,19 @@ Steps:
 [Range value: attr_factor min:0 max:10  /]
 
 
-Abstoßungskraft: 
+Abstoßungskraft:
 [var name:"rep_factor" value:20 /]
 [Dynamic value: rep_factor min:0 max:100 step: 1/]
 
 [Range value: rep_factor min:0 max:100 /]
 
-Hindernisseinflussbereich: 
+Hindernisseinflussbereich:
 [var name:"influence_range" value:50 /]
 [Dynamic value: influence_range min:1 max:100 step:1/]
 
 [Range value: influence_range min:1 max:100 /]
 
-Schrittgröße: 
+Schrittgröße:
 [var name:"step_size" value:10 /]
 [Dynamic value: step_size min:0 max:100 step:1 /]
 
