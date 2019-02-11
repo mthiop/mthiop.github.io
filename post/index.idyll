@@ -7,10 +7,8 @@
   author:"" /]
 
 [Aside]
-//[CustomD3Component className:"d3-component" rep_factor:20 attr_factor:20 state:0 step_size:10 influence_range:100 movable_objects:0 /]
-[image style:`{width: '100%'}` src:"/static/images/screenshot.png" /]
+//////////////////[image style:`{width: '100%'}` src:"/static/images/screenshot.png" /]
 [/Aside]
-
 
 ## Abstract
 
@@ -23,6 +21,12 @@ Die Pfadplanung mit Potentialfelder kommt aus der Robotik. und dient einem Robot
 
 
 ## Problembeschreibung
+[Aside]
+[CustomD3Component className:"d3-component" rep_factor:20 attr_factor:20 state:state step_size:10 influence_range:100 movable_objects:1 /]
+[button onClick:`state++`]
+Toggle Animation
+[/button]
+[/Aside]
 
 Stell dir vor, ein Roboter (hier R2D2) soll von seinem Startpunkt aus ein Ziel erreichen.
 Auf dem Weg des Roboters liegen jedoch Hindernisse. Gefährliche Kampfdruiden und gemeine Bösewichte wollen den Roboter aufhalten. Daher muss der Roboter einen Weg zum Ziel finden, ohne an eines der Hindernisse zu geraten.
@@ -36,6 +40,7 @@ Bei dieser Methode werden einfache physikalische Kräfte verwendet.
 Diese berechneten Kräfte bzw. Potentiale weisen den Roboter in eine Richtung. Das Ziel
 zieht den Roboter an und die Hindernisse stoßen ihn ab. Dadurch sollen Begegnungen mit den Hindernissen vermieden werden.
 
+
 ## Der Algorithmus
 
 
@@ -45,20 +50,14 @@ zum Ziel und Vermeidung von Kollision mit einem Hindernis. Das Ziel hat anziehen
 wird der Roboter dorthin gezogen. Die Hindernisse umgeht der Roboter, da diese
 abstoßende Kräfte haben.
 
-In dieser Animation (rechts) kannst du die Posiiton des Roboters (grüner Kreis),
-die Hindernisse (Dreiecke) und das Ziel (roter Kreis) ändern und sehen, wie
-sich der Roboter verhält. Leuchtet ein Hindernis rot beeinflusst es den Roboter
+Auf der rechten Seite siehst du eine Simulation des Algorithmus. Du kannst alle Objekte verschieben und an beliebiger Stelle pausieren. Nutze die Gelegenheit um erste Erfahrungen mit dem Algorithmus zu sammeln.
 
 
 ## Erklärung
 
 [Aside]
 [var name:"state" value: 0 /]
-[CustomD3Component className:"d3-component" rep_factor:rep_factor attr_factor:attr_factor state:state2 step_size:step_size influence_range:influence_range movable_objects:0 /]
-//[CustomD3Component className:"d3-component" rep_factor:20 attr_factor:20 state:state step_size:10 influence_range:100 movable_objects:1 /]
-[button onClick:`state++`]
-Toggle Animation
-[/button]
+[CustomD3Component className:"d3-component" rep_factor:rep_factor attr_factor:attr_factor state:0 step_size:step_size influence_range:influence_range movable_objects:0 /]
 [/Aside]
 
 Wie findet der Roboter den Weg zum Ziel ohne mit Hindernissen zu kollidieren?
