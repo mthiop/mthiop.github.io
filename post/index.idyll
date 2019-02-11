@@ -76,7 +76,7 @@ einem Planungszyklus durchläuft, genommen werden.
 Wenn du den Regler verschiebst, kannst du die Schrittgröße beeinflussen.
 Fällt dir ein Problem auf, wenn du den Wert sehr hoch setzt?
 
-Schrittgröße:
+Schrittgröße: 
 [var name:"step_size" value:10 /]
 [Dynamic value: step_size min:0 max:100 step:1 /]
 
