@@ -7,7 +7,7 @@
   author:"" /]
 
 [Aside]
-//[CustomD3Component className:"d3-component" rep_factor:20 attr_factor:20 state:0 step_size:10 influence_range:100 movable_objects:0 /]
+//[CustomD3Component className:"d3-component" rep_factor:20 attr_factor:20 state:0 step_size:10 influence_range:100 movable_objects:1 /]
 [image style:`{width: '100%'}` src:"/static/images/screenshot.png" /]
 [/Aside]
 
