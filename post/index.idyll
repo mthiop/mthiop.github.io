@@ -22,9 +22,10 @@ Die Pfadplanung mit Potentialfelder kommt aus der Robotik. und dient einem Robot
 
 ## Problembeschreibung
 [Aside]
+[p][em]Verschiebbare Objekte![/em][/p]
 [CustomD3Component className:"d3-component" rep_factor:20 attr_factor:20 state:state step_size:10 influence_range:100 movable_objects:1 /]
 [button onClick:`state++`]
-Toggle Animation
+Play/Pause
 [/button]
 [/Aside]
 
@@ -51,18 +52,19 @@ abstoßende Kräfte haben.
 Auf der rechten Seite siehst du eine Simulation des Algorithmus. Du kannst alle Objekte verschieben und an beliebiger Stelle pausieren. Nutze die Gelegenheit um erste Erfahrungen mit dem Algorithmus zu sammeln.
 
 
-## Erklärung
-
 [Aside]
 [var name:"state" value: 0 /]
+[p][em]Veraenderbare Parameter![/em][/p]
 [CustomD3Component className:"d3-component" rep_factor:rep_factor attr_factor:attr_factor state:0 step_size:step_size influence_range:influence_range movable_objects:0 /]
 [/Aside]
 
+## Erklärung
 Wie findet der Roboter den Weg zum Ziel ohne mit Hindernissen zu kollidieren?
 Der Roboter wird durch eine Kraft [Equation] F [/Equation] beeinflusst.
 Im Bild rechts sieht man einen zweidimensionalen Raum mit allen anfahrbaren Positionen
 des Roboters. Die Position des Roboters [Equation]q_r[/Equation], bestehend aus
 einer x- und einer y- Koordinate, berechnet sich durch folgende Gleichung:
+
 
 [Equation]q_r=\sigma * \frac{F(q_r)}{|F(q_r)|}[/Equation]
 
@@ -178,12 +180,11 @@ Verschiebe die Regler [em]Abstoßungskraft[/em] und [em]Hindernisseinflussbereic
 
 [Aside]
 [var name:"state2" value: 0 /]
-//[CustomD3Component className:"d3-component" rep_factor:rep_factor attr_factor:attr_factor state:state2 step_size:step_size influence_range:influence_range movable_objects:0 /]
 
 //[Display value:clickCount /]
 [CustomPlot rep_factor:rep_factor attr_factor:attr_factor influence_range:influence_range steps:steps /]
 [button onClick:`state2++`]
-Toggle Animation
+Play/Pause
 [/button]
 [/Aside].
 
@@ -197,3 +198,4 @@ Steps:
 
 
 Falls dein Interesse geweckt ist, gibt es hier noch etwas mehr [link text:"Informationen" url:"http://portal.ku.edu.tr/~cbasdogan/Courses/Robotics/projects/algorithm_poten_field.pdf" /]. Dort wird noch auf die Probleme des Algorithmus und Erweiterungen eingegangen.
+
