@@ -51,7 +51,6 @@ abstoßende Kräfte haben.
 Auf der rechten Seite siehst du eine Simulation des Algorithmus. Du kannst alle Objekte verschieben und an beliebiger Stelle pausieren. Nutze die Gelegenheit um erste Erfahrungen mit dem Algorithmus zu sammeln.
 
 
-
 ## Erklärung
 
 [Aside]
@@ -71,7 +70,7 @@ Dabei bezeichnet [Equation]\sigma [/Equation] die Schrittlänge des Roboters.
 Also kann mit diesem Paramter Einfluss auf die Entfernung, die der Roboter in
 einem Planungszyklus durchläuft, genommen werden.
 
-Wenn du den Regler verschiebst, kannst du die Schrittgröße beeinflussen.
+Wenn du den Regler [em]Schrittgröße[/em] verschiebst, kannst du die Schrittgröße beeinflussen.
 Fällt dir ein Problem auf, wenn du den Wert sehr hoch setzt?
 
 [var name:"step_size" value:10 /]
@@ -118,11 +117,11 @@ Du sieht, dass das Ergebnis nur vom Abstand des Roboters und des Ziels, sowie de
 Es wird ein Vektor in Richtung des Ziels bestimmt und gewichtet.
 Der Parameter [Equation]\epsilon[/Equation] verstärkt die anziehende Kraft oder schwächt sie ab.
 
-Mit Verschiebung des Regelers ändert sich die Anziehungskraft des Ziels zum Roboter.
+Mit Verschiebung des Regelers [em]Anziehungskraft [/em] ändert sich die Anziehungskraft des Ziels zum Roboter.
 
 [var name:"attr_factor" value: 20 /]
 [p]
-  [em]Anziehungskraft [Equation]\epsilon[/Equation][/em]
+  [em]Anziehungskraft [/em] [Equation]\epsilon[/Equation]
 	[Range value:attr_factor min:0 max:100 /]
   [Display value:attr_factor /]
 [/p]
@@ -130,27 +129,38 @@ Mit Verschiebung des Regelers ändert sich die Anziehungskraft des Ziels zum Rob
 
 Damit der Roboter zum Ziel kommt,aber nicht mit möglichen Hinernissen kollidiert, geht von den Hindernissen die Kraft [Equation]F_{\text{abstoßend}}[/Equation] ab.
 
-[Equation]F_{\text{abstoßend}}(q_r)=\theta * F_{\text{Erkennung}} * F_{\text{Entfernung}} * \frac{q_r-q_h}{|q_r-q_z|}[/Equation]
+[Equation]F_{\text{abstoßend}}(q_r)=\theta * F_{\text{Erkennung}}*F_{\text{Entfernung}} *\frac{q_r-q_h}{|q_r-q_z|}[/Equation].
 
-[br /]
-[br /]
 
 Hier stellt [Equation]\theta[/Equation] den Skalierungsparamter dar.
 
-Formel F-Entfernung
+[br/]
+[Equation]F_{\text{Entfernung}}=\frac{1}{p(q_r)^2}[/Equation]
 
-FEntfernung repräsentiert den Abstand zwischen Roboter und Hindernis.
 
-Formel F-Erkennung
+//Formel F-Entfernung
 
-F-Erkennnung regelt den Einfluss eines Hindernisses auf den Roboter. Erst wenn der Abstand zwischen Roboter und Hinderniss kleiner als phi ist, wird F-abstoßend berechnet. Ist der Abstand kleiner als phi , wird F-Erkennung größer, je kleiner der Abstand zwischen Roboter und Hindernis ist. In der Simulation wird ein Hindernis rot markiert, wenn phi kleiner als der Abstand ist.
+[br /]
+[br /]
+
+[Equation]F_{\text{Entfernung}}[/Equation] repräsentiert den Abstand zwischen Roboter und Hindernis:
+
+
+[Equation]F_{\text{Erkennung}}=(\frac{1}{q_r}-\frac{1}{\phi})[/Equation]
+
+[br /]
+[br /]
+
+[Equation]F_{\text{Erkennung}}[/Equation]regelt den Einfluss eines Hindernisses auf den Roboter. Erst wenn der Abstand zwischen Roboter und Hinderniss kleiner als phi ist, wird [Equation]F_{\text{abstoßend}}[/Equation]berechnet. Ist der Abstand kleiner als [Equation]\phi[/Equation] , wird F-Erkennung größer, je kleiner der Abstand zwischen Roboter und Hindernis ist. In der Simulation wird ein Hindernis rot markiert, wenn [Equation]\phi[/Equation] kleiner als der Abstand ist.
+
+Ein Hindernis hat neben der abstoßenden Kraft auch einen Einflussbereich, der beeinflusst wann der Roboter durch die abstoßende Kraft beeinflusst wird.
 
 Verschiebe die Regler [em]Abstoßungskraft[/em] und [em]Hindernisseinflussbereich[/em] und beobachte wie sich der Roboter zu den Hindernissen verhält.
 
 
 [var name:"rep_factor" value:20 /]
 [p]
-  [em]Abstoßungskraft [Equation]\theta[/Equation][/em]
+  [em]Abstoßungskraft [/em][Equation]\theta[/Equation]
 	[Range value:rep_factor min:0 max:100 /]
   [Display value:rep_factor /]
 [/p]
@@ -162,26 +172,6 @@ Verschiebe die Regler [em]Abstoßungskraft[/em] und [em]Hindernisseinflussbereic
   [Display value:influence_range/]
 [/p]
 
-
-
-
-
-
-
-
-//[Equation]F_{\text{bla}}[/Equation] bestimmt die Stärke eine blablabla
-
-
-
-//[Equation]F_{\text{Erkennung}}=(\frac{1}{|p(q_r)|} - \frac{1}{\phi})[/Equation]
-
-
-
-//[Equation]F_{\text{Entfernung}}[/Equation] blabdsflsdjfljds
-
-
-
-//[Equation]F_{\text{Entfernung}}= \frac{1}{p(q_r)^2}[/Equation]
 
 
 
