@@ -21,37 +21,29 @@ Universität Berlin entstanden. Aufgabe war es einen Algorithmus zu erklären un
 zu visualisieren, wobei Informatikstudenten im ersten Semester für das
 Studium motiviert werden sollten.
 
-Die Pfadplanung mit Potentialfelder kommt aus der Robotik. und dient einem Roboter
-mit Hilfe von Potentialfelder einen Weg zu einem Ziel zu finden, ohne Kollidierung
-mit einem Hinderniss.
+Die Pfadplanung mit Potentialfelder kommt aus der Robotik. und dient einem Roboter mit Hilfe von Potentialfelder einen Weg zu einem Ziel zu finden, ohne Kollidierung mit einem Hinderniss.
 
 
 ## Problembeschreibung
 
+Stell dir vor, ein Roboter (hier R2D2) soll von seinem Startpunkt aus ein Ziel erreichen.
+Auf dem Weg des Roboters liegen jedoch Hindernisse. Gefährliche Kampfdruiden und gemeine Bösewichte wollen den Roboter aufhalten. Daher muss der Roboter einen Weg zum Ziel finden, ohne an eines der Hindernisse zu geraten.
 
-Stell dir vor ein Roboter soll von seinem Startpunkt aus ein Ziel erreichen.
-Um dieses Ziel zu erreichen muss der Roboter ohne mit einem Hinderniss zu kollidieren.
 Damit der Roboter so wenig Energie wie möglich verbraucht, muss er einen möglichst
 kurzen Weg finden. Hier für wird die Pfadplanung, hier mit
 der *Potential Fields Methode* eingesetzt.
 
 Bei dieser Methode werden einfache physikalische Kräfte verwendet.
-Diese berechneten Kräfte bzw. Potentiale weisen den Roboter zum Ziel hin. Das Ziel
-zieht den Roboter an und die Hindernisse stoßen ihn ab.
+
+Diese berechneten Kräfte bzw. Potentiale weisen den Roboter in eine Richtung. Das Ziel
+zieht den Roboter an und die Hindernisse stoßen ihn ab. Dadurch sollen Begegnungen mit den Hindernissen vermieden werden.
 
 ## Der Algorithmus
 
-[Aside]
-[var name:"state" value: 0 /]
-[CustomD3Component className:"d3-component" rep_factor:20 attr_factor:20 state:state step_size:10 influence_range:100 movable_objects:1 /]
-[button onClick:`state++`]
-Toggle Animation
-[/button]
-[/Aside]
 
 
 Der Algorithmus Potential Fields nutzt einfache physikalische Elemente zur Wegfindung
-zum Ziel und Vermeidung von Kollision mit eiem Hindernis. Das Ziel hat anziehende Kräfte, daher
+zum Ziel und Vermeidung von Kollision mit einem Hindernis. Das Ziel hat anziehende Kräfte, daher
 wird der Roboter dorthin gezogen. Die Hindernisse umgeht der Roboter, da diese
 abstoßende Kräfte haben.
 
@@ -61,6 +53,14 @@ sich der Roboter verhält.
 
 
 ## Erklärung
+
+[Aside]
+[var name:"state" value: 0 /]
+[CustomD3Component className:"d3-component" rep_factor:20 attr_factor:20 state:state step_size:10 influence_range:100 movable_objects:1 /]
+[button onClick:`state++`]
+Toggle Animation
+[/button]
+[/Aside]
 
 Wie findet der Roboter den Weg zum Ziel ohne mit Hindernissen zu kollidieren?
 Der Roboter wird durch eine Kraft [Equation] F [/Equation] beeinflusst.
@@ -106,7 +106,7 @@ den Roboter, in der Darstellung rechts, beeinflussen.
 
 [Aside]
 [var name:"state2" value: 0 /]
-[CustomD3Component className:"d3-component" rep_factor:rep_factor attr_factor:attr_factor state:state2 step_size:step_size influence_range:influence_range movable_objects:0 /]
+//[CustomD3Component className:"d3-component" rep_factor:rep_factor attr_factor:attr_factor state:state2 step_size:step_size influence_range:influence_range movable_objects:0 /]
 
 //[Display value:clickCount /]
 [CustomPlot rep_factor:rep_factor attr_factor:attr_factor influence_range:influence_range steps:steps /]
@@ -146,6 +146,5 @@ Schrittgröße:
 
 [Range value: step_size min:0 max:100 /]
 
-//## Besondere Fälle
 
-Falls dein Interesse geweckt ist, gibt es hier noch etwas mehr [link text:"Informationen" url:"portal.ku.edu.tr/~cbasdogan/Courses/Robotics/projects/algorithm_poten_field.pdf" /]. Dort wird noch auf die Probleme des Algorithmus und Erweiterungen eingegangen.
+Falls dein Interesse geweckt ist, gibt es hier noch etwas mehr [link text:"Informationen" url:"http://portal.ku.edu.tr/~cbasdogan/Courses/Robotics/projects/algorithm_poten_field.pdf" /]. Dort wird noch auf die Probleme des Algorithmus und Erweiterungen eingegangen.
