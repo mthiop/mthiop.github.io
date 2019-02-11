@@ -11,21 +11,28 @@ const size = 500;
 const circleRadius = 10;
 const transitionDuration = 450;//ms
 const timerFrequency = 500;//ms
+const steps = 50;
+const attr_factor = 5;
+const influence_range = 50;
+const rep_factor = 20;
 
-class CustomPlot extends D3Component {
+class CustomPlot extends React.PureComponent {
   
 calc_d(x, y, gx, gy) {
     return Math.pow(x-gx,2)+Math.pow(y-gy,2); 
 }
  
 genAttractiveForce(goal) {
-    let data = []
-    const steps =  50;  // number of datapoints will be steps*steps
-    var axisMax = 500;
-    var axisStep = axisMax / steps;
 
-    var e = 1;
-    var e = this.inAttractionFactor;
+    let data = []
+    //steps =  50;  // number of datapoints will be steps*steps
+    var axisMax = 500;
+    var axisStep = axisMax / this.props.steps;
+	
+
+    //var e = 5;
+    var e = this.props.attr_factor;
+	console.log(e);
 	//F_Att = -e * (robot-qG) / norm(robot-goal); #quadratic
     
     
@@ -41,6 +48,7 @@ genAttractiveForce(goal) {
 	var result = Vector.scale(direction, (-e / normTerm));
 	//var d = this.calc_d(x, y, gx, gy);
 	//var normTerm = 0.5*Math.pow(Math.sqrt(d),2);
+
         data.push({
           x: x,
           y: y,
@@ -49,7 +57,6 @@ genAttractiveForce(goal) {
         })
       }
     }
- 
     return data
 }
 
@@ -58,18 +65,18 @@ genRepulsiveForce(obstacle) {
 
 	//const v = this.props.hallo;
 	let data = []
-    var steps = 50;  // number of datapoints will be steps*steps
+    //var steps = 50;  // number of datapoints will be steps*steps
     var axisMax = 500;
-    var axisStep = axisMax / steps;
+    var axisStep = axisMax / this.props.steps;
     var gx = 105; // obstacle x
     var gy = 105; // obstacle y
  //   var range = 1000;   
 
     for (var x = 0; x < axisMax; x+=axisStep) {
       for (var y = 0; y < axisMax; y+=axisStep) {
-	var n = this.inRepulsiveFactor * 10000;// We need to scale the factor because the distances are to high since we use pixel values.
+	var n = this.props.rep_factor * 10000;// We need to scale the factor because the distances are to high since we use pixel values.
 	//var radius = circleRadius; // We assume a circle for obstacles.
-	var influenceRange = this.inInfluenceRange;
+	var influenceRange = this.props.influence_range;
 	var robot = new Vector([x, y]);
 	var direction = Vector.subtract(robot, obstacle);
 	var distance = direction.magnitude();
@@ -135,44 +142,22 @@ data.forEach(function (a) {
 return grouped;
 }
 
-/**initialize(node, props) {
-	  // Parameters
-	//const inAnimationRunning = this.inAnimationRunning = 1;
-	//const inMovableObjects = this.inMovableObjects = props.movable_objects;
-	const inAttractionFactor = this.inAttractionFactor = props.attr_factor;
-	//const inRepulsiveFactor = this.inRepulsiveFactor = this.props.rep_factor;
-	//const inStepSize = this.inStepSize = props.step_size;
-	const inInfluenceRange = this.inInfluenceRange= props.influence_range;
-}**/
-
-/**update(props, oldProps) {
-	// Update algorithm properties
-	
-	if (oldProps.attr_factor != props.attr_factor) {
-		this.inAttractionFactor = props.attr_factor;
-	}
-
-	if (oldProps.rep_factor != this.props.rep_factor) {
-		this.inRepulsiveFactor = this.props.rep_factor;
-	}
-
-	if (oldProps.influence_range != props.influence_range) {
-		this.inInfluenceRange = props.influence_range;
-	}
-
-	if (oldProps.step_size != props.step_size) {
-		this.inStepSize = props.step_size;
-	}
-}**/
-
 render () {
-	  // Parameters
-	//const inAnimationRunning = this.inAnimationRunning = 1;
-	//const inMovableObjects = this.inMovableObjects = props.movable_objects;
-	const inAttractionFactor = this.inAttractionFactor = this.props.attr_factor;
-	const inRepulsiveFactor = this.inRepulsiveFactor = this.props.rep_factor;
-	//const inStepSize = this.inStepSize = props.step_size;
-	const inInfluenceRange = this.inInfluenceRange= this.props.influence_range;
+console.log('render called');
+const { idyll, hasError, updateProps, ...props } = this.props;
+const attr_factor = 5;
+    this.props.updateProps({
+steps: this.props.steps,
+	attr_factor: this.props.attr_factor,
+	
+	influence_range: this.props.influence_range,
+	rep_factor: this.props.rep_factor
+    })
+this.props.steps +1;
+
+/**if (this.props.attr_factor) {
+	attr_factor = this.props.attr_factor
+}**/
 var options = {
     zMax: 2000,
     style: 'surface'
@@ -184,8 +169,10 @@ var obstacle = new Vector([100, 100]);
     let dataRep = this.genRepulsiveForce(obstacle)
     let dataPot = this.genPotentialForce(dataRep, dataAttr)
     return (
-<div>
-<Graph3D data={dataPot} options={options}/>
+<div {...props}>
+
+<Graph3D data={dataAttr} options={options}/>
+<Graph3D data={dataRep} options={options}/>
 
 </div>	
 )
