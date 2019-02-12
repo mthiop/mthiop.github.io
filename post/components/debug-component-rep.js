@@ -190,8 +190,8 @@ class DebugComponentRep extends React.Component {
 
 DebugComponentRep.defaultProps = {
     options: {
-        width: '600px',
-        height: '600px',
+        width: '400px',
+        height: '350px',
         style: 'surface',
         showPerspective: true,
         showGrid: true,
