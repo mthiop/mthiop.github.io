@@ -380,9 +380,11 @@ update(props, oldProps) {
 
 	if (props.visible == 0) {
 		this.svg.attr("visibility", "hidden");
+		d3.select("#forceViz").style("display", "inline");
 	}
 	if (props.visible == 1) {
 		this.svg.attr("visibility", "visible");
+		d3.select("#forceViz").style("display", "none");
 	}
 
 }
