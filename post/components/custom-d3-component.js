@@ -153,6 +153,7 @@ updateRobotPosition()
 
 
 initialize(node, props) {
+		d3.select("#forceViz").style("display", "none");
 	// We need the class-this for callbacks
 	var self = this;
 
@@ -384,6 +385,12 @@ update(props, oldProps) {
 	}
 	if (props.visible == 1) {
 		this.svg.attr("visibility", "visible");
+		d3.select("#forceViz").style("display", "none");
+	}
+	if (props.forceViz == 0) {
+		d3.select("#forceViz").style("display", "inline");
+	}
+	if (props.forceViz == 1) {
 		d3.select("#forceViz").style("display", "none");
 	}
 
