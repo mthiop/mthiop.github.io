@@ -6,9 +6,23 @@
   subtitle:""
   author:"" /]
 
-[Aside]
-//////////////////[image style:`{width: '100%'}` src:"/static/images/screenshot.png" /]
-[/Aside]
+// Variables
+[var name:"state" value: 0 /]
+[var name:"step_size" value:10 /]
+[var name:"attr_factor" value: 20 /]
+[var name:"rep_factor" value:20 /]
+[var name:"influence_range" value:100 /]
+[var name:"state2" value: 0 /]
+[var name:steps value:50 /]
+[var name:"playgroundVisible" value:1 /]
+
+[Fixed]
+//[p][em]Verschiebbare Objekte![/em][/p]
+[CustomD3Component className:"d3-component" rep_factor:20 attr_factor:20 state:state step_size:10 influence_range:100 movable_objects:1 visible:playgroundVisible /]
+//[button onClick:`state++`]
+//Play/Pause
+//[/button]
+[/Fixed]
 
 ## Abstract
 
@@ -21,13 +35,6 @@ Die Pfadplanung mit Potentialfelder kommt aus der Robotik. und dient einem Robot
 
 
 ## Problembeschreibung
-[Aside]
-[p][em]Verschiebbare Objekte![/em][/p]
-[CustomD3Component className:"d3-component" rep_factor:20 attr_factor:20 state:state step_size:10 influence_range:100 movable_objects:1 /]
-[button onClick:`state++`]
-Play/Pause
-[/button]
-[/Aside]
 
 Stell dir vor, ein Roboter (hier R2D2) soll von seinem Startpunkt aus ein Ziel erreichen.
 Auf dem Weg des Roboters liegen jedoch Hindernisse. Gefährliche Kampfdruiden und gemeine Bösewichte wollen den Roboter aufhalten. Daher muss der Roboter einen Weg zum Ziel finden, ohne an eines der Hindernisse zu geraten.
@@ -49,14 +56,13 @@ zum Ziel und Vermeidung von Kollision mit einem Hindernis. Das Ziel hat anziehen
 wird der Roboter dorthin gezogen. Die Hindernisse umgeht der Roboter, da diese
 abstoßende Kräfte haben.
 
-Auf der rechten Seite siehst du eine Simulation des Algorithmus. Der blaumarkierte Roboter findet einen Weg zum orange markierten Ziel. Du kannst alle Objekte verschieben und an beliebiger Stelle pausieren. Nutze die Gelegenheit um erste Erfahrungen mit dem Algorithmus zu sammeln.
+Auf der rechten Seite siehst du eine Simulation des Algorithmus. [action onClick:`state++`]Klicke hier, um die Simulation zu starten.[/action]Der blaumarkierte Roboter findet einen Weg zum orange markierten Ziel. Du kannst alle Objekte verschieben und an beliebiger Stelle pausieren. Nutze die Gelegenheit um erste Erfahrungen mit dem Algorithmus zu sammeln. 
 
 
-[Aside]
-[var name:"state" value: 0 /]
-[p][em]Veraenderbare Parameter![/em][/p]
-[CustomD3Component className:"d3-component" rep_factor:rep_factor attr_factor:attr_factor state:0 step_size:step_size influence_range:influence_range movable_objects:0 /]
-[/Aside]
+//[Aside]
+////[p][em]Veraenderbare Parameter![/em][/p]
+//[CustomD3Component className:"d3-component" rep_factor:rep_factor attr_factor:attr_factor state:0 step_size:step_size influence_range:influence_range movable_objects:0 /]
+//[/Aside]
 
 ## Erklärung
 Wie findet der Roboter den Weg zum Ziel ohne mit Hindernissen zu kollidieren?
@@ -73,8 +79,8 @@ einem Planungszyklus durchläuft, genommen werden.
 Wenn du den Regler [em]Schrittgröße[/em] verschiebst, kannst du die Schrittgröße beeinflussen.
 Fällt dir ein Problem auf, wenn du den Wert sehr hoch setzt?
 
-[var name:"step_size" value:10 /]
 
+[div onEnterView:`playgroundVisible = 0` onExitViewFully:`playgroundVisible = 1`]
 [p]
   [em]Schrittgröße [/em]
 	[Range value: step_size min:0 max:100 /]
@@ -119,7 +125,6 @@ Der Parameter [Equation]\epsilon[/Equation] verstärkt die anziehende Kraft oder
 
 Mit Verschiebung des Regelers [em]Anziehungskraft [/em] ändert sich die Anziehungskraft des Ziels zum Roboter.
 
-[var name:"attr_factor" value: 20 /]
 [p]
   [em]Anziehungskraft [/em] [Equation]\epsilon[/Equation]
 	[Range value:attr_factor min:0 max:100 /]
@@ -158,14 +163,12 @@ Ein Hindernis hat neben der abstoßenden Kraft auch einen Einflussbereich, der b
 Verschiebe die Regler [em]Abstoßungskraft[/em] und [em]Hindernisseinflussbereich[/em] und beobachte wie sich der Roboter zu den Hindernissen verhält.
 
 
-[var name:"rep_factor" value:20 /]
 [p]
   [em]Abstoßungskraft [/em][Equation]\theta[/Equation]
 	[Range value:rep_factor min:0 max:100 /]
   [Display value:rep_factor /]
 [/p]
 
-[var name:"influence_range" value:100 /]
 [p]
   [em]Hindernisseinflussbereich[/em]
 	[Range value:influence_range min:0 max:400 /]
@@ -177,7 +180,6 @@ Verschiebe die Regler [em]Abstoßungskraft[/em] und [em]Hindernisseinflussbereic
 
 
 [Aside]
-[var name:"state2" value: 0 /]
 
 //[Display value:clickCount /]
 [DebugComponent rep_factor:rep_factor attr_factor:attr_factor influence_range:influence_range steps:steps /]
@@ -188,7 +190,6 @@ Play/Pause
 
 Steps:
 
-[var name:steps value:50 /]
 [Range value:steps min:1 max:100 /]
 
 
@@ -197,3 +198,4 @@ Steps:
 
 Falls dein Interesse geweckt ist, gibt es hier noch etwas mehr [link text:"Informationen" url:"http://portal.ku.edu.tr/~cbasdogan/Courses/Robotics/projects/algorithm_poten_field.pdf" /]. Dort wird noch auf die Probleme des Algorithmus und Erweiterungen eingegangen.
 
+[/div]

@@ -157,7 +157,7 @@ initialize(node, props) {
 	var self = this;
 
 	  // Parameters
-	const inAnimationRunning = this.inAnimationRunning = 1;
+	const inAnimationRunning = this.inAnimationRunning = 0;
 	const inMovableObjects = this.inMovableObjects = props.movable_objects;
 	const inAttractionFactor = this.inAttractionFactor = props.attr_factor;
 	const inRepulsiveFactor = this.inRepulsiveFactor = props.rep_factor;
@@ -342,8 +342,8 @@ svg.append('g').selectAll('#obstacle')
 	}
 
 	// We need to write this in a strange way because js doens't know what 'this' in the function is.
-	var t = this;
-	const timer = this.timer = setInterval(function(){t.updateRobotPosition();}, timerFrequency);
+	//var t = this;
+	//const timer = this.timer = setInterval(function(){t.updateRobotPosition();}, timerFrequency);
   }
 
 update(props, oldProps) {
@@ -376,6 +376,13 @@ update(props, oldProps) {
 
 	if (oldProps.step_size != props.step_size) {
 		this.inStepSize = props.step_size;
+	}
+
+	if (props.visible == 0) {
+		this.svg.attr("visibility", "hidden");
+	}
+	if (props.visible == 1) {
+		this.svg.attr("visibility", "visible");
 	}
 
 }
