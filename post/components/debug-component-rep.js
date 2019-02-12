@@ -6,7 +6,7 @@ var v = require('vectorious/withoutblas'),
     Vector = v.Vector;
 
 
-class DebugComponent extends React.Component {
+class DebugComponentRep extends React.Component {
 
     constructor(props) {
         super(props);
@@ -126,11 +126,11 @@ class DebugComponent extends React.Component {
 
         var goal = new Vector([50, 50]);
         var obstacle = new Vector([200, 200]);
-        let dataAttr = this.genAttractiveForce(goal);
+        //let dataAttr = this.genAttractiveForce(goal);
         let dataRep = this.genRepulsiveForce(obstacle);
-        let dataPot = this.genPotentialForce(dataRep, dataAttr);
+        //let dataPot = this.genPotentialForce(dataRep, dataAttr);
 
-        data.add(dataPot);
+        data.add(dataRep);
         //console.log("Data is:" + this.props.data);
         //data.add(this.props.data);
         this.$el.setData(data);
@@ -188,7 +188,7 @@ class DebugComponent extends React.Component {
                     {this.props.steps}</p>
  */
 
-DebugComponent.defaultProps = {
+DebugComponentRep.defaultProps = {
     options: {
         width: '600px',
         height: '600px',
@@ -205,4 +205,4 @@ DebugComponent.defaultProps = {
     }
 };
 
-module.exports = DebugComponent;
+module.exports = DebugComponentRep;

@@ -8,7 +8,7 @@
 
 // Variables
 [var name:"state" value: 0 /]
-[var name:"step_size" value:10 /]
+[var name:"step_size" value:10/]
 [var name:"attr_factor" value: 20 /]
 [var name:"rep_factor" value:20 /]
 [var name:"influence_range" value:100 /]
@@ -83,7 +83,7 @@ Fällt dir ein Problem auf, wenn du den Wert sehr hoch setzt?
 [div onEnterView:`playgroundVisible = 0` onExitViewFully:`playgroundVisible = 1`]
 [p]
   [em]Schrittgröße [/em]
-	[Range value: step_size min:0 max:100 /]
+	[Range value: step_size min:6 max:100 /]
   [Display value:step_size /]
 [/p]
 
@@ -131,6 +131,7 @@ Mit Verschiebung des Regelers [em]Anziehungskraft [/em] ändert sich die Anziehu
   [Display value:attr_factor /]
 [/p]
 
+[DebugComponentAttr rep_factor:rep_factor attr_factor:attr_factor influence_range:influence_range steps:step_size /]
 
 Damit der Roboter zum Ziel kommt,aber nicht mit möglichen Hinernissen kollidiert, geht von den Hindernissen die Kraft [Equation]F_{\text{abstoßend}}[/Equation] ab.
 
@@ -176,18 +177,23 @@ Verschiebe die Regler [em]Abstoßungskraft[/em] und [em]Hindernisseinflussbereic
 [/p]
 
 
+[DebugComponentRep rep_factor:rep_factor attr_factor:attr_factor influence_range:influence_range steps:step_size /]
 
 
 
 [Aside]
 
 //[Display value:clickCount /]
-[DebugComponent rep_factor:rep_factor attr_factor:attr_factor influence_range:influence_range steps:steps /]
+
+[p]
+  [em]Schrittgröße [/em]
+	[Range value: step_size min:6 max:100 /]
+  [Display value:step_size /]
+[/p]
 [/Aside].
 
-Steps:
 
-[Range value:steps min:1 max:100 /]
+[DebugComponent rep_factor:rep_factor attr_factor:attr_factor influence_range:influence_range steps:step_size /]
 
 
 
