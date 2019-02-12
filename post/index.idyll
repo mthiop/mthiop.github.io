@@ -56,7 +56,7 @@ zum Ziel und Vermeidung von Kollision mit einem Hindernis. Das Ziel hat anziehen
 wird der Roboter dorthin gezogen. Die Hindernisse umgeht der Roboter, da diese
 abstoßende Kräfte haben.
 
-Auf der rechten Seite siehst du eine Simulation des Algorithmus. [action onClick:`state++`]Klicke hier, um die Simulation zu starten.[/action]Der blaumarkierte Roboter findet einen Weg zum orange markierten Ziel. Du kannst alle Objekte verschieben und an beliebiger Stelle pausieren. Nutze die Gelegenheit um erste Erfahrungen mit dem Algorithmus zu sammeln. 
+Auf der rechten Seite siehst du eine Simulation des Algorithmus. [action onClick:`state++`]Klicke hier, um die Simulation zu starten.[/action] Der blaumarkierte Roboter findet einen Weg zum orange markierten Ziel. Du kannst alle Objekte verschieben und an beliebiger Stelle [action onClick:`state++`]pausieren und fortsetzen[/action]. Nutze die Gelegenheit um erste Erfahrungen mit dem Algorithmus zu sammeln. 
 
 
 //[Aside]
