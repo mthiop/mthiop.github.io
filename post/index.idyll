@@ -71,6 +71,7 @@ Auf der rechten Seite siehst du eine Simulation des Algorithmus. [action onClick
 
 
 ## Parametererklärung
+Anstatt des Szenarios siehst du auf der rechten Seite nun ein vereinfachtes Beispiel mit einem Hindernis.
 
 Wie findet der Roboter den Weg zum Ziel ohne mit Hindernissen zu kollidieren?
 Der Roboter wird durch eine Kraft [Equation] F [/Equation] beeinflusst.
@@ -83,27 +84,8 @@ Dabei bezeichnet [Equation]\sigma [/Equation] die Schrittlänge des Roboters.
 Also kann mit diesem Paramter Einfluss auf die Entfernung, die der Roboter in
 einem Planungszyklus durchläuft, genommen werden.
 
-Wenn du den Regler [em]Schrittgröße[/em][Equation]\sigma[/Equation] verschiebst, kannst du die Schrittgröße beeinflussen.
-Fällt dir ein Problem auf, wenn du den Wert sehr hoch setzt?
-
 [/div]
 [div ]
-
-
-
-[p]
-  [em]Schrittgröße [/em][Equation]\sigma[/Equation]
-	[Range value: step_size min:6 max:100 /]
-  [Display value:step_size /]
-[/p]
-
-
-
-Wie du vielleicht bemerkt hast, springt der Roboter durch Hindernisse und
-überspringt gegegenfalls das Ziel. Das liegt daran, dass der Roboter während
-eines Schrittes immer in die gleiche Richtung geht.
-
-[br /]
 
 Schauen wir uns nun an wie die Richtung bestimmt wird:
 
@@ -133,9 +115,9 @@ Du sieht, dass das Ergebnis nur vom Abstand des Roboters und des Ziels, sowie de
 Es wird ein Vektor in Richtung des Ziels bestimmt und gewichtet.
 Der Parameter [Equation]\epsilon[/Equation] verstärkt die anziehende Kraft oder schwächt sie ab.
 
-Diese anziehende Kraft kannst du dir auch wie einen Abhang vorstellen. Das Tal ist das Ziel und die Steigung die Anziehungskraft.
+Diese anziehende Kraft kannst du dir auch wie einen Abhang vorstellen. Das Tal ist das Ziel und das Gefälle die Anziehungskraft. Je stärker die Anziehungskraft desto stärker ist das Gefälle.
 
-Mit Verschiebung des Regelers [em]Anziehungskraft [/em] ändert sich die Anziehungskraft des Ziels zum Roboter. Beobachte wie sich die Steigung und das Verhalten des Roboters verändert.
+Mit Verschiebung des Regelers [em]Anziehungskraft [/em] ändert sich die Anziehungskraft des Ziels zum Roboter. Beobachte wie sich das Gefälle und das Verhalten des Roboters verändert.
 
 [p]
   [em]Anziehungskraft [/em] [Equation]\epsilon[/Equation]
@@ -177,8 +159,6 @@ Ein Hindernis hat neben der abstoßenden Kraft auch einen Einflussbereich, der b
 
 Verschiebe die Regler [em]Abstoßungskraft[/em] und [em]Hindernisseinflussbereich[/em]. Beobachte wie sich die Steigung und die Breite des Berges ändern und wie sich der Roboter zu den Hindernissen verhält.
 
-[DebugComponentRep rep_factor:rep_factor attr_factor:attr_factor influence_range:influence_range steps:step_size /]
-
 [p]
   [em]Abstoßungskraft [/em][Equation]\theta[/Equation]
 	[Range value:rep_factor min:0 max:100 /]
@@ -203,11 +183,19 @@ Die Addition der anziehenden Kraft (Abhang) mit der abstoßenden Kraft (Berg) er
 [div onExitViewFully:`forceViz=1;playgroundVisible=0;` onEnterViewFully:`forceViz=0;playgroundVisible=1;`]
 
 ### Parameteranwendung
+Wenn du den Regler [em]Schrittgröße[/em] [Equation]\sigma[/Equation] verschiebst, kannst du die Schrittgröße beeinflussen.
+Fällt dir ein Problem auf, wenn du den Wert sehr hoch setzt?
 [p]
   [em]Schrittgröße [/em][Equation]\sigma[/Equation]
 	[Range value: step_size min:6 max:100 /]
   [Display value:step_size /]
 [/p]
+
+Wie du vielleicht bemerkt hast, springt der Roboter durch Hindernisse und
+überspringt gegegenfalls das Ziel. Das liegt daran, dass der Roboter während
+eines Schrittes immer in die gleiche Richtung geht.
+
+[br /]
 
 [p]
   [em]Anziehungskraft [/em] [Equation]\epsilon[/Equation]
