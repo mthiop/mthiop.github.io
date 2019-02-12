@@ -123,7 +123,9 @@ Du sieht, dass das Ergebnis nur vom Abstand des Roboters und des Ziels, sowie de
 Es wird ein Vektor in Richtung des Ziels bestimmt und gewichtet.
 Der Parameter [Equation]\epsilon[/Equation] verstärkt die anziehende Kraft oder schwächt sie ab.
 
-Mit Verschiebung des Regelers [em]Anziehungskraft [/em] ändert sich die Anziehungskraft des Ziels zum Roboter.
+Diese anziehende Kraft kannst du dir auch wie einen Abhang vorstellen. Das Tal ist das Ziel und die Steigung die Anziehungskraft.
+
+Mit Verschiebung des Regelers [em]Anziehungskraft [/em] ändert sich die Anziehungskraft des Ziels zum Roboter. Beobachte wie sich die Steigung und das Verhalten des Roboters verändert.
 
 [p]
   [em]Anziehungskraft [/em] [Equation]\epsilon[/Equation]
@@ -133,7 +135,7 @@ Mit Verschiebung des Regelers [em]Anziehungskraft [/em] ändert sich die Anziehu
 
 [DebugComponentAttr rep_factor:rep_factor attr_factor:attr_factor influence_range:influence_range steps:step_size /]
 
-Damit der Roboter zum Ziel kommt,aber nicht mit möglichen Hinernissen kollidiert, geht von den Hindernissen die Kraft [Equation]F_{\text{abstoßend}}[/Equation] ab.
+Damit der Roboter zum Ziel kommt, aber nicht mit möglichen Hinernissen kollidiert, geht von den Hindernissen die Kraft [Equation]F_{\text{abstoßend}}[/Equation] ab.
 
 [Equation]F_{\text{abstoßend}}(q_r)=\theta * F_{\text{Erkennung}}*F_{\text{Entfernung}} *\frac{q_r-q_h}{|q_r-q_z|}[/Equation].
 
@@ -161,7 +163,9 @@ Hier stellt [Equation]\theta[/Equation] den Skalierungsparamter dar.
 
 Ein Hindernis hat neben der abstoßenden Kraft auch einen Einflussbereich, der beeinflusst wann der Roboter durch die abstoßende Kraft beeinflusst wird.
 
-Verschiebe die Regler [em]Abstoßungskraft[/em] und [em]Hindernisseinflussbereich[/em] und beobachte wie sich der Roboter zu den Hindernissen verhält.
+Ähnlich wie mit unserem Abhang für die anziehende Kraft, kannst du dir ein Hindernis als Berg auf einer Ebene vorstellen. Dabei ist die abstoßende Kraft die Steigung und der Einflussbereich die Breite des Berges.
+
+Verschiebe die Regler [em]Abstoßungskraft[/em] und [em]Hindernisseinflussbereich[/em]. Beobachte wie sich die Steigung und die Breite des Berges ändern und wie sich der Roboter zu den Hindernissen verhält.
 
 
 [p]
@@ -177,24 +181,30 @@ Verschiebe die Regler [em]Abstoßungskraft[/em] und [em]Hindernisseinflussbereic
 [/p]
 
 
+
 [DebugComponentRep rep_factor:rep_factor attr_factor:attr_factor influence_range:influence_range steps:step_size /]
-
-
-
-[Aside]
 
 //[Display value:clickCount /]
 
-[p]
-  [em]Schrittgröße [/em]
-	[Range value: step_size min:6 max:100 /]
-  [Display value:step_size /]
-[/p]
-[/Aside].
-
+Die Addition der anziehenden Kraft (Abhang) mit der abstoßenden Kraft (Berg) ergibt das Potentialfeld:
 
 [DebugComponent rep_factor:rep_factor attr_factor:attr_factor influence_range:influence_range steps:step_size /]
+[p]
+  [em]Anziehungskraft [/em] [Equation]\epsilon[/Equation]
+	[Range value:attr_factor min:0 max:100 /]
+  [Display value:attr_factor /]
+[/p]
+[p]
+  [em]Abstoßungskraft [/em][Equation]\theta[/Equation]
+	[Range value:rep_factor min:0 max:100 /]
+  [Display value:rep_factor /]
+[/p]
 
+[p]
+  [em]Hindernisseinflussbereich[/em]
+	[Range value:influence_range min:0 max:400 /]
+  [Display value:influence_range/]
+[/p]
 
 
 
