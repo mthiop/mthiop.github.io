@@ -48,7 +48,7 @@ zum Ziel und Vermeidung von Kollision mit einem Hindernis. Das Ziel hat anziehen
 wird der Roboter dorthin gezogen. Die Hindernisse umgeht der Roboter, da diese
 abstoßende Kräfte haben.
 
-Auf der rechten Seite siehst du eine Simulation des Algorithmus. Du kannst alle Objekte verschieben und an beliebiger Stelle pausieren. Nutze die Gelegenheit um erste Erfahrungen mit dem Algorithmus zu sammeln.
+Auf der rechten Seite siehst du eine Simulation des Algorithmus. Der blaumarkierte Roboter findet einen Weg zum orange markierten Ziel. Du kannst alle Objekte verschieben und an beliebiger Stelle pausieren. Nutze die Gelegenheit um erste Erfahrungen mit dem Algorithmus zu sammeln.
 
 
 ## Erklärung
@@ -60,9 +60,7 @@ Auf der rechten Seite siehst du eine Simulation des Algorithmus. Du kannst alle 
 
 Wie findet der Roboter den Weg zum Ziel ohne mit Hindernissen zu kollidieren?
 Der Roboter wird durch eine Kraft [Equation] F [/Equation] beeinflusst.
-Im Bild rechts sieht man einen zweidimensionalen Raum mit allen anfahrbaren Positionen
-des Roboters. Die Position des Roboters [Equation]q_r[/Equation], bestehend aus
-einer x- und einer y- Koordinate, berechnet sich durch folgende Gleichung:
+Im Bild rechts sieht man einen zweidimensionalen Raum mit allen anfahrbaren Positionen des Roboters. Die Position des Roboters [Equation]q_r[/Equation], bestehend aus einer x- und einer y- Koordinate, berechnet sich durch folgende Gleichung:
 
 [Equation]q_r=\sigma * \frac{F(q_r)}{|F(q_r)|}[/Equation]
 
