@@ -183,9 +183,6 @@ Verschiebe die Regler [em]Abstoßungskraft[/em] und [em]Hindernisseinflussbereic
 
 //[Display value:clickCount /]
 [DebugComponent rep_factor:rep_factor attr_factor:attr_factor influence_range:influence_range steps:steps /]
-[button onClick:`state2++`]
-Play/Pause
-[/button]
 [/Aside].
 
 Steps:
