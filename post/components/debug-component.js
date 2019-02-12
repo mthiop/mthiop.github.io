@@ -23,8 +23,8 @@ class DebugComponent extends React.Component {
     genAttractiveForce(goal) {
         let data = [];
         //steps =  50;  // number of datapoints will be steps*steps
-        var axisMax = 500;
-        var axisStep = axisMax / this.props.steps;
+        var axisMax = 450;
+        var axisStep = axisMax / (axisMax/this.props.steps);
 
 
         //var e = 5;
@@ -62,8 +62,8 @@ class DebugComponent extends React.Component {
         //const v = this.props.hallo;
         let data = []
         //var steps = 50;  // number of datapoints will be steps*steps
-        var axisMax = 500;
-        var axisStep = axisMax / this.props.steps;
+        var axisMax = 450;
+        var axisStep = axisMax / (axisMax/this.props.steps);
         var gx = 105; // obstacle x
         var gy = 105; // obstacle y
         //   var range = 1000;
