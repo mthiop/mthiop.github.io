@@ -19,7 +19,16 @@
 
 [div onExitView:`playgroundVisible = 0` onEnterViewFully:`playgroundVisible = 1`]
 [Fixed]
-//[p][em]Verschiebbare Objekte![/em][/p]
+[div id:"forceViz"]
+//[Conditional if:`forceViz == 1`]
+[Graphic]
+     [img height:450 width:450 src:`"static/images/staticPlayground.png"` /]
+[/Graphic]
+//[/Conditional]
+//[DebugComponent rep_factor:rep_factor attr_factor:attr_factor influence_range:influence_range steps:steps /]
+[/div]
+[/Fixed]
+[Fixed]
 [CustomD3Component className:"d3-component" rep_factor:20 attr_factor:20 state:state step_size:10 influence_range:100 movable_objects:1 visible:playgroundVisible /]
 //[button onClick:`state++`]
 //Play/Pause
@@ -80,14 +89,6 @@ Fällt dir ein Problem auf, wenn du den Wert sehr hoch setzt?
 [/div]
 [div ]
 
-[Fixed]
-[div id:"forceViz"]
-[Graphic]
-     [img height:450 width:450 src:`"static/images/staticPlayground.png"` /]
-[/Graphic]
-//[DebugComponent rep_factor:rep_factor attr_factor:attr_factor influence_range:influence_range steps:steps /]
-[/div]
-[/Fixed]
 
 
 [p]
@@ -132,7 +133,9 @@ Du sieht, dass das Ergebnis nur vom Abstand des Roboters und des Ziels, sowie de
 Es wird ein Vektor in Richtung des Ziels bestimmt und gewichtet.
 Der Parameter [Equation]\epsilon[/Equation] verstärkt die anziehende Kraft oder schwächt sie ab.
 
-Mit Verschiebung des Regelers [em]Anziehungskraft [/em] ändert sich die Anziehungskraft des Ziels zum Roboter.
+Diese anziehende Kraft kannst du dir auch wie einen Abhang vorstellen. Das Tal ist das Ziel und die Steigung die Anziehungskraft.
+
+Mit Verschiebung des Regelers [em]Anziehungskraft [/em] ändert sich die Anziehungskraft des Ziels zum Roboter. Beobachte wie sich die Steigung und das Verhalten des Roboters verändert.
 
 [p]
   [em]Anziehungskraft [/em] [Equation]\epsilon[/Equation]
@@ -142,7 +145,7 @@ Mit Verschiebung des Regelers [em]Anziehungskraft [/em] ändert sich die Anziehu
 
 [DebugComponentAttr rep_factor:rep_factor attr_factor:attr_factor influence_range:influence_range steps:step_size /]
 
-Damit der Roboter zum Ziel kommt,aber nicht mit möglichen Hinernissen kollidiert, geht von den Hindernissen die Kraft [Equation]F_{\text{abstoßend}}[/Equation] ab.
+Damit der Roboter zum Ziel kommt, aber nicht mit möglichen Hinernissen kollidiert, geht von den Hindernissen die Kraft [Equation]F_{\text{abstoßend}}[/Equation] ab.
 
 [Equation]F_{\text{abstoßend}}(q_r)=\theta * F_{\text{Erkennung}}*F_{\text{Entfernung}} *\frac{q_r-q_h}{|q_r-q_z|}[/Equation].
 
@@ -170,7 +173,9 @@ Hier stellt [Equation]\theta[/Equation] den Skalierungsparamter dar.
 
 Ein Hindernis hat neben der abstoßenden Kraft auch einen Einflussbereich, der beeinflusst wann der Roboter durch die abstoßende Kraft beeinflusst wird.
 
-Verschiebe die Regler [em]Abstoßungskraft[/em] und [em]Hindernisseinflussbereich[/em] und beobachte wie sich der Roboter zu den Hindernissen verhält.
+Ähnlich wie mit unserem Abhang für die anziehende Kraft, kannst du dir ein Hindernis als Berg auf einer Ebene vorstellen. Dabei ist die abstoßende Kraft die Steigung und der Einflussbereich die Breite des Berges.
+
+Verschiebe die Regler [em]Abstoßungskraft[/em] und [em]Hindernisseinflussbereich[/em]. Beobachte wie sich die Steigung und die Breite des Berges ändern und wie sich der Roboter zu den Hindernissen verhält.
 
 [DebugComponentRep rep_factor:rep_factor attr_factor:attr_factor influence_range:influence_range steps:step_size /]
 
@@ -186,16 +191,18 @@ Verschiebe die Regler [em]Abstoßungskraft[/em] und [em]Hindernisseinflussbereic
   [Display value:influence_range/]
 [/p]
 
-[DebugComponent rep_factor:rep_factor attr_factor:attr_factor influence_range:influence_range steps:step_size /]
-[/div]
+[DebugComponentRep rep_factor:rep_factor attr_factor:attr_factor influence_range:influence_range steps:step_size /]
 
+
+
+Die Addition der anziehenden Kraft (Abhang) mit der abstoßenden Kraft (Berg) ergibt das Potentialfeld:
+
+[DebugComponent rep_factor:rep_factor attr_factor:attr_factor influence_range:influence_range steps:step_size /]
+
+[/div]
 [div onExitViewFully:`forceViz=1;playgroundVisible=0;` onEnterViewFully:`forceViz=0;playgroundVisible=1;`]
 
 ### Parameteranwendung
-
-
-
-
 [p]
   [em]Schrittgröße [/em][Equation]\sigma[/Equation]
 	[Range value: step_size min:6 max:100 /]
