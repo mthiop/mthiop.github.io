@@ -28,7 +28,7 @@ class DebugComponent extends React.Component {
 
 
         //var e = 5;
-        var e = this.props.attr_factor;
+        var e = this.props.attr_factor/5;
         console.log("Props.attr_factor:" + e);
         //F_Att = -e * (robot-qG) / norm(robot-goal); #quadratic
 
@@ -72,7 +72,7 @@ class DebugComponent extends React.Component {
             for (var y = 0; y < axisMax; y += axisStep) {
                 var n = this.props.rep_factor * 10000;// We need to scale the factor because the distances are to high since we use pixel values.
                 //var radius = circleRadius; // We assume a circle for obstacles.
-                var influenceRange = this.props.influence_range;
+                var influenceRange = this.props.influence_range/2;
                 var robot = new Vector([x, y]);
                 var direction = Vector.subtract(robot, obstacle);
                 var distance = direction.magnitude();
@@ -112,7 +112,10 @@ class DebugComponent extends React.Component {
                 this[key] = {x: a.x, y: a.y, z: a.z};
                 grouped.push(this[key]);
             }
-            this[key].z += a.z;
+		if (this[key].z + a.z > 10000) {
+                        this[key].z = 10000;
+                    } else {
+            this[key].z += a.z;}
         }, Object.create(null));
         return grouped;
     }
@@ -121,8 +124,8 @@ class DebugComponent extends React.Component {
         console.log("Hallo");
         var data = new vis.DataSet();
 
-        var goal = new Vector([25, 25]);
-        var obstacle = new Vector([100, 100]);
+        var goal = new Vector([50, 50]);
+        var obstacle = new Vector([200, 200]);
         let dataAttr = this.genAttractiveForce(goal);
         let dataRep = this.genRepulsiveForce(obstacle);
         let dataPot = this.genPotentialForce(dataRep, dataAttr);
