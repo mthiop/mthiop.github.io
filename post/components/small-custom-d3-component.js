@@ -82,7 +82,7 @@ updateRobotPosition()
 		}
 	});
 
-	if (closestLength < this.inInfluenceRange) {
+	if (closestLength-circleRadius < this.inInfluenceRange) {
 		this.svg.select("#obstacleBackground")
 		.attr("cx", closestObstacle.x)
 		.attr("cy", closestObstacle.y);
