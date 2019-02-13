@@ -80,7 +80,7 @@ Also kann mit diesem Paramter Einfluss auf die Entfernung, die der Roboter in
 einem Planungszyklus durchläuft, genommen werden.
 
 [/div]
-[div ]
+[div scrollOffset:-500]
 
 Schauen wir uns nun an wie die Richtung bestimmt wird:
 
@@ -126,15 +126,14 @@ Damit der Roboter zum Ziel kommt, aber nicht mit möglichen Hinernissen kollidie
 [Equation]F_{\text{abstoßend}}(q_r)=\theta * F_{\text{Erkennung}}*F_{\text{Entfernung}} *\frac{q_r-q_h}{|q_r-q_z|}[/Equation].
 
 
-Hier stellt [Equation]\theta[/Equation] den Skalierungsparamter dar.
+Hier stellt θ den Skalierungsparamter dar.
 
-[br/]
-[Equation]F_{\text{Entfernung}}=\frac{1}{p(q_r)^2}[/Equation]
+[br/].
+
+[Equation]F_{\text{Entfernung}}=\frac{1}{p(q_r)^2}[/Equation].
 
 
-//Formel F-Entfernung
 
-[br /]
 [br /]
 
 [Equation]F_{\text{Entfernung}}[/Equation] repräsentiert den Abstand zwischen Roboter und Hindernis:
@@ -174,7 +173,6 @@ Die Addition der anziehenden Kraft (Abhang) mit der abstoßenden Kraft (Berg) er
 [DebugComponent rep_factor:rep_factor attr_factor:attr_factor influence_range:influence_range steps:step_size /]
 
 [/div]
-[div onExitViewFully:`forceViz=1;playgroundVisible=0;` onEnterViewFully:`forceViz=0;playgroundVisible=1;`]
 
 ### Parameteranwendung
 
@@ -194,6 +192,7 @@ Wie du vielleicht bemerkt hast, springt der Roboter durch Hindernisse und
 eines Schrittes immer in die gleiche Richtung geht.
 
 [br /]
+[div onExitViewFully:`forceViz=1;playgroundVisible=0;` onEnterView:`forceViz=0;playgroundVisible=1;`]
 
 Mit der Anziehungskraft kannst du sehen, wie stark der Roboter vom Ziel angezogen wird. Wenn du den Regler erhöhst, wird der Roboter knapper am Hindernis vorbeigehen um schneller ans Ziel zu gelangen.
 
