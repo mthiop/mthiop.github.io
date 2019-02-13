@@ -20,19 +20,13 @@
 [div onExitView:`playgroundVisible = 0` onEnterViewFully:`playgroundVisible = 1`]
 [Fixed]
 [div id:"forceViz"]
-//[Conditional if:`forceViz == 1`]
 [Graphic]
      [img height:450 width:450 src:`"static/images/staticPlayground.png"` /]
 [/Graphic]
-//[/Conditional]
-//[DebugComponent rep_factor:rep_factor attr_factor:attr_factor influence_range:influence_range steps:steps /]
 [/div]
 [/Fixed]
 [Fixed]
-[CustomD3Component className:"d3-component" rep_factor:20 attr_factor:20 state:state step_size:10 influence_range:100 movable_objects:1 visible:playgroundVisible /]
-//[button onClick:`state++`]
-//Play/Pause
-//[/button]
+[CustomD3Component className:"d3-component" rep_factor:rep_factor attr_factor:attr_factor state:state step_size:step_size influence_range:influence_range movable_objects:1 visible:playgroundVisible /]
 [/Fixed]
 
 ## Abstract
@@ -183,6 +177,9 @@ Die Addition der anziehenden Kraft (Abhang) mit der abstoßenden Kraft (Berg) er
 [div onExitViewFully:`forceViz=1;playgroundVisible=0;` onEnterViewFully:`forceViz=0;playgroundVisible=1;`]
 
 ### Parameteranwendung
+
+Als letztes kannst du die Parameter nun auch in der Simulation verwenden [action onClick:`state++`]|Start und Stop|[/action]:
+
 Wenn du den Regler [em]Schrittgröße[/em] [Equation]\sigma[/Equation] verschiebst, kannst du die Schrittgröße beeinflussen.
 Fällt dir ein Problem auf, wenn du den Wert sehr hoch setzt?
 [p]
@@ -197,11 +194,15 @@ eines Schrittes immer in die gleiche Richtung geht.
 
 [br /]
 
+Mit der Anziehungskraft kannst du sehen, wie stark der Roboter vom Ziel angezogen wird. Wenn du den Regler erhöhst, wird der Roboter knapper am Hindernis vorbeigehen um schneller ans Ziel zu gelangen.
+
 [p]
   [em]Anziehungskraft [/em] [Equation]\epsilon[/Equation]
 	[Range value:attr_factor min:0 max:100 /]
   [Display value:attr_factor /]
 [/p]
+
+Das Gegenteil erreichst du mit der Abstoßungskraft:
 
 [p]
   [em]Abstoßungskraft [/em][Equation]\theta[/Equation]
@@ -209,13 +210,16 @@ eines Schrittes immer in die gleiche Richtung geht.
   [Display value:rep_factor /]
 [/p]
 
+Mit dem Hinderniseinflussbereich kannst du verändern, wann der Roboter ein Hindernis bemerkt. Das erkennst du daran, dass das Hindernis rot aufleuchtet.
+
 [p]
-  [em]Hindernisseinflussbereich[/em] [Equation]\phi[/Equation]
+  [em]Hinderniseinflussbereich[/em] [Equation]\phi[/Equation]
 	[Range value:influence_range min:0 max:400 /]
   [Display value:influence_range/]
 [/p]
 
 
+### Abschließende Worte
 
 Falls dein Interesse geweckt ist, gibt es hier noch etwas mehr [link text:"Informationen" url:"http://portal.ku.edu.tr/~cbasdogan/Courses/Robotics/projects/algorithm_poten_field.pdf" /]. Dort wird noch auf die Probleme des Algorithmus und Erweiterungen eingegangen.
 
