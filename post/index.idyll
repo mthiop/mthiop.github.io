@@ -1,4 +1,4 @@
-[meta title:"Potential Fields" description:"Pfadplanung mit Potential Fields" /]
+ [meta title:"Potential Fields" description:"Pfadplanung mit Potential Fields" /]
 
 
 [Header
@@ -37,7 +37,7 @@ Universität Berlin entstanden. Aufgabe war es einen Algorithmus zu erklären un
 zu visualisieren, wobei Informatikstudenten im ersten Semester für das
 Studium motiviert werden sollten.
 
-Die Pfadplanung mit Potentialfelder ist ein Algorithmus aus der Robotik und dient dazu einem Roboter einen Weg zu einem Ziel zu planen, ohne mit einem Hinderniss zu kollidieren.
+Die Pfadplanung mit Potentialfeldern ist ein Algorithmus aus der Robotik und dient dazu einem Roboter einen Weg zu einem Ziel zu planen, ohne mit einem Hinderniss zu kollidieren.
 
 
 ## Problembeschreibung
