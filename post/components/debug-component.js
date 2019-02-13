@@ -125,7 +125,7 @@ class DebugComponent extends React.Component {
         var data = new vis.DataSet();
 
         var goal = new Vector([50, 50]);
-        var obstacle = new Vector([200, 200]);
+        var obstacle = new Vector([205,195]);
         let dataAttr = this.genAttractiveForce(goal);
         let dataRep = this.genRepulsiveForce(obstacle);
         let dataPot = this.genPotentialForce(dataRep, dataAttr);
