@@ -89,8 +89,7 @@ Schauen wir uns nun an wie die Richtung bestimmt wird:
 [br /]
 
 
-[Equation]F(q_r)[/Equation] besteht aus zwei Komponenten. Zum einen ist
-[Equation]F_{\text{anziehend}(q_r)}[/Equation] die anziehende Kraft des
+[Equation]F(q_r)[/Equation] besteht aus zwei Komponenten. Zum einen ist  [Equation]F_{\text{anziehend}(q_r)}[/Equation] die anziehende Kraft des
 Roboters in die Richtung des Ziels. Das Ziel hat dabei die Position
 [Equation]q_z[/Equation].
 Zum anderen beschreibt [Equation]F_{\text{abstoßend}(q_r, q_h)}[/Equation] die
@@ -178,7 +177,8 @@ Die Addition der anziehenden Kraft (Abhang) mit der abstoßenden Kraft (Berg) er
 
 ### Parameteranwendung
 
-Als letztes kannst du die Parameter nun auch in der Simulation verwenden [action onClick:`state++`]|Start und Stop|[/action]:
+Hier kannst du noch einmal die Parametern verändern. Beobachte die Veränderung des Potentialfeldes (oben) und wie sich der Roboter in der Simulation verhält [action onClick:`state++`]|Start und Stop|[/action]:
+
 
 Wenn du den Regler [em]Schrittgröße[/em] [Equation]\sigma[/Equation] verschiebst, kannst du die Schrittgröße beeinflussen.
 Fällt dir ein Problem auf, wenn du den Wert sehr hoch setzt?
