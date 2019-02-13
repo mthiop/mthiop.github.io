@@ -388,10 +388,10 @@ update(props, oldProps) {
 		d3.select("#forceViz").style("display", "none");
 	}
 	if (props.forceViz == 0) {
-		d3.select("#forceViz").style("display", "inline");
+		d3.select("#forceViz").style("display", "none");
 	}
 	if (props.forceViz == 1) {
-		d3.select("#forceViz").style("display", "none");
+		d3.select("#forceViz").style("display", "inline");
 	}
 
 }
