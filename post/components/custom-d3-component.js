@@ -126,6 +126,8 @@ updateRobotPosition()
 //		robotPosition.y = Math.random() * size;
 		robotPosition.x = 50;
 		robotPosition.y = 50;
+		this.robotPathDataOld = this.robotPathData;
+		this.svg.select("#robotPathOld").attr('d', this.robotPathDataOld).attr('d', this.lineFunction(this.robotPathData));
 		this.robotPathData = [];
 	}
 
@@ -220,6 +222,7 @@ initialize(node, props) {
 
 	  // Path setup
 	const robotPathData = this.robotPathData = [[50-(circleRadius/2),50-(circleRadius/2)]];
+	const robotPathDataOld = this.robotPathDataOld = [];
 	const lineFunction = this.lineFunction = d3.line()
 	.x(function(d) { return d[0]; })
 	.y(function(d) { return d[1]; })
@@ -230,6 +233,14 @@ initialize(node, props) {
       .attr("stroke", "steelblue")
       .attr("stroke-width", "2")
 	  .attr("id", "robotPath")
+      .attr("fill", "none");
+
+	svg.append("path")
+      .attr("d", lineFunction(robotPathDataOld))
+      .attr("stroke", "steelblue")
+      .attr("stroke-width", "2")
+	  .attr("id", "robotPathOld")
+	  .attr("opacity", .4)
       .attr("fill", "none");
 
 	  // Obstacle setup
