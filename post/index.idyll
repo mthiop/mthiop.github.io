@@ -1,3 +1,4 @@
+[div onExitView:`playgroundVisible = 0` onEnterViewFully:`playgroundVisible = 1`]
  [meta title:"Potential Fields" description:"Pfadplanung mit Potential Fields" /]
 
 
@@ -17,7 +18,6 @@
 [var name:"playgroundVisible" value:1 /]
 [var name:"forceViz" value:0 /]
 
-[div onExitView:`playgroundVisible = 0` onEnterViewFully:`playgroundVisible = 1`]
 [Fixed]
 [div id:"forceViz"]
 [SmallCustomD3Component className:"d3-component" rep_factor:rep_factor attr_factor:attr_factor state:state step_size:step_size influence_range:influence_range movable_objects:0 /]
@@ -80,7 +80,7 @@ Also kann mit diesem Paramter Einfluss auf die Entfernung, die der Roboter in
 einem Planungszyklus durchläuft, genommen werden.
 
 [/div]
-[div scrollOffset:-500]
+[div]
 
 Schauen wir uns nun an wie die Richtung bestimmt wird:
 
@@ -127,6 +127,8 @@ Damit der Roboter zum Ziel kommt, aber nicht mit möglichen Hinernissen kollidie
 
 
 Hier stellt θ den Skalierungsparamter dar.
+
+
 
 [br/].
 
