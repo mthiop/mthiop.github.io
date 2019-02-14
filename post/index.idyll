@@ -37,12 +37,12 @@ Universität Berlin entstanden. Aufgabe war es einen Algorithmus zu erklären un
 zu visualisieren, wobei Informatikstudenten im ersten Semester für das
 Studium motiviert werden sollten.
 
-Die Pfadplanung mit Potentialfeldern ist ein Algorithmus aus der Robotik und dient dazu einem Roboter einen Weg zu einem Ziel zu planen, ohne mit einem Hinderniss zu kollidieren.
+Die Pfadplanung mit Potentialfeldern ist ein Algorithmus aus der Robotik. Der Algorithmus plant einem Roboter einen Weg zu einem Ziel. Dabei wird die Kollision mit Hindernissen vermieden.
 
 
 ## Problembeschreibung
 
-Stell dir vor, ein Roboter (hier R2D2) soll von seinem Startpunkt aus ein Ziel erreichen.
+Stell dir vor ein Roboter (hier R2D2) soll von seinem Startpunkt aus ein Ziel erreichen.
 Auf dem Weg des Roboters liegen jedoch Hindernisse. Gefährliche Kampfdruiden und gemeine Bösewichte wollen den Roboter aufhalten. Daher muss der Roboter einen Weg zum Ziel finden, ohne an eines der Hindernisse zu geraten.
 
 Damit der Roboter so wenig Energie wie möglich verbraucht, muss er einen möglichst
