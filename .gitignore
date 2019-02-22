@@ -12,6 +12,9 @@
 *.cb2
 .*.lb
 
+## tilde:
+*~
+
 ## Intermediate documents:
 *.dvi
 *.xdv
