@@ -1,0 +1,242 @@
+
+% =============================================================================
+\section{Problembeschreibung und Eignung des Algorithmus}\label{sec:intro}
+% =============================================================================
+
+Der \textit{Potential Fields Method} Algorithmus befasst sich grundlegend mit der Pfadplanung eines Roboters. Das Problem besteht dabei aus einem Roboter, der sich zu einem Ziel bewegen soll. Die Pfadplanung versucht einen Pfad vom Startpunkt des Roboters zum Ziel zu planen. Dabei sollen Kollisionen mit Hindernissen vermieden werden. Der Pfad sollte außerdem so kurz wie möglich sein.
+
+Im Falle der \textit{Potential Fields Method} werden hierfür einfache physikalische Gesetze verwendet. Bei der Pfadplanung werden künstliche Kräfte bzw. Potentiale berechnet, die den Roboter zum Ziel weisen. Der Roboter wird vom Potentialfeld des Ziels angezogen, aber vom Potentialfeld des Hindernisses abgestoßen. Die Kräfte werden mit einigen Gleichungen berechnet, die in Abschnitt \vref{sec:algo} erläutert werden.
+
+Der Algorithmus behandelt ein abstraktes Problem, das auch ohne jegliche Vorkenntnisse verständlich ist. Daher ist er für Erstsemesterstudierende ohne fundiertes Wissen möglich zu verstehen. Man braucht lediglich mathematisches und physikalisches Verständnis aus dem Abitur. 
+Für Erstsemesterstudierende könnte der Algorithmus für die Mathematik im Studium motivieren, da es ein mathematisches Konstrukt entmystifiziert. Scheinen die mathematischen Gleichungen im ersten Moment erschlagend, können sie durch eine gute Visualisierung Schritt für Schritt erschlossen werden. 
+
+Durch die variierbare Komplexität und mögliche Erweiterungen ist der Algorithmus aber auch für fortgeschrittene Studenten von Interesse. 
+Der Algorithmus wird im Modul \textit{Robotik} gelehrt und wird auch in der modernen Forschung noch verwendet. Beispiele sind hier autonome Automobile~\cite{dolgov2009path}, Computerspiele wie Starcraft~\cite{hagelback2012potential}, Drohnen~\cite{paul2008modelling} und Mars-Rover~\cite{massari2004autonomous}. Die ersten drei Beispiele sind in Bild~\vref{fig:teaser} abgebildet.
+%-> Abstraktes Problem, leicht verständlich, ohne Vorkenntnisse
+%-> Variierbare Komplexität (Erweiterungen etc)
+%-> Einfache Mathemathik, Abiturwissen
+%-> Motivation fuer Mathemathik im Studium
+
+
+% =============================================================================
+\section{Algorithmus}\label{sec:algo}
+% =============================================================================
+
+Der Algorithmus \textit{Potential Fields Method} nutzt einfache physikalische Elemente zur Vermeidung von Kollisionen mit einem Hindernis.
+
+\subsection{Beschreibung}
+Es wird eine Kraft $F$ beschrieben, welche die Bewegung des Roboters beeinflusst um das Ziel zu erreichen und Hindernissen auszuweichen.
+Diese Kraft besteht dabei aus zwei Komponenten, die für jede Konfiguration $q$ berechnet werden kann.
+Hierbei stellt $q$ eine Konfiguration im Konfigurationsraum dar (zum Beispiel eine $xy$ Koordinate).
+Eine Konfiguration ist eine Position, die der Roboter anfahren kann.
+Der Konfigurationsraum enthält alle anfahrbaren Konfigurationen.
+Der Roboter hat dabei die Konfiguration $q_r$:
+\begin{equation}
+	F(q_r) = F_{\text{anziehend}}(q_r) + F_{abstoßend}(q_r)
+\end{equation}
+Unter $F_{\text{anziehend}}(q_r)$ versteht sich eine anziehende Kraft, die den Roboter in  Richtung einer Position leitet.
+Dies ist das Ziel des Roboters.
+Dadurch wird dafür gesorgt, dass der Roboter sich in Richtung des Ziels $q_z$ bewegt.
+Hierfür gibt es verschiedene Variationen, die hier beschriebene Variante nennt sich \textit{konisch} \cite{Formulars}.
+\begin{equation}
+	F_{\text{anziehend}}(q_r) = - \epsilon \cdot \frac{q_r - q_z}{\lvert q_r - q_z \rvert}
+\end{equation}
+Es wird ein Vektor in Richtung des Ziels bestimmt und gewichtet. Dabei gibt es den Parameter $\epsilon$, mit dem die anziehende Kraft verstärkt oder abgeschwächt werden kann.
+\newline
+Nutzt man nur die anziehende Kraft $F_{\text{anziehend}}(q_r)$, bewegt sich der Roboter zwar zum Ziel, ignoriert auf seinem Weg allerdings jegliche Hindernisse.
+Um dem entgegen zu wirken, geht auch von den Hindernissen eine Kraft aus: $F_{\text {abstoßend}}(q_r)$.
+Diese wird für das Hindernis mit dem kleinsten Abstand $p(q_r)$ mit Konfiguration $q_h$  berechnet:
+\begin{equation}
+	F_{\text{abstoßend}}(q_r) = \theta \cdot F_{\text{Erkennung}} \cdot F_{\text{Entfernung}} \cdot \frac{q_r - q_o}{ \lvert q_r - q_o \rvert }
+\end{equation}
+\begin{equation}
+ F_{\text{Erkennung}} = \left( \frac{1}{\lvert p(q_r) \rvert} - \frac{1}{\phi} \right)
+\end{equation}
+\begin{equation}
+F_{\text{Entfernung}} = \frac{1}{p(q_r)^2}
+\end{equation}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\linewidth, height=0.7\linewidth]{img/Params}
+  \caption{Darstellung der Parameter des Algorithmus.}
+  \label{fig:params}
+\end{figure}
+
+Hier ist $\theta$ das Äquivalent von $\epsilon$ für Hindernisse. 
+Es dient zur allgemeinen Veränderung der abstoßenden Kraft.
+Mit $F_{\text{Erkennung}}$ wird die Stärke der Kraft relativ zu einer Grenze $\phi$ bestimmt.
+Das bedeutet, dass die abstoßende Kraft nur angewandt wird, wenn $p(q_r) \leq \phi$ ist. 
+Dadurch beginnt der Roboter dem Hindernis erst auszuweichen, wenn der Grenzwert $\phi$ überschritten wird.
+Der Roboter erkennt also Hindernisse in einem Abstand von $\phi$.
+Die einzelnen Parameter sind in Bild~\vref{fig:params} verdeutlicht.
+Durch dieses Verhalten soll ein kürzerer Weg zum Ziel erreicht werden.
+Der letzte Term $F_{\text{Entfernung}}$ skaliert die Kraft im Verhältnis zur Entfernung des Hindernisses. Je näher es ist, desto stärker wird die abstoßende Kraft.
+
+\subsection{Verständnisschwerpunkte}
+Aus persönlicher Erfahrung liegt die Schwierigkeit beim Verständnis des Algorithmus bei den mathematischen Gleichungen, die das Zusammenspiel der Kräfte beschreiben.
+Werden nur die Gleichungen ohne ein anschauliches Beispiel betrachtet, erscheinen die Gleichungen abstrakt und  komplex.
+Daher sollen die Gleichungen in die einzelnen Terme aufgebrochen werden.
+Durch eine Visualisierung sollen die Auswirkungen der Veränderung einzelner Terme sichtbar gemacht werden.
+Auf diesem Wege wird immer nur ein Teil der Gleichung betrachtet und sich dessen Veränderung bewusst gemacht.
+Durch diese Möglichkeit zum Experimentieren soll die Mathematik interaktiv verstanden werden. 
+
+\section{Verwandte Arbeiten}
+
+Wir haben verschiedene Visualisierungsmöglichkeiten gefunden.
+
+\subsection{Beschreibung}
+\begin{itemize}
+\item Bild~\vref{fig:pyrob}  ist ein Ausschnitt einer Animation, die den Weg des Roboters zeigt. Die Darstellung verwendet eine Farbkarte zur Visualisierung der Kraft. Durch die Farbintensität wird verdeutlicht, welche Kraft an welcher Konfiguration herrscht. Ein dunkler Farbwert steht für ein hoch abstoßenden Kraftwert, helle Werte sind hingegen anziehend. Daher sind die Hindernisse sowie Bereiche hinter dem Roboter sehr dunkel, das Ziel jedoch sehr hell. Durch den Farbverlauf kann eine Richtung erkannt werden, in die der Roboter forciert wird. Der Roboter bewegt sich entlang der roten Linie vom Startpunkt zum Ziel. Die Eingabedaten und Parameter des Algorithmus sind hier nicht veränderbar.
+\item Bei Bild~\vref{fig:mcgill} wird die Kraft jeder Konfiguration als Vektor in jeder möglichen Konfiguration dargestellt. Aus diesem Grund zeigen die Pfeile (Vektoren) vom Hindernis fort und in Richtung des Ziels. Der Kreis in Magenta stellt das Ziel dar, während das Hindernis durch einen grünen Kreis symbolisiert wird. In dieser Visualisierung ist der Einfluss von $\phi$ gut erkennbar, da der Einflussbereich des Hindernisses sich kreisförmig um das Hindernis ausbreitet.
+\item Das letzte Beispiel (Bild~\vref{fig:elec}) zeigt ein verwandtes Thema. Es behandelt elektronische Felder. Diese entwickeln auch ein Kräfteverhältnis und visualisieren somit ein ähnliches Problem. Der grüne Kreis wird von den roten Kreisen angezogen. Die roten Kreise stoßen sich hingegen ab. Daher könnte der Roboter als grüner Kreis verstanden werden und rote Kreise als Ziele.
+\end{itemize}
+
+\begin{table*}[b]
+  \centering
+  \begin{tabularx}{\textwidth}{l|l|c|c|c}
+   Kategorie & Kriterium  & \cite{PythonRobotics} & \cite{McGill} & \cite{Electric} \\\hline
+   Interaktivität & Objekte verschiebbar &\lightning & \lightning & \checked \\
+   Interaktivität & Verhalten änderbar & \lightning & \lightning & \checked \\
+   Erklärbarkeit & Erklärender Text vorhanden & \checked \lightning  wenig & \checked & Link Wikipedia\\
+   Erklärbarkeit & Überschrift / Unterschrift vorhanden & \checked & \checked & \checked \\
+   Erklärbarkeit & Achsenbeschriftung vorhanden & (\checked) \lightning & (\checked) \lightning & \lightning\\
+   Erklärbarkeit & Legende vorhanden & \lightning & \lightning & \checked \\
+   Erklärbarkeit & Selbsterklärend & \checked & \checked \lightning & \checked \lightning\\  
+   Erklärbarkeit & Statisch/Dynamisch & Dynamisch & Statisch & Dynamisch \\
+   White/Blackbox & Einblick in Algorithmus & & & \checked \\
+   White/Blackbox & Algorithmus verständlich & \checked & \checked & \lightning \\
+   White/Blackbox & Probleminformation & & \lightning & \lightning \\
+     
+\end{tabularx}
+  \caption{Morphologische Analyse}
+  \label{tab:morph}
+\end{table*}
+
+\subsection{Analyse}
+Wir haben auf den beschriebenen Beispielen eine morphologische Analyse (Tabelle~\vref{tab:morph}) durchgeführt. Daraus ließen sich die folgenden Erkenntnisse ableiten.
+\begin{itemize}
+    \item Bild~\vref{fig:pyrob}: Die Visualisierung versucht, den Weg des Roboters zu erklären, indem die Kräfte der möglichen Konfigurationen zu jedem Zeitpunkt durch die Farbkarte sichtbar sind. Dadurch erhält der Nutzer ein Verständnis, warum der Roboter den zurückgelegten Weg gewählt hat. Der Nutzer muss dafür aber die gesamte Welt des Roboters im Blick haben, was im ersten Moment überfordernd wirkt. Das Verständnis wird daher nicht Schritt für Schritt aufgebaut und ist eher für fortgeschrittene Betrachter geeignet.
+    \item Bild~\vref{fig:mcgill}: Auch bei dieser Visualisierung wird das globale Kräftewirken verdeutlicht. Allerdings wird hier ein Vektorfeld benutzt. Die Vor- und Nachteile des vorherigen Bildes sind jedoch auch hier zu finden. 
+    \item Bild~\vref{fig:elec}: Der Vorteil dieser Visualisierung ist ein sehr klarer, einfacher Aufbau. Es wird nicht versucht, die wirkenden Kräfte des ganzen Feldes an jedem Punkt zu visualisieren. Dadurch ist die Visualisierung weniger überladen. Es bleibt überschaubarer und überfordert den Betrachter nicht. Allerdings stellt es unseren Algorithmus nicht exakt dar, es gibt kein Äquivalent für Hindernisse.
+\end{itemize}
+
+Als Folge daraus werden wir versuchen die globale Farbkarte aus Bild~\vref{fig:pyrob}, eine vereinfachte, lokale Vektordarstellung aus Bild~\vref{fig:mcgill} und die klare Einfachheit und hohe Interaktivität aus Bild~\vref{fig:elec} für unsere Visualisierung zu benutzen.
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\linewidth, height=0.7\linewidth]{img/pythonrobotics}
+  \caption{Beispielhafte Visualisierung mit einer Farbkarte~\cite{PythonRobotics}.}
+  \label{fig:pyrob}
+\end{figure}
+
+\begin{figure}
+\label{mcg}
+  \centering
+  \includegraphics[width=0.7\linewidth, height=0.7\linewidth]{img/mcgill}
+  \caption{Beispielhafte Visualisierung als Vektorfeld~\cite{McGill}.}
+  \label{fig:mcgill}
+\end{figure}
+\begin{figure}
+  \centering
+  \includegraphics[width=0.7\linewidth, height=0.7\linewidth]{img/electric2}
+  \caption{Interessante Visualisierung für elektronische Felder~\cite{Electric}.}
+  \label{fig:elec}
+\end{figure}
+
+% =============================================================================
+\section{Ansatz/Prototyp}
+% =============================================================================
+
+% Begriffe definieren!!!!
+
+Zunächst wird dem Nutzer in einer Einleitung das Problem der Pfadplanung erläutert. Konkret, wie kommt zum Beispiel ein Roboter von seinem Startpunkt zu einem Ziel. Die Studenten und Studentinnen bekommen ein Verständnis wofür die Pfadplanung dient. Gleichzeitig wird ihnen vermittelt, welche Probleme bei einer Pfadplanung auftreten können. So müssen zum Beispiel kürzeste Wege gefunden, Hindernisse umgangen und Sackgassen gemieden werden. Anschließend wird mit der sogenannten \textit{Potential Fields Method} eine Lösung vorgestellt. Die Hauptzielgruppe in diesem Projekt sind Erstsemesterstudierende im Fach Informatik. Jedoch wird der Algorithmus auf unterschiedliche Art und Schwierigkeit erklärt, so dass auch fachfremde Personen ein einfacher Einstieg in die Thematik gegeben werden soll. 
+
+
+\begin{figure}[ht!]
+  \centering
+  \fbox{
+  \includegraphics[width=0.7\linewidth, height=0.7\linewidth]{img/statischBB}}
+  \caption{Abstrakte, statische Darstellung des Problems}
+  \label{fig:bbstatic}
+\end{figure}
+
+
+%TODO Einleitung die die Abschnitte/Gliederung erklaert
+Mit der ersten Visualisierung wird der Algorithmus allgemein vorgestellt und anhand einer Animation gezeigt. % und zur Problemerklärung!
+Bild~\vref{fig:bbstatic} stellt dafür ein Beispiel dar.  Dabei wird ein Roboter (bzw. ein Startobjekt) gezeigt, der sich in Richtung Ziel bewegt und die Hindernisse umgeht. Der zurückgelegte Weg wird nach und nach eingeblendet. Die Animation kann nicht verändert werden. Um die Animation zu steuern, gibt es einen Start- und Stoppknopf. Neben der Animation wird das Problem mit Text vorgestellt. % Zuerst das Problem
+\begin{figure}[ht!]
+  \centering
+  \fbox{
+  \includegraphics[width=0.7\linewidth, height=0.7\linewidth]{img/interaktiv}}
+  \caption{Interaktiv veränderbares Beispiel}
+  \label{fig:interaktiv}
+\end{figure}
+
+
+Für die Erklärung des Algorithmus benutzen wir zwei Ansätze. Der erste Ansatz beruht auf dem sogenannten Blackbox Verfahren. Das heißt, dass der Nutzer  Eingaben verändern kann und  ein entsprechendes Ergebnis erhält ohne die genauen Abläufe des Algorithmus zu kennen. Wir möchten den Nutzer spielerisch an die \textit{Potential Fields Method} heranführen und ihn für den Algorithmus begeistern. Der Nutzer bekommt die Möglichkeit interaktiv mit den Objekten zu spielen. Das  Bild enthält ein Start- und Zielobjekt und ein Hindernis, wie in Bild~\vref{fig:interaktiv} dargestellt. Durch das Verschieben des Start- und Zielpunkts und das Setzen von Hindernissen wird dem Nutzer visuell und interaktiv vermittelt, wie sich der Algorithmus verhält und wie die Auswirkungen auf die Pfadplanung sind. Der Fokus im ersten Teil des Ansatzes liegt darin, allen Personengruppen die Thematik visuell zu erklären und eine Einführung zu geben.
+
+
+\begin{figure}[ht!]
+  \centering
+  \fbox{
+  \includegraphics[width=0.7\linewidth, height=0.7\linewidth]{img/Whitebox}}
+  \caption{Whitebox Beispiel mit veränderbaren Parametern}
+  \label{fig:whitebox}
+\end{figure}
+
+\begin{figure}[ht!]
+  \centering
+  \fbox{
+  \includegraphics[width=0.7\linewidth, height=0.7\linewidth]{img/contourPfeil.png}}
+  \caption{Kräfte dargestellt als Isokonturen und lokalen Flussgraphen}
+  \label{fig:isocon}
+\end{figure}
+
+\begin{figure}[ht!]
+  \centering
+  \fbox{
+  \includegraphics[width=0.7\linewidth, height=0.7\linewidth]{img/3dfield.png}}
+  \caption{3D Visualisierung der Kräfte mit Pfad}
+  \label{fig:3dmountain}
+\end{figure}
+
+Mit dem zweiten Ansatz, unter Zuhilfenahme des sogenannten Whitebox Verfahrens, verfolgen wir die Vermittlung eines tiefgründigen Verständnisses des Algorithmus. Der Fokus dieser Erklärung richtet sich an fachnahe Personen, speziell Erstsemesterstudierende. Hier wird dem Nutzer mit vorgegebenen Eingaben detailliert der Algorithmus erklärt. Es können Parameter mithilfe von Reglern verändert werden. In Bild~\vref{fig:whitebox} wird ein Weg in gestrichelter Linie gezeigt, welcher einem Standardweg entspricht.
+Werden Parameter verändert, so wird im Vergleich zum Standardweg ein neuer Weg mit den veränderten Parametern berechnet und gezeigt. Die Positionen der Objekte kann jedoch nicht verschoben werden, da es bei dieser Erklärung in erster Linie um die Auswirkungen der Parameter geht.
+Mit den Parametern werden die anziehenden und abstoßenden Kräfte verändert und visuell dargestellt. Dabei haben wir uns gegen die klassische Darstellung mit Vektorfeldern entschieden (Bild~\vref{fig:mcgill}). Ungeübte Betrachter können nur schwer erkennen wie  nicht zirkulierende Senken und Quellen \cite{munzner2015visualization} interagieren. Es ist nicht intuitiv ersichtlich wie bzw. wo ein Weg für die Pfadfindung entsteht. Ebenso  verhält es sich mit den in Bild~\vref{fig:elec} dargestellten elektronischen Feldern. Für ein besseres Verständnis haben wir  einerseits eine aktivierbare und deaktivierbare Darstellung mit Isokonturen \cite{munzner2015visualization} und lokale Vektoren gewählt. Dabei stellen die unterschiedlichen Farben die anziehenden bzw. abstoßenden Kräfte dar, welche mit den lokalen Vektoren hervorgehoben werden (Bild~\vref{fig:isocon}). Andererseits wird diese Darstellung mit einer 3D Karte anschaulich erklärt. Die unterschiedlichen Farben repräsentieren hierbei verschiedene Höhenmeter. Objekte mit abstoßenden Kräften werden als Berge visualisiert und das Ziel mit der anziehenden Kraft als Tal. Ziel des Roboters ist ein möglichst schneller und einfacher Weg ins Tal (Bild~\vref{fig:3dmountain}). Dies ist vergleichbar mit einem Ball der ins Tal rollt.
+
+
+
+Nachdem der Nutzer ein grundlegendes Verständnis über den Algorithmus vermittelt bekommen hat, möchten wir auf potenzielle Probleme hinweisen, wie z. B. in Bild \vref{fig:pfprob}. Dort sieht man, dass der Roboter in ein lokales Minimum geraten ist und dieses nicht mehr verlassen kann. Zum Schluss zeigen wir, dass der vorgestellte Algorithmus nicht nur ein theoretisches Konstrukt ist. Anhand von realen Beispielen wird der praktische Nutzen belegt (siehe Abschnitt~\vref{sec:intro}).%Hallo Micha!
+
+\begin{figure}[ht!]
+  \centering
+  \includegraphics[width=0.7\linewidth, height=0.7\linewidth]{img/pfprob}
+  \caption{Box Canyon Problem~\cite{Goodrich2002PotentialFT}.}
+  \label{fig:pfprob}
+\end{figure}
+
+%\subsection{Prototyp}
+
+
+
+%2) Im nächsten Schritt bekommt der Nutzer die Möglichkeit mit den Objekten zu spielen. % spielerisch das Problem/ALgo kennen zu leren?
+%Das interaktive Bild enthält ein Start- und Zielobjekt und ein Hindernis, wie in Bild~\vref{fig:interaktiv} dargestellt. Alle Objekte können verschoben werden und es können auch gegenbenenfalls neue Hindernisse hinzugefügt werden. Dementsprechend wird der neue Pfad gezeigt. Der Nutzer bekommt aber nur eine Blackbox gezeigt, das dieser zwar die Objekte bewegen kann, aber nicht gezeigt wird, wir der Algorithmus den Pfad findet. % Geschlechtzeug? Was ist eine BB - Begriff definieren
+
+%3) Im dritten Abschnitt bekommt der Nutzer einen Einblick in die Whitebox. %Begriff definieren
+%Hier können die Parameter mit Hilfe von Reglern verändert werden. In Bild~\vref{fig:whitebox} wird ein Weg in gestrichelter Linie gezeigt, welcher einem Default Weg entspricht. 
+%Im Vergleich dazu wird ein Weg mit den neuen  veränderten Parameter berechnet und gezeigt. Man kann hier allerdings die Position der Objekte nicht verschieben, da es hier in erster Linie um die Parameter geht.
+
+%4) Im vierten Abschnitt werden die anziehenden und abstoßenden Kräfte visuell dargestellt. Dabei haben wir uns gegen die klassische Darstellung mit Flussgraphen für Vektor Feldern entschieden (Bild~\vref{fig:mcgill}). Ungeübte Betrachter können nur schwer erkennen wie  nichtzirkulierende Senken und Quellen interagieren und wie bzw. wo ein Weg für die Pfadfindung entsteht. Ebenso  verhält es sich mit den in Bild~\vref{fig:elec} dargestellten elektronischen Feldern. Für ein besseres Verständnis haben wir  einerseits eine Darstellung mit Isokonturen und lokalen Flussgraphen gewählt . Dabei stellen die unterschiedlichen Farben die anziehenden bzw. abstoßenden Kräfte dar, welche mit den lokalen Flussgraphen hervorgehoben werden (Bild~\vref{fig:isocon}). Andererseits wird diese Darstellung mit einer 3d Karte anschaulich erklärt. Die unterschiedlichen Farben repräsentieren hierbei verschiedene Höhenmeter. Objekte mit abstoßenden Kräften werden als Berge visualisiert und das Ziel mit der anziehenden Kraft als Tal. Ziel des Roboters ist ein möglichst schneller und einfacher Weg ins Tal (Bild~\vref{fig:3dmountain}).
+
+%Default Pfad oder Pfad mit vorherigen Werten??
+
+
+
+
+
+ \section{Ziel}
+Das Ziel des Projektes war bis zum 14.02.2019 die visuelle Darstellung und Erklärung einer Pfadplanung mit der Potential Fields Methode. Hauptzielgruppe sind Erstsemesterstudierende in der Informatik und Interessenten. Mehr als 50 Prozent der Tester sollten die Visualisierung und Erklärung verstehen. Wir möchten eine Basisversion der Visualisierung in der gegebenen Zeit erreichen.
+
+
+\section{Evaluation}

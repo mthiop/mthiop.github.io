@@ -1,0 +1,97 @@
+\documentclass[sigchi, review]{acmart}
+
+\usepackage{booktabs} % For formal tables
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{ wasysym }
+\usepackage{tabularx}
+\usepackage[german]{fancyref}
+\usepackage[toc,page]{appendix}
+
+
+% Copyright
+\setcopyright{none}
+%\setcopyright{acmcopyright}
+%\setcopyright{acmlicensed}
+%\setcopyright{rightsretained}
+%\setcopyright{usgov}
+%\setcopyright{usgovmixed}
+%\setcopyright{cagov}
+%\setcopyright{licensedcagov}
+%\setcopyright{cagovmixed}
+%\setcopyright{licensedothergov}
+
+% DOI
+%\acmDOI{10.475/123_4}
+
+% ISBN
+%\acmISBN{123-4567-24-567/08/06}
+
+%Conference
+%\acmConference[WOODSTOCK'97]{ACM Woodstock conference}{July 1997}{El
+%  Paso, Texas USA}
+%\acmYear{1997}
+\copyrightyear{2018}
+
+%\acmPrice{15.00}
+
+
+\begin{document}
+\title{Data Visualization: Potential Fields Method}
+%\titlenote{Produces the permission block, and
+%  copyright information}
+%\subtitle{Extended Abstract}
+%\subtitlenote{The full version of the author's guide is available as
+ % \texttt{acmart.pdf} document}
+
+% \author{Till-Julius Krüger}
+% \affiliation{%
+%   \institution{Freie Universität Berlin \\ Institut für Informatik}
+% }
+% \email{}
+
+% \author{Michael Pluhatsch}
+% \affiliation{%
+%   \institution{Freie Universität Berlin \\ Institut für Informatik}
+% }
+% \email{}
+
+% \author[3]{Anahid Roshandel}
+% \affiliation{%
+%   	\institution{Freie Universität Berlin \\ Institut für Informatik}
+% }
+% \email{}
+
+% The default list of authors is too long for headers.
+%\renewcommand{\shortauthors}{B. Trovato et al.}
+
+%TODO Namen entfernen [x]
+%TODO Kapitel umsortieren [x]
+%TODO Quellen fuer verwendung [x]
+%TODO Fußnote erste Seite entfernen [x]
+%TODO Abstrakt überarbeiten [x]
+
+\begin{abstract}
+Dieses Paper beschäftigt sich mit der Analyse und Planung einer Visualisierung der \textit{Potential Fields Method} für Studierende des ersten Semesters und Interessierte nach dem Abitur. Dafür haben wir  verschiedene vorhandene Ansätze betrachtet und analysiert. Aus den resultierenden Erkenntnissen haben wir einen eigenen Prototyp erstellt. Dieser erschafft zunächst mit dem Blackbox-Verfahren ein Verständnis für das Problem des Algorithmus. Danach sollen mit Hilfe des Whitebox-Verfahrens Einblicke in die Funktionsweise des Algorithmus gewährt werden. Nach der Implementierung soll die Visualisierung evaluiert werden.
+\end{abstract}
+
+
+\keywords{Potential Fields Method, Data Visualization, Analyse, Algorithmus}
+
+\begin{teaserfigure}
+  \includegraphics[width=\textwidth]{img/teaser}
+  \caption{Anwendungsmöglichkeiten der \textit{Potential Field Method}~\cite{hagelback2012potential}\cite{montemerlo2008junior}\cite{paul2008uav}}
+  \label{fig:teaser}
+\end{teaserfigure}
+
+
+\maketitle
+\input{potfields}
+
+
+
+\bibliographystyle{ACM-Reference-Format}
+%\bibliography{sample-bibliography}
+\bibliography{sample-bibliography.bib}
+
+\end{document}
