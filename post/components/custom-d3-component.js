@@ -155,6 +155,8 @@ updateRobotPosition()
 
 
 initialize(node, props) {
+		d3.select("#button").style("visibility", "hidden");
+		d3.select("#buttonPlaceholder").style("visibility", "hidden");
 		d3.select("#forceViz").style("display", "none");
 	// We need the class-this for callbacks
 	var self = this;
@@ -403,6 +405,12 @@ update(props, oldProps) {
 	}
 	if (props.forceViz == 1) {
 		d3.select("#forceViz").style("display", "inline");
+	}
+	if (props.buttonVisible == 1) {
+		d3.select("#button").style("visibility", "visible");
+	}
+	if (props.buttonVisible == 0) {
+		d3.select("#button").style("visibility", "hidden");
 	}
 
 }
