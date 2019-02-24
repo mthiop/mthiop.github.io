@@ -933,14 +933,13 @@ hr {
 }
 
 
-
 .d3-component svg {
-  background: #ddd;
-  max-height: 300px;
+/*  background: #ddd;*/
+  max-height: 500px;
 }
 
 @media all and (max-width: 1000px) {
   .d3-component svg {
-    max-height: 200px;
+    max-height: 500px;
   }
 }
