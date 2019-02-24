@@ -17,17 +17,25 @@
 [var name:steps value:50 /]
 [var name:"playgroundVisible" value:1 /]
 [var name:"forceViz" value:0 /]
+[var name:"buttonVisible" value:0 /]
 
 [Fixed]
-[div id:"forceViz"]
-[SmallCustomD3Component className:"d3-component" rep_factor:rep_factor attr_factor:attr_factor state:state step_size:step_size influence_range:influence_range movable_objects:0 /]
-//[Graphic]
-//     [img height:450 width:450 src:`"static/images/staticPlayground.png"` /]
-//[/Graphic]
-[/div]
+	[div id:"forceViz"]
+			[SmallCustomD3Component className:"d3-component" rep_factor:rep_factor attr_factor:attr_factor state:state step_size:step_size influence_range:influence_range movable_objects:0 /]
+	[/div]
+	[div id:"buttonPlaceholder"]
+		[Button]
+		Start/Stop Simulation
+		[/Button]
+	[/div]
 [/Fixed]
 [Fixed]
-[CustomD3Component className:"d3-component" rep_factor:rep_factor attr_factor:attr_factor state:state step_size:step_size influence_range:influence_range movable_objects:1 visible:playgroundVisible /]
+	[CustomD3Component className:"d3-component" rep_factor:rep_factor attr_factor:attr_factor state:state step_size:step_size influence_range:influence_range movable_objects:1 visible:playgroundVisible buttonVisible:buttonVisible /]
+	[div id:"button"]
+		[Button onClick:`state++`]
+		Start/Stop Simulation
+		[/Button]
+	[/div]
 [/Fixed]
 
 ## Abstract
@@ -54,15 +62,17 @@ Bei dieser Methode werden einfache physikalische Kräfte verwendet.
 Diese berechneten Kräfte bzw. Potentiale weisen den Roboter in eine Richtung. Das Ziel
 zieht den Roboter an und die Hindernisse stoßen ihn ab. Dadurch sollen Begegnungen mit den Hindernissen vermieden werden.
 
+[div onEnterView:`buttonVisible = 1`]
 
 ## Der Algorithmus
 
+[/div]
 Der Algorithmus Potential Fields nutzt einfache physikalische Elemente zur Wegfindung
 zum Ziel und Vermeidung von Kollision mit einem Hindernis. Das Ziel hat anziehende Kräfte, daher
 wird der Roboter dorthin gezogen. Die Hindernisse umgeht der Roboter, da diese
 abstoßende Kräfte haben.
 
-Auf der rechten Seite siehst du eine Simulation des Algorithmus. [action onClick:`state++`]Klicke hier, um die Simulation zu starten.[/action] Der blaumarkierte Roboter findet einen Weg zum orange markierten Ziel. Du kannst alle Objekte verschieben und an beliebiger Stelle [action onClick:`state++`]pausieren und fortsetzen[/action]. Nutze die Gelegenheit um erste Erfahrungen mit dem Algorithmus zu sammeln. Du kannst dir ein eigenes Szenario mit dem Roboter, den Hindernissen und dem Ziel zusammenbauen.
+Auf der rechten Seite siehst du eine Simulation des Algorithmus. [action onClick:`state++`]Klicke hier, um die Simulation zu starten.[/action] (Du kannst auch den Button unter der Simulation verwenden). Der blaumarkierte Roboter findet einen Weg zum orange markierten Ziel. Du kannst alle Objekte verschieben und an beliebiger Stelle [action onClick:`state++`]pausieren und fortsetzen[/action]. Nutze die Gelegenheit um erste Erfahrungen mit dem Algorithmus zu sammeln. Du kannst dir ein eigenes Szenario mit dem Roboter, den Hindernissen und dem Ziel zusammenbauen.
 
 
 ## Parametererklärung
@@ -80,7 +90,7 @@ Also kann mit diesem Paramter Einfluss auf die Entfernung, die der Roboter in
 einem Planungszyklus durchläuft, genommen werden.
 
 [/div]
-[div]
+[div onEnterView:`buttonVisible = 1`]
 
 Schauen wir uns nun an wie die Richtung bestimmt wird:
 
@@ -178,7 +188,7 @@ Die Addition der anziehenden Kraft (Abhang) mit der abstoßenden Kraft (Berg) er
 
 ### Parameteranwendung
 
-Hier kannst du noch einmal die Parametern verändern. Beobachte die Veränderung des Potentialfeldes (oben) und wie sich der Roboter in der Simulation verhält [action onClick:`state++`]|Start und Stop|[/action]:
+Hier kannst du noch einmal die Parametern verändern. Beobachte die Veränderung des Potentialfeldes (oben) und wie sich der Roboter in der Simulation verhält:
 
 
 Wenn du den Regler [em]Schrittgröße[/em] [Equation]\sigma[/Equation] verschiebst, kannst du die Schrittgröße beeinflussen.
@@ -194,7 +204,7 @@ Wie du vielleicht bemerkt hast, springt der Roboter durch Hindernisse und
 eines Schrittes immer in die gleiche Richtung geht.
 
 [br /]
-[div onExitViewFully:`forceViz=1;playgroundVisible=0;` onEnterView:`forceViz=0;playgroundVisible=1;`]
+[div onEnterView:`buttonVisible = 1` onExitViewFully:`forceViz=1;playgroundVisible=0;` onEnterView:`forceViz=0;playgroundVisible=1;`]
 
 Mit der Anziehungskraft kannst du sehen, wie stark der Roboter vom Ziel angezogen wird. Wenn du den Regler erhöhst, wird der Roboter knapper am Hindernis vorbeigehen um schneller ans Ziel zu gelangen.
 
