@@ -188,7 +188,7 @@ Die Addition der anziehenden Kraft (Abhang) mit der abstoßenden Kraft (Berg) er
 
 ### Parameteranwendung
 
-Hier kannst du noch einmal die Parametern verändern. Beobachte die Veränderung des Potentialfeldes (oben) und wie sich der Roboter in der Simulation verhält [action onClick:`state++`]|Start und Stop|[/action]:
+Hier kannst du noch einmal die Parametern verändern. Beobachte die Veränderung des Potentialfeldes (oben) und wie sich der Roboter in der Simulation verhält:
 
 
 Wenn du den Regler [em]Schrittgröße[/em] [Equation]\sigma[/Equation] verschiebst, kannst du die Schrittgröße beeinflussen.
