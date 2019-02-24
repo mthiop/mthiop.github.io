@@ -30,7 +30,14 @@ Diese Kraft besteht dabei aus zwei Komponenten, die für jede Konfiguration $q$ 
 Hierbei stellt $q$ eine Konfiguration im Konfigurationsraum dar (zum Beispiel eine $xy$ Koordinate).
 Eine Konfiguration ist eine Position, die der Roboter anfahren kann.
 Der Konfigurationsraum enthält alle anfahrbaren Konfigurationen.
-Der Roboter hat dabei die Konfiguration $q_r$:
+Der Roboter hat dabei die Konfiguration $q_r$.
+In jeder Iteration des Algorithmus wird eine neue Position des Roboter berechnet:
+\begin{equation}
+	q_r = \sigma \cdot \frac{F(q_r)}{|F(q_r)|}
+\end{equation}
+Hierbei bezeichnet $\sigma$ die Schrittweite des Roboters. Das bedeutet, dass dieser Parameter enscheidet, wie weit sich der Roboter in Richtung der berechneten Kraft $F(q_r)$ bewegt. Aus diesem Grunde wird die $F(q_r)$ normalisiert, sodass nur $\sigma$ die Schrittweite beeinflusst.
+
+$F(q_r)$ wird aus zwei Termen berechnet:
 \begin{equation}
 	F(q_r) = F_{\text{anziehend}}(q_r) + F_{abstoßend}(q_r)
 \end{equation}
@@ -47,7 +54,11 @@ Nutzt man nur die anziehende Kraft $F_{\text{anziehend}}(q_r)$, bewegt sich der 
 Um dem entgegen zu wirken, geht auch von den Hindernissen eine Kraft aus: $F_{\text {abstoßend}}(q_r)$.
 Diese wird für das Hindernis mit dem kleinsten Abstand $p(q_r)$ mit Konfiguration $q_h$  berechnet:
 \begin{equation}
-	F_{\text{abstoßend}}(q_r) = \theta \cdot F_{\text{Erkennung}} \cdot F_{\text{Entfernung}} \cdot \frac{q_r - q_o}{ \lvert q_r - q_o \rvert }
+	F_{\text{abstoßend}}(q_r) =
+	\begin{cases}
+    [0,0] ,& \text{if } \phi > p(q_r)\\
+     \theta \cdot F_{\text{Erkennung}} \cdot F_{\text{Entfernung}} \cdot \frac{q_r - q_o}{ \lvert q_r - q_o \rvert },               & \text{otherwise}
+\end{cases}
 \end{equation}
 \begin{equation}
  F_{\text{Erkennung}} = \left( \frac{1}{\lvert p(q_r) \rvert} - \frac{1}{\phi} \right)
@@ -63,15 +74,18 @@ F_{\text{Entfernung}} = \frac{1}{p(q_r)^2}
   \label{fig:params}
 \end{figure}
 
-Hier ist $\theta$ das Äquivalent von $\epsilon$ für Hindernisse. 
-Es dient zur allgemeinen Veränderung der abstoßenden Kraft.
-Mit $F_{\text{Erkennung}}$ wird die Stärke der Kraft relativ zu einer Grenze $\phi$ bestimmt.
 Das bedeutet, dass die abstoßende Kraft nur angewandt wird, wenn $p(q_r) \leq \phi$ ist. 
 Dadurch beginnt der Roboter dem Hindernis erst auszuweichen, wenn der Grenzwert $\phi$ überschritten wird.
 Der Roboter erkennt also Hindernisse in einem Abstand von $\phi$.
-Die einzelnen Parameter sind in Bild~\vref{fig:params} verdeutlicht.
 Durch dieses Verhalten soll ein kürzerer Weg zum Ziel erreicht werden.
+
+$\theta$ ist hier das Äquivalent von $\epsilon$ für Hindernisse. 
+Es dient zur allgemeinen Veränderung der abstoßenden Kraft.
+Mit $F_{\text{Erkennung}}$ wird die Stärke der Kraft relativ zu einer Grenze $\phi$ bestimmt.
 Der letzte Term $F_{\text{Entfernung}}$ skaliert die Kraft im Verhältnis zur Entfernung des Hindernisses. Je näher es ist, desto stärker wird die abstoßende Kraft.
+
+Die einzelnen Parameter sind in Bild~\vref{fig:params} verdeutlicht.
+
 
 \subsection{Verständnisschwerpunkte}
 Aus persönlicher Erfahrung liegt die Schwierigkeit beim Verständnis des Algorithmus bei den mathematischen Gleichungen, die das Zusammenspiel der Kräfte beschreiben.
