@@ -135,7 +135,13 @@ Wir haben auf den beschriebenen Beispielen eine morphologische Analyse (Tabelle~
     \item Bild~\vref{fig:elec}: Der Vorteil dieser Visualisierung ist ein sehr klarer, einfacher Aufbau. Es wird nicht versucht, die wirkenden Kräfte des ganzen Feldes an jedem Punkt zu visualisieren. Dadurch ist die Visualisierung weniger überladen. Es bleibt überschaubarer und überfordert den Betrachter nicht. Allerdings stellt es unseren Algorithmus nicht exakt dar, es gibt kein Äquivalent für Hindernisse.
 \end{itemize}
 
-Als Folge daraus werden wir versuchen die globale Farbkarte aus Bild~\vref{fig:pyrob}, eine vereinfachte, lokale Vektordarstellung aus Bild~\vref{fig:mcgill} und die klare Einfachheit und hohe Interaktivität aus Bild~\vref{fig:elec} für unsere Visualisierung zu benutzen.
+Als Folge daraus werden wir versuchen, die Whitebox-Darstellungen (globale Farbkarte aus Bild~\vref{fig:pyrob}, lokale Vektordarstellung aus Bild~\vref{fig:mcgill}) in einer seperaten Ansicht zu zeigen. 
+Wir finden dabei die Ansicht aus ~\vref{fig:pyrob} intuitiver. 
+Dabei sollen nur die wirkenden Kräfte gezeigt werden und der Roboter, die Hindernisse und das Ziel in einer eigenen Ansicht dargestellt werden.
+Wir möchten die Darstellung jedoch noch um eine zusätzliche Dimension erweitern und die Stärke der Kraft nicht nur durch Farbe, sondern auch durch Höhe kodieren.
+
+In der Roboter-Ansicht wollen wir die klare Einfachheit und hohe Interaktivität aus Bild~\vref{fig:elec} für unsere Visualisierung nutzen. Dadurch kombinieren wir alle Vorteile der bestehenden Visualisierungen auf eine neue Art.
+Durch diese Aufteilung soll der Nutzer Schritt-für-Schritt an das Problem und den Algorithmus herangeführt werden, ohne ihn zu überfordern.
 
 \begin{figure}
   \centering
