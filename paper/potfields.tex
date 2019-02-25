@@ -39,22 +39,22 @@ Hierbei bezeichnet $\sigma$ die Schrittweite des Roboters. Das bedeutet, dass di
 
 $F(q_r)$ wird aus zwei Termen berechnet:
 \begin{equation}
-	F(q_r) = F_{\text{anziehend}}(q_r) + F_{abstoßend}(q_r)
+     F(q_r) = F_{\text{anziehend}}(q_r, q_z) + F_{abstoßend}(q_r,q_h)
 \end{equation}
-Unter $F_{\text{anziehend}}(q_r)$ versteht sich eine anziehende Kraft, die den Roboter in  Richtung einer Position leitet.
+Unter $F_{\text{anziehend}}(q_r, q_z)$ versteht sich eine anziehende Kraft, die den Roboter in  Richtung einer Position leitet.
 Dies ist das Ziel des Roboters.
 Dadurch wird dafür gesorgt, dass der Roboter sich in Richtung des Ziels $q_z$ bewegt.
 Hierfür gibt es verschiedene Variationen, die hier beschriebene Variante nennt sich \textit{konisch} \cite{Formulars}.
 \begin{equation}
-	F_{\text{anziehend}}(q_r) = - \epsilon \cdot \frac{q_r - q_z}{\lvert q_r - q_z \rvert}
+	F_{\text{anziehend}}(q_r, q_z) = - \epsilon \cdot \frac{q_r - q_z}{\lvert q_r - q_z \rvert}
 \end{equation}
 Es wird ein Vektor in Richtung des Ziels bestimmt und gewichtet. Dabei gibt es den Parameter $\epsilon$, mit dem die anziehende Kraft verstärkt oder abgeschwächt werden kann.
 \newline
-Nutzt man nur die anziehende Kraft $F_{\text{anziehend}}(q_r)$, bewegt sich der Roboter zwar zum Ziel, ignoriert auf seinem Weg allerdings jegliche Hindernisse.
-Um dem entgegen zu wirken, geht auch von den Hindernissen eine Kraft aus: $F_{\text {abstoßend}}(q_r)$.
+Nutzt man nur die anziehende Kraft $F_{\text{anziehend}}(q_r, q_z)$, bewegt sich der Roboter zwar zum Ziel, ignoriert auf seinem Weg allerdings jegliche Hindernisse.
+Um dem entgegen zu wirken, geht auch von den Hindernissen eine Kraft aus: $F_{\text {abstoßend}}(q_r, q_h)$.
 Diese wird für das Hindernis mit dem kleinsten Abstand $p(q_r)$ mit Konfiguration $q_h$  berechnet:
 \begin{equation}
-	F_{\text{abstoßend}}(q_r) =
+	F_{\text{abstoßend}}(q_r, q_h) =
 	\begin{cases}
     [0,0] ,& \text{if } \phi > p(q_r)\\
      \theta \cdot F_{\text{Erkennung}} \cdot F_{\text{Entfernung}} \cdot \frac{q_r - q_o}{ \lvert q_r - q_o \rvert },               & \text{otherwise}
