@@ -335,7 +335,12 @@ Fotos, vorher - nachher
 \end{itemize}
 Für die Erklärung des Algorithmus wurde ein schrittweiser Aufbau gewählt. Anstatt die Animation der Pfadplanung direkt zu zeigen wird das Beispiel zunächst schriftlich erklärt. Ziel ist es, den Benutzer auf 
 \subsection{Differenz zu Prototyp}
-Static BB ist rausgefallen
+Unsere Implementierung hat ein paar Differenzen zum Prototyp.
+Da bei unserem Cognitive Walkthrough (\vref{sec:cogWal}) uns ein paar Unstimmigkeiten aufgefallen sind, haben wir sie sogleich verbessert.
+\begin{itemize}
+	\item Aufmerksamkeitsfluss: Wir haben den Aufmerksamkeitsfluss verändert, sodass die Simulation nicht von Anfang an spielt, sondern durch den Text gestartet werden muss. Da dies in der Presentation auf Kritik stoß, weil dieses Konzept didaktisch zu streng sei, haben wir zusätzlich noch einen Steuerbutton eingefügt. Dieser Button wird erst sichtbar, wenn der Nutzer etwas nach unten scrollt. Dadurch kann die Simulation auf intuitive Art auch ohne das Lesen des Textes gesteuert werden.
+	\item Metapher: Wir haben uns für eine Star-Wars-Metapher entschieden, da diese Filme eine breite Zuschauerschaft haben und die Metapher somit allgeimein verständlich seien sollte. Diese Metapher haben wir auch bei der Erklärung im Text aufgegriffen.
+\end{itemize}
 
 % =============================================================================
 \section{Evaluation}
@@ -352,7 +357,12 @@ P1:
 \item parametererklärung besser unterteilen
 \end{itemize}
 
-\subsection{Cognitive Walkthrough}
+\subsection{Cognitive Walkthrough}\label{sec:cogWal}
+Wir haben nach einer ersten Implementierung in der Gruppe einen Cognitive Walkthrough gemacht. Dabei haben wir die folgendende Punkte bemerkt:
+\begin{itemize}
+	\item Statische Blackbox: Die statische Blackbox hat die Aufmerksamkeit durch das bewegte Bild sehr stark angezogen. Keiner von uns hatte noch Lust den Text zu lesen. Stattdessen haben wir die Simulation gestartet und nur noch dem Roboter zugeschaut. Danach haben wir lieber zur nächten Visualisierung gescrollt.
+	\item Die abstrakte Darstellung der Objekte im Prototyp lädt nicht sehr zum Lernen ein. Es braucht eine gute Metapher um den Algorithmus und das Problem interessant zu machen.
+\end{itemize}
 
 \subsection{Tester}
 %Flip:
