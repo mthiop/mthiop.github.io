@@ -21,6 +21,14 @@
 %\setcopyright{cagovmixed}
 %\setcopyright{licensedothergov}
 
+\settopmatter{printacmref=false} %disable ACM reference fomrat
+
+% Disables footnote on the first page
+\makeatletter
+\renewcommand\@formatdoi[1]{\ignorespaces}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+\makeatother
+
 % DOI
 %\acmDOI{10.475/123_4}
 
