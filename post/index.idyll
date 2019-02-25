@@ -83,33 +83,41 @@ Der Roboter wird durch eine Kraft [Equation] F [/Equation] beeinflusst.
 Im Bild rechts sieht man einen zweidimensionalen Raum mit allen anfahrbaren Positionen des Roboters. Die Position des Roboters [Equation]q_r[/Equation], bestehend aus einer x- und einer y- Koordinate, berechnet sich durch folgende Gleichung:
 
 
-[Equation]q_r=\sigma * \frac{F(q_r)}{|F(q_r)|}[/Equation]
+[Equation]q_r=\sigma * \frac{F(q_r)}{||F(q_r)||}[/Equation]
 
 Dabei bezeichnet [Equation]\sigma [/Equation] die Schrittlänge des Roboters.
 Also kann mit diesem Paramter Einfluss auf die Entfernung, die der Roboter in
 einem Planungszyklus durchläuft, genommen werden.
+Nach jedem Planungsschritt wird die Position des Roboters neu berechnet.
 
 [/div]
 [div onEnterView:`buttonVisible = 1`]
 
 Schauen wir uns nun an wie die Richtung bestimmt wird:
 
-[Equation]F(q_r)=F_{\text{anziehend}}(q_r)+F_{\text{abstoßend}}(q_r,q_h)[/Equation]
+[Equation]F(q_r)=F_{\text{anziehend}}(q_r,q_z)+F_{\text{abstoßend}}(q_r,q_h)[/Equation]
 
 [br /]
 [br /]
 
 
-[Equation]F(q_r)[/Equation] besteht aus zwei Komponenten. Zum einen ist  [Equation]F_{\text{anziehend}(q_r)}[/Equation] die anziehende Kraft des
+[Equation]F(q_r)[/Equation] besteht aus zwei Komponenten. Zum einen ist  [Equation]F_{\text{anziehend}(q_r, q_z)}[/Equation] die anziehende Kraft des
 Roboters in die Richtung des Ziels. Das Ziel hat dabei die Position
 [Equation]q_z[/Equation].
-Zum anderen beschreibt [Equation]F_{\text{abstoßend}(q_r, q_h)}[/Equation] die
-abstoßende Kraft des nächsten Hindernisses. Das Hindernis hat dabei die Position [Equation]q_h[/Equation]. Es wird immer nur das Hindernis mit dem kleinsten Abstand zum Roboter betrachtet.
+Zum Anderen beschreibt [Equation]F_{\text{abstoßend}(q_r, q_h)}[/Equation] die
+abstoßende Kraft des nächsten Hindernisses. Das Hindernis hat dabei die Position [Equation]q_h[/Equation]. 
+Es wird immer nur das Hindernis mit dem kleinsten Abstand zum Roboter betrachtet.
 
 
-Die anziehende Kraft wird berechnet durch:
+Die anziehende Kraft wird wieder durch zwei Terme berechnet:
 
-[Equation]F_{\text{anziehend}}(q_r)= -\epsilon *\frac{qr-qz}{|qr-qz|}[/Equation]
+[Equation]F_{\text{anziehend}}(q_r, q_z)= -U_{\text{anziehend}}(q_r, q_g) * (q_r - q_z)[/Equation]
+
+[Equation](q_r - q_z)[/Equation] ist dabei der Richtungsvektor vom Roboter zum Ziel.
+
+Dieser 
+
+[Equation]U_{\text{anziehend}}(q_r, q_z)= -\epsilon * \frac{1}{||q_r-q_z||}[/Equation]
 
 [br /]
 [br /]
@@ -133,7 +141,7 @@ Mit Verschiebung des Regelers [em]Anziehungskraft [/em] ändert sich die Anziehu
 
 Damit der Roboter zum Ziel kommt, aber nicht mit möglichen Hinernissen kollidiert, geht von den Hindernissen die Kraft [Equation]F_{\text{abstoßend}}[/Equation] ab.
 
-[Equation]F_{\text{abstoßend}}(q_r)=\theta * F_{\text{Erkennung}}*F_{\text{Entfernung}} *\frac{q_r-q_h}{|q_r-q_z|}[/Equation].
+[Equation]F_{\text{abstoßend}}(q_r)=\theta * F_{\text{Erkennung}}*F_{\text{Entfernung}} *\frac{q_r-q_h}{||q_r-q_z||}[/Equation].
 
 
 Hier stellt θ den Skalierungsparamter dar.
