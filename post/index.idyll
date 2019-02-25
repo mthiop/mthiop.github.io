@@ -93,7 +93,7 @@ Nach jedem Planungsschritt wird die Position des Roboters neu berechnet.
 [/div]
 [div onEnterView:`buttonVisible = 1`]
 
-Schauen wir uns nun an wie die Richtung bestimmt wird:
+Schauen wir uns nun an wie die Kraft bestimmt wird:
 
 [Equation]F(q_r)=F_{\text{anziehend}}(q_r,q_z)+F_{\text{abstoßend}}(q_r,q_h)[/Equation]
 
@@ -105,7 +105,7 @@ Schauen wir uns nun an wie die Richtung bestimmt wird:
 Roboters in die Richtung des Ziels. Das Ziel hat dabei die Position
 [Equation]q_z[/Equation].
 Zum Anderen beschreibt [Equation]F_{\text{abstoßend}(q_r, q_h)}[/Equation] die
-abstoßende Kraft des nächsten Hindernisses. Das Hindernis hat dabei die Position [Equation]q_h[/Equation]. 
+abstoßende Kraft des nächsten Hindernisses. Das Hindernis hat dabei die Position [Equation]q_h[/Equation].
 Es wird immer nur das Hindernis mit dem kleinsten Abstand zum Roboter betrachtet.
 
 
@@ -113,23 +113,27 @@ Die anziehende Kraft wird wieder durch zwei Terme berechnet:
 
 [Equation]F_{\text{anziehend}}(q_r, q_z)= -U_{\text{anziehend}}(q_r, q_g) * (q_r - q_z)[/Equation]
 
+[br /]
+[br /]
+
 [Equation](q_r - q_z)[/Equation] ist dabei der Richtungsvektor vom Roboter zum Ziel.
 
-Dieser 
+Dieser Richtungsvektor wird mit dem Potential [Equation]U_{\text{anziehend}}(q_r, q_z)[/Equation] skaliert:
 
-[Equation]U_{\text{anziehend}}(q_r, q_z)= -\epsilon * \frac{1}{||q_r-q_z||}[/Equation]
+[Equation]U_{\text{anziehend}}(q_r, q_z)= \epsilon * \frac{1}{||q_r-q_z||}[/Equation]
 
 [br /]
 [br /]
-
 
 Du sieht, dass das Ergebnis nur vom Abstand des Roboters und des Ziels, sowie dem Skalierungsparameter [Equation]\epsilon[/Equation] abhängt.
-Es wird ein Vektor in Richtung des Ziels bestimmt und gewichtet.
+Das Potential sagt also aus, wie stark der Roboter vom Ziel angezogen wird.
+Je größer der Abstand, desto kleiner das Potential.
 Der Parameter [Equation]\epsilon[/Equation] verstärkt die anziehende Kraft oder schwächt sie ab.
 
-Diese anziehende Kraft kannst du dir auch wie einen Abhang vorstellen. Das Tal ist das Ziel und das Gefälle die Anziehungskraft. Je stärker die Anziehungskraft desto stärker ist das Gefälle.
+Diese anziehende Kraft kannst du dir auch wie einen Abhang vorstellen. Das Tal ist das Ziel und das Gefälle die Anziehungskraft. Je stärker die Anziehungskraft desto stärker ist das Gefälle. In der nachfolgenden Ansicht siehst du das Potential der Anziehung.
 
-Mit Verschiebung des Regelers [em]Anziehungskraft [/em] ändert sich die Anziehungskraft des Ziels zum Roboter. Beobachte wie sich das Gefälle und das Verhalten des Roboters verändert.
+Mit Verschiebung des Regelers [em]Anziehungskraft [/em] ändert sich der Parameter [Equation]\epsilon[/Equation] die Anziehungskraft des Ziels zum Roboter.
+Beobachte wie sich das Gefälle und das Verhalten des Roboters verändert.
 
 [p]
   [em]Anziehungskraft [/em] [Equation]\epsilon[/Equation]
@@ -140,31 +144,37 @@ Mit Verschiebung des Regelers [em]Anziehungskraft [/em] ändert sich die Anziehu
 [DebugComponentAttr rep_factor:rep_factor attr_factor:attr_factor influence_range:influence_range steps:step_size /]
 
 Damit der Roboter zum Ziel kommt, aber nicht mit möglichen Hinernissen kollidiert, geht von den Hindernissen die Kraft [Equation]F_{\text{abstoßend}}[/Equation] ab.
+Auch die abstoßende Kraft ist auch in zwei Terme unterteilt:
 
-[Equation]F_{\text{abstoßend}}(q_r)=\theta * F_{\text{Erkennung}}*F_{\text{Entfernung}} *\frac{q_r-q_h}{||q_r-q_z||}[/Equation].
+[Equation]F_{\text{abstoßend}}(q_r, q_h)= U_{\text{abstoßend}} * (q_r-q_h)[/Equation].
 
+[br /]
+[br /]
+[Equation](q_r-q_h)[/Equation] ist der Richtungsvektor vom Hindernis zum Roboter, der mit dem Potential [Equation]U_{\text{abstoßend}}(q_r, q_h)[/Equation] skaliert wird:
+
+[Equation]U_{\text{abstoßend}}(q_r, q_h)=\theta * U_{\text{Erkennung}}*U_{\text{Entfernung}} *\frac{1}{||q_r-q_h||}[/Equation]
+
+[br/]
+[br/]
 
 Hier stellt θ den Skalierungsparamter dar.
 
+[br/]
 
-
-[br/].
-
-[Equation]F_{\text{Entfernung}}=\frac{1}{p(q_r)^2}[/Equation].
-
+[Equation]U_{\text{Entfernung}}=\frac{1}{|q_r - q_h|^2}[/Equation].
 
 
 [br /]
 
-[Equation]F_{\text{Entfernung}}[/Equation] repräsentiert den Abstand zwischen Roboter und Hindernis:
+[Equation]U_{\text{Entfernung}}[/Equation] repräsentiert den Abstand zwischen Roboter und Hindernis:
 
 
-[Equation]F_{\text{Erkennung}}=(\frac{1}{q_r}-\frac{1}{\phi})[/Equation]
+[Equation]U_{\text{Erkennung}}=(\frac{1}{q_r}-\frac{1}{\phi})[/Equation]
 
 [br /]
 [br /]
 
-[Equation]F_{\text{Erkennung}}[/Equation]regelt den Einfluss eines Hindernisses auf den Roboter. Erst wenn der Abstand zwischen Roboter und Hinderniss kleiner als phi ist, wird [Equation]F_{\text{abstoßend}}[/Equation]berechnet. Ist der Abstand kleiner als [Equation]\phi[/Equation] , wird F-Erkennung größer, je kleiner der Abstand zwischen Roboter und Hindernis ist. In der Simulation wird ein Hindernis rot markiert, wenn [Equation]\phi[/Equation] kleiner als der Abstand ist.
+[Equation]U_{\text{Erkennung}}[/Equation]regelt den Einfluss eines Hindernisses auf den Roboter. Erst wenn der Abstand zwischen Roboter und Hinderniss kleiner als phi ist, wird [Equation]U_{\text{abstoßend}}[/Equation]berechnet. Ist der Abstand kleiner als [Equation]\phi[/Equation] , wird [Equation]U_{\text{Erkennung}}[/Equation] größer, je kleiner der Abstand zwischen Roboter und Hindernis ist. In der Simulation wird ein Hindernis rot markiert, wenn [Equation]\phi[/Equation] kleiner als der Abstand ist.
 
 Ein Hindernis hat neben der abstoßenden Kraft auch einen Einflussbereich, der beeinflusst wann der Roboter durch die abstoßende Kraft beeinflusst wird.
 
