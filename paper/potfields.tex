@@ -165,12 +165,11 @@ Durch diese Aufteilung soll der Nutzer Schritt-für-Schritt an das Problem und d
 \end{figure}
 
 % =============================================================================
-\section{Ansatz/Prototyp}
+\section{Ansatz/Prototyp} \label{sec:prot}
 % =============================================================================
 
 % Begriffe definieren!!!!
-%TODO Die Studenten und Studentinnen bekommen ein Verständnis wofür die Pfadplanung dient. abändern [ ]  z.B. "Die Studenten und Studentinnen bekommen ein Verständnis wofür die Pfadplanung dient." -> "Die Studierenden bekommen ein allgemeines Verständnis für Pfadplanungen und deren Anwendungen."
-Zunächst wird dem Nutzer in einer Einleitung das Problem der Pfadplanung erläutert. Konkret, wie kommt zum Beispiel ein Roboter von seinem Startpunkt zu einem Ziel. Die Studenten und Studentinnen bekommen ein Verständnis wofür die Pfadplanung dient. Gleichzeitig wird ihnen vermittelt, welche Probleme bei einer Pfadplanung auftreten können. So müssen zum Beispiel kürzeste Wege gefunden, Hindernisse umgangen und Sackgassen gemieden werden. Anschließend wird mit der sogenannten \textit{Potential Fields Method} eine Lösung vorgestellt. Die Hauptzielgruppe in diesem Projekt sind Erstsemesterstudierende im Fach Informatik. Jedoch wird der Algorithmus auf unterschiedliche Art und Schwierigkeit erklärt, so dass auch fachfremde Personen ein einfacher Einstieg in die Thematik gegeben werden soll. 
+Zunächst wird dem Nutzer in einer Einleitung das Problem der Pfadplanung erläutert. Konkret, wie kommt zum Beispiel ein Roboter von seinem Startpunkt zu einem Ziel. Die Studenten und Studentinnen bekommen ein allgemeines Verständnis für Pfadplanungen und deren Anwendungen. Gleichzeitig wird ihnen vermittelt, welche Probleme bei einer Pfadplanung auftreten können. So müssen zum Beispiel kürzeste Wege gefunden, Hindernisse umgangen und Sackgassen gemieden werden. Anschließend wird mit der sogenannten \textit{Potential Fields Method} eine Lösung vorgestellt. Die Hauptzielgruppe in diesem Projekt sind Erstsemesterstudierende im Fach Informatik. Jedoch wird der Algorithmus auf unterschiedliche Art und Schwierigkeit erklärt, so dass auch fachfremde Personen ein einfacher Einstieg in die Thematik gegeben werden soll. 
 
 
 \begin{figure}[ht!]
@@ -251,26 +250,106 @@ Nachdem der Nutzer ein grundlegendes Verständnis über den Algorithmus vermitte
 
 %Default Pfad oder Pfad mit vorherigen Werten??
 
- \section{Ziel}
+% =============================================================================
+\section{Ziel}
+% =============================================================================
 Das Ziel des Projektes war bis zum 14.02.2019 die visuelle Darstellung und Erklärung einer Pfadplanung mit der Potential Fields Methode. Hauptzielgruppe sind Erstsemesterstudierende in der Informatik und Interessenten. Mehr als 50 Prozent der Tester sollten die Visualisierung und Erklärung verstehen. Wir möchten eine Basisversion der Visualisierung in der gegebenen Zeit erreichen.
-
+% =============================================================================
 \section{Implementierung}
+% =============================================================================
+Für das Projekt wurde mit Javascript und der Markup Sprache Idyll eine GitHub Page \cite{gitpage} erstellt.
+Die theoretischen Beschreibungen aus unserem Ansatz wurden anhand eines konkretes Beispiels erklärt und visualisiert. 
+
 Fotos, vorher - nachher
+\begin{figure}[ht!]
+  \centering
+  \fbox{
+  \includegraphics[width=0.7\linewidth, height=0.7\linewidth]{img/attr.png}}
+  \caption{Whitebox Beispiel mit veränderbaren Parametern}
+  \label{fig:whitebox}
+\end{figure}
 
+\begin{figure}[ht!]
+  \centering
+  \fbox{
+  \includegraphics[width=0.7\linewidth, height=0.7\linewidth]{img/pot.png}}
+  \caption{Whitebox Beispiel mit veränderbaren Parametern}
+  \label{fig:whitebox}
+\end{figure}
+
+\begin{figure}[ht!]
+  \centering
+  \fbox{
+  \includegraphics[width=0.7\linewidth, height=0.7\linewidth]{img/rep.png}}
+  \caption{Whitebox Beispiel mit veränderbaren Parametern}
+  \label{fig:whitebox}
+\end{figure}
+
+\begin{figure}[ht!]
+  \centering
+  \includegraphics[width=0.7\linewidth, height=0.7\linewidth]{img/sim1.png}
+  \caption{Whitebox Beispiel mit veränderbaren Parametern}
+  \label{fig:whitebox}
+\end{figure}
+
+\begin{figure}[ht!]
+  \centering
+  \includegraphics[width=0.7\linewidth, height=0.7\linewidth]{img/sim2.png}
+  \caption{Whitebox Beispiel mit veränderbaren Parametern}
+  \label{fig:whitebox}
+\end{figure}
+
+
+\begin{figure*}
+\centering
+\begin{minipage}[b]{.48\textwidth}
+\centering
+\includegraphics[width=0.8\linewidth, height=0.8\linewidth]{img/sim1.png}
+\caption{Caption}\label{label-a}
+\end{minipage}\hfill
+\begin{minipage}[b]{.48\textwidth}
+\centering
+\includegraphics[width=0.8\linewidth, height=0.8\linewidth]{img/sim2.png}
+\caption{Caption}\label{label-b}
+\end{minipage}
+\caption{Unterschrift für beide Bidler}
+\end{figure*}
 \subsection{Design Rationals}
-
+\begin{itemize}
+\item fokus auf lesen nicht direkt animation
+\item schritt für schritt (aufbauend erklren)
+\item star wars für roboter und ist ein cooles beispiel
+\item farben der roboter (blau roboter, gelb ziel, rot aktives hindernis)
+\item eye over memory
+\item 3d abhang um potentiale zu verdeutlichen
+\item facetten (skript gucken)
+\end{itemize}
+Für die Erklärung des Algorithmus wurde ein schrittweiser Aufbau gewählt. Anstatt die Animation der Pfadplanung direkt zu zeigen wird das Beispiel zunächst schriftlich erklärt. Ziel ist es, den Benutzer auf 
 \subsection{Differenz zu Prototyp}
 Static BB ist rausgefallen
 
-
+% =============================================================================
 \section{Evaluation}
+% =============================================================================
 %TODO hier müssen wir unbedingt noch was reinschreiben
+Informatikgruppe 3+: \\
+P1:
+\begin{itemize}
+\item verständlich dank animation
+\item animation war anschaulich
+\item parameter spielen war gut
+\item star wars
+\item animation zu den kräften
+\item parametererklärung besser unterteilen
+\end{itemize}
 
 \subsection{Cognitive Walkthrough}
 
 \subsection{Tester}
 
+% =============================================================================
 \section{Diskussion}
+% =============================================================================
 Abgleich mit Zielen
 Was haben wir erreicht?
 Wie waren die Testergebnisse?
