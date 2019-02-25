@@ -30,6 +30,7 @@ attractiveForce(robot,goal)
 	//F_Att = -e * (robot-qG) / norm(robot-goal); #quadratic
 	var normTerm = direction.magnitude();
 	var result = Vector.scale(direction, (-e / normTerm));
+	console.log("attr ",result.x, result.y);
 	return result;
 }
 
@@ -42,14 +43,18 @@ repulsiveForce(robot, obstacle)
 	var direction = Vector.subtract(robot, obstacle);
 	var distance = direction.magnitude() - radius;
 
-	if (distance > influenceRange) {
+	if (distance >= influenceRange) {
 		return new Vector([0,0]);
 	} else {
-		var firstTerm = ((1./distance) - (1./influenceRange));
+		var firstTerm = Math.abs((1./distance) - (1./influenceRange));
+		console.log("f1 ",firstTerm);
 		var secondTerm = (1./(distance*distance));
+		console.log("f2 ",secondTerm);
 		var thirdTerm = (1./direction.magnitude());
+		console.log("f3 ",thirdTerm);
 		var factor = firstTerm * secondTerm * thirdTerm * n;
 		var force = Vector.scale(direction, factor);
+		console.log("rep",force.x, force.y);
 		return force;
 	}
 }
@@ -102,6 +107,7 @@ updateRobotPosition()
 
 	// Apply step size
 	repulsiveVector.scale(this.inStepSize / repulsiveVector.magnitude());
+	console.log("force ",repulsiveVector.x, repulsiveVector.y);
 
 	// Add to position
 	robotPosition.add(repulsiveVector);

@@ -190,7 +190,7 @@ Verschiebe die Regler [em]Abstoßungskraft[/em] und [em]Hindernisseinflussbereic
 
 [p]
   [em]Hindernisseinflussbereich[/em] [Equation]\phi[/Equation]
-	[Range value:influence_range min:0 max:400 /]
+	[Range value:influence_range min:1 max:400 /]
   [Display value:influence_range/]
 [/p]
 
@@ -244,7 +244,7 @@ Mit dem Hinderniseinflussbereich kannst du verändern, wann der Roboter ein Hind
 
 [p]
   [em]Hinderniseinflussbereich[/em] [Equation]\phi[/Equation]
-	[Range value:influence_range min:0 max:400 /]
+	[Range value:influence_range min:1 max:400 /]
   [Display value:influence_range/]
 [/p]
 

@@ -45,7 +45,7 @@ repulsiveForce(robot, obstacle)
 	if (distance > influenceRange) {
 		return new Vector([0,0]);
 	} else {
-		var firstTerm = ((1./distance) - (1./influenceRange));
+		var firstTerm = Math.abs((1./distance) - (1./influenceRange));
 		var secondTerm = (1./(distance*distance));
 		var thirdTerm = (1./direction.magnitude());
 		var factor = firstTerm * secondTerm * thirdTerm * n;
