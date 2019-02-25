@@ -21,7 +21,7 @@ Der Algorithmus wird im Modul \textit{Robotik} gelehrt und wird auch in der mode
 % =============================================================================
 \section{Algorithmus}\label{sec:algo}
 % =============================================================================
-%TODO Till
+
 Der Algorithmus \textit{Potential Fields Method} nutzt einfache physikalische Elemente zur Vermeidung von Kollisionen mit einem Hindernis.
 
 \subsection{Beschreibung}
@@ -46,9 +46,13 @@ Dies ist das Ziel des Roboters.
 Dadurch wird dafür gesorgt, dass der Roboter sich in Richtung des Ziels $q_z$ bewegt.
 Hierfür gibt es verschiedene Variationen, die hier beschriebene Variante nennt sich \textit{konisch} \cite{Formulars}.
 \begin{equation}
-	F_{\text{anziehend}}(q_r, q_z) = - \epsilon \cdot \frac{q_r - q_z}{\lvert q_r - q_z \rvert}
+	F_{\text{anziehend}}(q_r, q_z)= -U_{\text{anziehend}}(q_r, q_g) \cdot (q_r - q_z)
 \end{equation}
-Es wird ein Vektor in Richtung des Ziels bestimmt und gewichtet. Dabei gibt es den Parameter $\epsilon$, mit dem die anziehende Kraft verstärkt oder abgeschwächt werden kann.
+
+\begin{equation}
+	U_{\text{anziehend}}(q_r, q_z) = - \epsilon \cdot \frac{1}{\lvert\lvert q_r - q_z \rvert\rvert}
+\end{equation}
+Es wird ein Vektor in Richtung des Ziels bestimmt und mit dem Potential $U_{\text{anziehend}}(q_r, q_z)$ gewichtet. Dabei gibt es den Parameter $\epsilon$, mit dem die anziehende Kraft verstärkt oder abgeschwächt werden kann.
 \newline
 Nutzt man nur die anziehende Kraft $F_{\text{anziehend}}(q_r, q_z)$, bewegt sich der Roboter zwar zum Ziel, ignoriert auf seinem Weg allerdings jegliche Hindernisse.
 Um dem entgegen zu wirken, geht auch von den Hindernissen eine Kraft aus: $F_{\text {abstoßend}}(q_r, q_h)$.
@@ -57,14 +61,18 @@ Diese wird für das Hindernis mit dem kleinsten Abstand $p(q_r)$ mit Konfigurati
 	F_{\text{abstoßend}}(q_r, q_h) =
 	\begin{cases}
     [0,0] ,& \text{if } \phi > p(q_r)\\
-     \theta \cdot F_{\text{Erkennung}} \cdot F_{\text{Entfernung}} \cdot \frac{q_r - q_o}{ \lvert q_r - q_o \rvert },               & \text{otherwise}
+    U_{\text{abstoßend}}(q_r, q_h) \cdot (q_r-q_h),               & \text{otherwise}
 \end{cases}
 \end{equation}
+
 \begin{equation}
- F_{\text{Erkennung}} = \left( \frac{1}{\lvert p(q_r) \rvert} - \frac{1}{\phi} \right)
+     U_{\text{abstoßend}} = \theta \cdot U_{\text{Erkennung}} \cdot U_{\text{Entfernung}} \cdot \frac{1}{ \lvert q_r - q_o \rvert }
 \end{equation}
 \begin{equation}
-F_{\text{Entfernung}} = \frac{1}{p(q_r)^2}
+ U_{\text{Erkennung}} = \left( \frac{1}{\lvert p(q_r) \rvert} - \frac{1}{\phi} \right)
+\end{equation}
+\begin{equation}
+U_{\text{Entfernung}} = \frac{1}{p(q_r)^2}
 \end{equation}
 
 \begin{figure}
@@ -75,14 +83,15 @@ F_{\text{Entfernung}} = \frac{1}{p(q_r)^2}
 \end{figure}
 
 Das bedeutet, dass die abstoßende Kraft nur angewandt wird, wenn $p(q_r) \leq \phi$ ist. 
+Dann wird wieder ein Richtungsvector bestimmt und mit dem Potential $U_{\text{abstoßend}}(q_r, q_h)$ gewichtet.
 Dadurch beginnt der Roboter dem Hindernis erst auszuweichen, wenn der Grenzwert $\phi$ überschritten wird.
 Der Roboter erkennt also Hindernisse in einem Abstand von $\phi$.
 Durch dieses Verhalten soll ein kürzerer Weg zum Ziel erreicht werden.
 
 $\theta$ ist hier das Äquivalent von $\epsilon$ für Hindernisse. 
 Es dient zur allgemeinen Veränderung der abstoßenden Kraft.
-Mit $F_{\text{Erkennung}}$ wird die Stärke der Kraft relativ zu einer Grenze $\phi$ bestimmt.
-Der letzte Term $F_{\text{Entfernung}}$ skaliert die Kraft im Verhältnis zur Entfernung des Hindernisses. Je näher es ist, desto stärker wird die abstoßende Kraft.
+Mit $U_{\text{Erkennung}}$ wird die Stärke der Kraft relativ zu einer Grenze $\phi$ bestimmt.
+Der letzte Term $U_{\text{Entfernung}}$ skaliert die Kraft im Verhältnis zur Entfernung des Hindernisses. Je näher es ist, desto stärker wird die abstoßende Kraft.
 
 Die einzelnen Parameter sind in Bild~\vref{fig:params} verdeutlicht.
 
@@ -315,7 +324,6 @@ Fotos, vorher - nachher
 \caption{Unterschrift für beide Bidler}
 \end{figure*}
 \subsection{Design Rationals}
-%TODO Micha
 \begin{itemize}
 \item fokus auf lesen nicht direkt animation
 \item schritt für schritt (aufbauend erklren)
@@ -325,17 +333,14 @@ Fotos, vorher - nachher
 \item 3d abhang um potentiale zu verdeutlichen
 \item facetten (skript gucken)
 \end{itemize}
-Für die Erklärung des Algorithmus wurde ein schrittweiser Aufbau gewählt. Anstatt die Animation der Pfadplanung direkt zu zeigen wird das Beispiel zunächst schriftlich erklärt. Ziel ist es, den Fokus des Benutzers auf die Erklärung zu lenken, da Animationen das Potential zur Ablenkung haben.
-Als anschauliches Beispiel wurde das Thema Star Wars mit den Robotern C3PO und R2D2 gewählt. Star Wars ist den meisten Menschen ein Begriff. In unserem Beispiel möchte R2D2
+Für die Erklärung des Algorithmus wurde ein schrittweiser Aufbau gewählt. Anstatt die Animation der Pfadplanung direkt zu zeigen wird das Beispiel zunächst schriftlich erklärt. Ziel ist es, den Benutzer auf 
 \subsection{Differenz zu Prototyp}
-%TODO Till
 Static BB ist rausgefallen
 
 % =============================================================================
 \section{Evaluation}
 % =============================================================================
 %TODO hier müssen wir unbedingt noch was reinschreiben
-%TODO Anahid
 Informatikgruppe 3+: \\
 P1:
 \begin{itemize}
@@ -350,11 +355,14 @@ P1:
 \subsection{Cognitive Walkthrough}
 
 \subsection{Tester}
+%Flip:
+% Hat lokal minima problem herausgefunden
+% Reset-Button waere gut
+% Fancy statistiken in simulation
 
 % =============================================================================
 \section{Diskussion}
 % =============================================================================
-%TODO alle
 Abgleich mit Zielen
 Was haben wir erreicht?
 Wie waren die Testergebnisse?
