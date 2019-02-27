@@ -286,17 +286,17 @@ Für die Erklärung des Algorithmus wurde ein schrittweiser Aufbau gewählt. Nac
 Für ein besseres Verständnis dient das Thema Star Wars mit den Robotern C3PO und R2D2. Den meisten Menschen ist Star Wars ein Begriff, weshalb das Beispiel intuitiv verstanden wird. Der Roboter R2D2 möchte zu seinem Freund C3PO, möglichst ohne die Aufmerksamkeit seiner Gegner auf sich zu ziehen.
 C3PO ist eine Metapher für das Ziel und dessen Anziehungskraft. Die Gegner als Metapher für Hindernisse mit einem Einflussbereich und einer Abstoßungskraft.
 Anstatt die \textit{Potential Fields Method} theoretisch mit mathematischen Formeln aufzubauen, haben wir diesen Ansatz gewählt. Die verständliche Metapher erleichtert die Erklärung uns regt zugleich das Interesse und die Motivation an.
-Die Einstiegsabbildung zeigt R2D2 (blau markiert) und C3PO (gelb) mit einigen Gegnern zwischen den Beiden (Abbildung \ref{fig:sw_blackbox}).
+Die Einstiegsabbildung zeigt R2D2 (blau markiert) und C3PO (gelb) mit einigen Gegnern zwischen den Beiden.
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=0.7\linewidth, height=0.7\linewidth]{img/sim2.png}
+  \includegraphics[width=0.8\linewidth, height=0.8\linewidth]{img/sim2b.png}
   \caption{Blackbox Beispiel mit veränderbaren Parametern}
   \label{fig:sw_blackbox}
 \end{figure}
 
 Nach der Erklärung des Beispiels folgt eine Überleitung zum theoretischen Teil. In dieser Überleitung ("Der Algorithmus") wird der Nutzer noch einmal darauf hingewiesen, dass die \textit{Potential Fields Method} einen physikalischen Hintergrund hat und wie der Zusammenhang zu den Objekten in der Abbildung ist.
-Der Nutzer wird erst an dieser Stelle explizit auf die Möglichkeit aufmerksam gemacht, dass das Einstiegsabbildung eine interaktive Animation ist. Der Nutzer kann diese starten, pausieren und fortsetzen, die Objekte verschieben und so neue Szenarien kreieren. Der zurückgelegte Pfad von R2D2 wird als blaue Linie visualisiert. Sobald R2D2 seinen Freund C3PO erreicht, startet die Animation von vorne. Der alte Pfad wird transparenter dargestellt, um den Unterschied zu einem neuen Szenario zu verdeutlichen. Dies ist darauf begründet, dass ein Nutzer sich den Unterschied nicht merken muss und dadurch verständlicher wird ("Eye over Memory" \cite{munzner2015visualization}).
+Der Nutzer wird erst an dieser Stelle explizit auf die Möglichkeit aufmerksam gemacht, dass die Einstiegsabbildung eine interaktive Animation (Abbildung \ref{fig:sw_blackbox}) ist. Der Nutzer kann diese starten, pausieren und fortsetzen, die Objekte verschieben und so neue Szenarien kreieren. Der zurückgelegte Pfad von R2D2 wird als blaue Linie visualisiert. Sobald R2D2 seinen Freund C3PO erreicht, startet die Animation von vorne. Der alte Pfad wird transparenter dargestellt, um den Unterschied zu einem neuen Szenario zu verdeutlichen. Dies ist darauf begründet, dass ein Nutzer sich den Unterschied nicht merken muss und dadurch verständlicher wird ("Eye over Memory" \cite{munzner2015visualization}).
 
 Wir haben diesen Blackbox-Ansatz gewählt, um das Verständnis über das beschriebene Beispiel durch die interaktive Animation zu festigen. Dem interessierten Nutzer stellen sich nun Fragen bezüglich des Algorithmus, vor allem wie die \textit{Potential Fields Method} funktioniert.
 
@@ -314,7 +314,7 @@ Um das Verständnis der Potentialfelder zu veranschaulichen dienen sogenannte Su
 \begin{figure}[h!]
   \centering
   \fbox{
-  \includegraphics[width=0.7\linewidth, height=0.7\linewidth]{img/attr.png}}
+  \includegraphics[width=0.8\linewidth, height=0.8\linewidth]{img/attr.png}}
   \caption{Das anziehende Potential}
   \label{fig:surf_attr}
 \end{figure}
@@ -323,7 +323,7 @@ Das Potentialfeld für die abstoßende Kraft und den Einflussbereich des Hindern
 \begin{figure}[h!]
   \centering
   \fbox{
-  \includegraphics[width=0.7\linewidth, height=0.7\linewidth]{img/rep.png}}
+  \includegraphics[width=0.8\linewidth, height=0.8\linewidth]{img/rep.png}}
   \caption{Whitebox Beispiel mit veränderbaren Parametern}
   \label{fig:surf_rep}
 \end{figure}
@@ -350,7 +350,7 @@ Darüber hinaus soll die Gegenüberstellung und gleichzeitige Verknüpfung von S
 \end{minipage}\hfill
 \begin{minipage}[t]{.48\textwidth}
 \centering
-\includegraphics[width=0.8\linewidth, height=0.8\linewidth]{img/sim1.png}
+\includegraphics[width=0.8\linewidth, height=0.8\linewidth]{img/sim1b.png}
 \caption{Whitebox Beispiel mit veränderbaren Parametern}\label{fig:sw_whitebox}
 \end{minipage}
 \caption{Potentialfelder und Szenario werden nebeneinander dargestellt}
