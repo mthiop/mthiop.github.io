@@ -102,8 +102,7 @@ Schauen wir uns nun an wie die Kraft bestimmt wird:
 
 
 [Equation]F(q_r)[/Equation] besteht aus zwei Komponenten. Zum einen ist  [Equation]F_{\text{anziehend}(q_r, q_z)}[/Equation] die anziehende Kraft des
-Roboters in die Richtung des Ziels. Das Ziel hat dabei die Position
-[Equation]q_z[/Equation].
+Roboters in die Richtung des Ziels. Das Ziel hat dabei die Position [Equation]q_z[/Equation].
 Zum Anderen beschreibt [Equation]F_{\text{abstoßend}(q_r, q_h)}[/Equation] die
 abstoßende Kraft des nächsten Hindernisses. Das Hindernis hat dabei die Position [Equation]q_h[/Equation].
 Es wird immer nur das Hindernis mit dem kleinsten Abstand zum Roboter betrachtet.
@@ -143,7 +142,7 @@ Beobachte wie sich das Gefälle und das Verhalten des Roboters verändert.
 
 [DebugComponentAttr rep_factor:rep_factor attr_factor:attr_factor influence_range:influence_range steps:step_size /]
 
-Damit der Roboter zum Ziel kommt, aber nicht mit möglichen Hinernissen kollidiert, geht von den Hindernissen die Kraft [Equation]F_{\text{abstoßend}}[/Equation] ab.
+Damit der Roboter zum Ziel kommt, aber nicht mit möglichen Hindernissen kollidiert, geht von den Hindernissen die Kraft [Equation]F_{\text{abstoßend}}[/Equation] ab.
 Auch die abstoßende Kraft ist auch in zwei Terme unterteilt:
 
 [Equation]F_{\text{abstoßend}}(q_r, q_h)= U_{\text{abstoßend}} * (q_r-q_h)[/Equation].
