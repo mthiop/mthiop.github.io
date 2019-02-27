@@ -286,7 +286,7 @@ Für die Erklärung des Algorithmus wurde ein schrittweiser Aufbau gewählt. Nac
 Für ein besseres Verständnis dient das Thema Star Wars mit den Robotern C3PO und R2D2. Den meisten Menschen ist Star Wars ein Begriff, weshalb das Beispiel intuitiv verstanden wird. Der Roboter R2D2 möchte zu seinem Freund C3PO, möglichst ohne die Aufmerksamkeit seiner Gegner auf sich zu ziehen.
 C3PO ist eine Metapher für das Ziel und dessen Anziehungskraft. Die Gegner als Metapher für Hindernisse mit einem Einflussbereich und einer Abstoßungskraft.
 Anstatt die Potential Fields Methode theoretisch mit mathematischen Formeln aufzubauen, haben wir diesen Ansatz gewählt. Die verständliche Metapher erleichtert die Erklärung uns regt zugleich das Interesse und die Motivation an.
-Das Einstiegsbild zeigt R2D2 (blau markiert) und C3PO (gelb) mit einigen Gegnern zwischen den Beiden (Figure \ref{fig:sw_blackbox}).
+Das Einstiegsbild zeigt R2D2 (blau markiert) und C3PO (gelb) mit einigen Gegnern zwischen den Beiden (Bild \ref{fig:sw_blackbox}).
 
 \begin{figure}[h!]
   \centering
@@ -300,7 +300,7 @@ Der Nutzer wird erst an dieser Stelle explizit auf die Möglichkeit aufmerksam g
 
 Wir haben diesen Blackbox-Ansatz gewählt, um das Verständnis über das beschriebene Beispiel durch die interaktive Animation zu festigen. Dem interessierten Nutzer stellen sich nun Fragen bezüglich des Algorithmus, vor allem wie die Potential Fields Method funktioniert.
 
-In dem Abschnitt "Parametererklärung" wird der Algorithmus im Whitebox-Verfahren erklärt, d.h. der Nutzer wird nun mit mathematischen Formel und deren Auswirkungen konfrontiert. Die vorherige Animation wird durch ein simpleres und nicht veränderbares Szenario ersetzt (Figure \ref{fig:sw_whitebox}). 
+In dem Abschnitt "Parametererklärung" wird der Algorithmus im Whitebox-Verfahren erklärt, d.h. der Nutzer wird nun mit mathematischen Formel und deren Auswirkungen konfrontiert. Die vorherige Animation wird durch ein simpleres und nicht veränderbares Szenario ersetzt (Bild \ref{fig:sw_whitebox}). 
 %\begin{figure}[h!]
 %  \centering
 %  \includegraphics[width=0.7\linewidth, height=0.7\linewidth]{img/sim1.png}
@@ -310,7 +310,7 @@ In dem Abschnitt "Parametererklärung" wird der Algorithmus im Whitebox-Verfahre
 Das Szenario zeigt nun die Roboter R2D2 und C3PO und einen Gegner. R2D2 muss nur noch ein Hindernis umfahren, wodurch die folgende Erklärung mit ihren mathematischen Formeln anschaulicher vermittelt werden kann.
 
 Die grundlegende Formel \ref{eq:grad_field} und die zwei Terme (Formel \ref{eq:grad_attr} und \ref{eq:grad_rep}) werden beschrieben.
-Um das Verständnis der Potentialfelder zu veranschaulichen dienen sogenannte Surface Plots. Die Surface Plots sind so gewählt, dass sie das Szenario abbilden. Das anziehende Potentialfeld (Figure \ref{fig:surf_attr}) kann als Abhang verstanden werden, wobei das Tal das Ziel und das Gefälle die Anziehungskraft darstellt.
+Um das Verständnis der Potentialfelder zu veranschaulichen dienen sogenannte Surface Plots. Die Surface Plots sind so gewählt, dass sie das Szenario abbilden. Das anziehende Potentialfeld (Bild \ref{fig:surf_attr}) kann als Abhang verstanden werden, wobei das Tal das Ziel und das Gefälle die Anziehungskraft darstellt.
 \begin{figure}[h!]
   \centering
   \fbox{
@@ -319,7 +319,7 @@ Um das Verständnis der Potentialfelder zu veranschaulichen dienen sogenannte Su
   \label{fig:surf_attr}
 \end{figure}
 Der Nutzer hat die Möglichkeit über einen Regler den Parameter $\epsilon$ (Formel \ref{eq:pot_attr}) zu verändern und sieht unmittelbar die Auswirkungen im Surface Plot und im Szenario. 
-Das Potentialfeld für die abstoßende Kraft und den Einflussbereich des Hindernisses kann als Berg auf einer Ebene verstanden werden (Figure \ref{fig:surf_rep}). Die Parameter $\theta$ und $\phi$ (Formel \ref{eq:pot_rep}) können ebenfalls über Regler angepasst werden. Auch hier sind die Auswirkungen im Surface Plot und im Szenario sichtbar.
+Das Potentialfeld für die abstoßende Kraft und den Einflussbereich des Hindernisses kann als Berg auf einer Ebene verstanden werden (Bild \ref{fig:surf_rep}). Die Parameter $\theta$ und $\phi$ (Formel \ref{eq:pot_rep}) können ebenfalls über Regler angepasst werden. Auch hier sind die Auswirkungen im Surface Plot und im Szenario sichtbar.
 \begin{figure}[h!]
   \centering
   \fbox{
@@ -327,7 +327,7 @@ Das Potentialfeld für die abstoßende Kraft und den Einflussbereich des Hindern
   \caption{Whitebox Beispiel mit veränderbaren Parametern}
   \label{fig:surf_rep}
 \end{figure}
-Zum Abschluss der Erklärung wird die Kombination von anziehendem und abstoßendem Potentialfeld visualisiert (Figure \ref{fig:surf_pot}).
+Zum Abschluss der Erklärung wird die Kombination von anziehendem und abstoßendem Potentialfeld visualisiert (Bild \ref{fig:surf_pot}).
 %\begin{figure}[h!]
 %  \centering
 %  \fbox{
@@ -336,7 +336,7 @@ Zum Abschluss der Erklärung wird die Kombination von anziehendem und abstoßend
 %  \label{fig:surf_pot}
 %\end{figure}
 
-Surface Plots und Szenario werden nebeneinander angezeigt  (Figure \ref{fig:combi}).
+Surface Plots und Szenario werden nebeneinander angezeigt  (Bild \ref{fig:combi}).
 Der Unterschied zu einem vorherigem Durchlauf der Animation wird auch hier durch eine transparentere blaue Linie visualisiert. Zusätzlich wird die Erklärung für die rote Markierung der Gegner erklärt. Diese spiegelt das nächstliegende Hindernis von R2D2 dar. 
 Die gewählten Surface Plots sind keine neue Visualisierung für Potentialfelder. Wir haben sie dennoch gewählt, da die Surface Plots sehr anschaulich die Potentiale vermitteln. Im Gegensatz zu den Beispielen \ref{fig:other_pyrob}, \ref{fig:other_mcgill} und\ref{fig:other_elec} benötigt der Nutzer keine Vorkenntnisse zum Interpretieren von Vektorfeldern, Farbkarten oder elektrischen Feldern. Die Analogie der Potentialfelder zu Tal und Berg ist intuitiv und leicht verständlich.
 Darüber hinaus soll die Gegenüberstellung und gleichzeitige Verknüpfung von Surface Plot und Szenario das Verständnis fördern.
