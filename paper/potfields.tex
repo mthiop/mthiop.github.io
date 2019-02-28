@@ -267,24 +267,24 @@ Das Ziel des Projektes war bis zum 14.02.2019 die visuelle Darstellung und Erkl�
 \section{Implementierung}
 % =============================================================================
 Für das Projekt wurde mit Javascript und der Markup Sprache Idyll eine GitHub Page \cite{gitpage} erstellt.
-Die theoretischen Beschreibungen aus unserem Ansatz wurden anhand eines konkretes Beispiels erklärt und visualisiert. 
+Die theoretischen Beschreibungen aus unserem Ansatz wurden anhand eines konkreten Beispiels erklärt und visualisiert. 
 
 
 
 \subsection{Design Rationals}
-\begin{itemize}
-\item fokus auf lesen nicht direkt animation
-\item schritt für schritt (aufbauend erklren)
-\item star wars für roboter und ist ein cooles beispiel
-\item farben der roboter (blau roboter, gelb ziel, rot aktives hindernis)
-\item eye over memory
-\item 3d abhang um potentiale zu verdeutlichen
-\item facetten (skript gucken)
-\end{itemize}
+%\begin{itemize}
+%\item fokus auf lesen nicht direkt animation
+%\item schritt für schritt (aufbauend erklren)
+%\item star wars für roboter und ist ein cooles beispiel
+%\item farben der roboter (blau roboter, gelb ziel, rot aktives hindernis)
+%\item eye over memory
+%\item 3d abhang um potentiale zu verdeutlichen
+%\item facetten (skript gucken)
+%\end{itemize}
 Für die Erklärung des Algorithmus wurde ein schrittweiser Aufbau gewählt. Nach einer kurzen Einführung in das Thema, wird die Problemstellung anhand eines Beispiels beschrieben. Anstatt die Animation der Pfadplanung direkt zu zeigen wird das Beispiel zunächst schriftlich anhand einer Abbildung erklärt. Ziel ist es, den Benutzer auf den Text zu lenken, da die Animation selbst nur ein unterstützendes Mittel der Erklärung ist.
 Für ein besseres Verständnis dient das Thema Star Wars mit den Robotern C3PO und R2D2. Den meisten Menschen ist Star Wars ein Begriff, weshalb das Beispiel intuitiv verstanden wird. Der Roboter R2D2 möchte zu seinem Freund C3PO, möglichst ohne die Aufmerksamkeit seiner Gegner auf sich zu ziehen.
 C3PO ist eine Metapher für das Ziel und dessen Anziehungskraft. Die Gegner als Metapher für Hindernisse mit einem Einflussbereich und einer Abstoßungskraft.
-Anstatt die \textit{Potential Fields Method} theoretisch mit mathematischen Formeln aufzubauen, haben wir diesen Ansatz gewählt. Die verständliche Metapher erleichtert die Erklärung uns regt zugleich das Interesse und die Motivation an.
+Anstatt die \textit{Potential Fields Method} theoretisch mit mathematischen Formeln aufzubauen, haben wir diesen Ansatz gewählt. Die verständliche Metapher erleichtert die Erklärung und regt zugleich das Interesse und die Motivation an.
 Die Einstiegsabbildung zeigt R2D2 (blau markiert) und C3PO (gelb) mit einigen Gegnern zwischen den Beiden.
 
 \begin{figure}[h!]
@@ -299,7 +299,7 @@ Der Nutzer wird erst an dieser Stelle explizit auf die Möglichkeit aufmerksam g
 
 Wir haben diesen Blackbox-Ansatz gewählt, um das Verständnis über das beschriebene Beispiel durch die interaktive Animation zu festigen. Dem interessierten Nutzer stellen sich nun Fragen bezüglich des Algorithmus, vor allem, wie die \textit{Potential Fields Method} funktioniert.
 
-In dem Abschnitt "Parametererklärung" wird der Algorithmus im Whitebox-Verfahren erklärt, d.h. der Nutzer wird nun mit mathematischen Formel und deren Auswirkungen konfrontiert. Die vorherige Animation wird durch ein simpleres und nicht veränderbares Szenario ersetzt (Abbildung \ref{fig:sw_whitebox}). 
+In dem Abschnitt "Parametererklärung" wird der Algorithmus im Whitebox-Verfahren erklärt, d.h. der Nutzer wird nun mit mathematischen Formeln und deren Auswirkungen konfrontiert. Die vorherige Animation wird durch ein simpleres und nicht veränderbares Szenario ersetzt (Abbildung \ref{fig:sw_whitebox}). 
 %\begin{figure}[h!]
 %  \centering
 %  \includegraphics[width=0.7\linewidth, height=0.7\linewidth]{img/sim1.png}
@@ -336,9 +336,9 @@ Zum Abschluss der Erklärung wird die Kombination von anziehendem und abstoßend
 %\end{figure}
 
 Surface Plots und Szenario werden nebeneinander angezeigt  (Abbildung \ref{fig:combi}).
-Der Unterschied zu einem vorherigem Durchlauf der Animation wird auch hier durch eine transparentere blaue Linie visualisiert. Zusätzlich wird die Erklärung für die rote Markierung der Gegner erklärt. Diese spiegelt das nächstliegende Hindernis von R2D2 dar. 
+Der Unterschied zu einem vorherigen Durchlauf der Animation wird auch hier durch eine transparentere blaue Linie visualisiert. Zusätzlich wird die Erklärung für die rote Markierung der Gegner erklärt. Diese stellt das nächstliegende Hindernis von R2D2 dar. 
 Die gewählten Surface Plots sind keine neue Visualisierung für Potentialfelder. Wir haben sie dennoch gewählt, da die Surface Plots sehr anschaulich die Potentiale vermitteln. Im Gegensatz zu den Beispielen \ref{fig:other_pyrob}, \ref{fig:other_mcgill} und \ref{fig:other_elec} benötigt der Nutzer keine Vorkenntnisse zum Interpretieren von Vektorfeldern, Farbkarten oder elektrischen Feldern. Die Analogie der Potentialfelder zu Tal und Berg ist intuitiv und leicht verständlich.
-Darüber hinaus soll die Gegenüberstellung und gleichzeitige Verknüpfung von Surface Plot und Szenario das Verständnis fördern.
+Darüber hinaus soll die Gegenüberstellung und gleichzeitige Verknüpfung von Surface Plot und Szenario, sowie die interaktive Benutzung das Verständnis fördern.
 
 \begin{figure*}
 \centering
@@ -356,7 +356,7 @@ Darüber hinaus soll die Gegenüberstellung und gleichzeitige Verknüpfung von S
 \label{fig:combi}
 \end{figure*}
 
-Am Ende des Projekts kann der Nutzer alle Parameter auf die ursprüngliche Animation anwenden und die Auswirkungen auf verschiedene, selbst erzeugte Szenarien sehen. Dabei wird er zwangsläufig auf Limitierungen des Algorithmus aufmerksam. Weitere Informationen werden über eine Weiterleitung auf andere Seite bereitgestellt.
+Am Ende des Projekts kann der Nutzer alle Parameter auf die ursprüngliche Animation anwenden und die Auswirkungen auf verschiedene, selbst erzeugte Szenarien sehen. Dabei wird er zwangsläufig auf Limitierungen des Algorithmus aufmerksam. Weitere Informationen werden über eine Weiterleitung auf eine andere Seite bereitgestellt.
 %TODO Limitierungen in IdyllPage einbauen (Vermerk oder Fragestellung).
 
 \subsection{Differenz zum Prototyp}
