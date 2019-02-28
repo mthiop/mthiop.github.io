@@ -190,7 +190,6 @@ Zunächst wird dem Nutzer in einer Einleitung das Problem der Pfadplanung erläu
 \end{figure}
 
 
-%TODO Einleitung die die Abschnitte/Gliederung erklaert
 Mit der ersten Visualisierung wird der Algorithmus allgemein vorgestellt und anhand einer Animation gezeigt. % und zur Problemerklärung!
 Abbildung~\vref{fig:bbstatic} stellt dafür ein Beispiel dar.  Dabei wird ein Roboter (bzw. ein Startobjekt) gezeigt, der sich in Richtung Ziel bewegt und die Hindernisse umgeht. Der zurückgelegte Weg wird nach und nach eingeblendet. Die Animation kann nicht verändert werden. Um die Animation zu steuern, gibt es einen Start- und Stoppknopf. Neben der Animation wird das Problem mit Text vorgestellt. % Zuerst das Problem
 \begin{figure}[ht!]
@@ -267,25 +266,24 @@ Das Ziel des Projektes war bis zum 14.02.2019 die visuelle Darstellung und Erkl�
 \section{Implementierung}
 % =============================================================================
 Für das Projekt wurde mit Javascript und der Markup Sprache Idyll eine GitHub Page \cite{gitpage} erstellt.
-Die theoretischen Beschreibungen aus unserem Ansatz wurden anhand eines konkretes Beispiels erklärt und visualisiert. 
+Die theoretischen Beschreibungen aus unserem Ansatz wurden anhand eines konkreten Beispiels erklärt und visualisiert. 
 
-Fotos, vorher - nachher
 
 
 \subsection{Design Rationals}
-\begin{itemize}
-\item fokus auf lesen nicht direkt animation
-\item schritt für schritt (aufbauend erklren)
-\item star wars für roboter und ist ein cooles beispiel
-\item farben der roboter (blau roboter, gelb ziel, rot aktives hindernis)
-\item eye over memory
-\item 3d abhang um potentiale zu verdeutlichen
-\item facetten (skript gucken)
-\end{itemize}
-Für die Erklärung des Algorithmus wurde ein schrittweiser Aufbau gewählt. Nach einer kurzen Einführung ins das Thema, wird die Problemstellung anhand eines Beispiels beschrieben. Anstatt die Animation der Pfadplanung direkt zu zeigen wird das Beispiel zunächst schriftlich anhand einer Abbildung erklärt. Ziel ist es, den Benutzer auf den Text zu lenken, da die Animation selbst nur ein unterstützendes Mittel der Erklärung ist.
+%\begin{itemize}
+%\item fokus auf lesen nicht direkt animation
+%\item schritt für schritt (aufbauend erklren)
+%\item star wars für roboter und ist ein cooles beispiel
+%\item farben der roboter (blau roboter, gelb ziel, rot aktives hindernis)
+%\item eye over memory
+%\item 3d abhang um potentiale zu verdeutlichen
+%\item facetten (skript gucken)
+%\end{itemize}
+Für die Erklärung des Algorithmus wurde ein schrittweiser Aufbau gewählt. Nach einer kurzen Einführung in das Thema, wird die Problemstellung anhand eines Beispiels beschrieben. Anstatt die Animation der Pfadplanung direkt zu zeigen wird das Beispiel zunächst schriftlich anhand einer Abbildung erklärt. Ziel ist es, den Benutzer auf den Text zu lenken, da die Animation selbst nur ein unterstützendes Mittel der Erklärung ist.
 Für ein besseres Verständnis dient das Thema Star Wars mit den Robotern C3PO und R2D2. Den meisten Menschen ist Star Wars ein Begriff, weshalb das Beispiel intuitiv verstanden wird. Der Roboter R2D2 möchte zu seinem Freund C3PO, möglichst ohne die Aufmerksamkeit seiner Gegner auf sich zu ziehen.
 C3PO ist eine Metapher für das Ziel und dessen Anziehungskraft. Die Gegner als Metapher für Hindernisse mit einem Einflussbereich und einer Abstoßungskraft.
-Anstatt die \textit{Potential Fields Method} theoretisch mit mathematischen Formeln aufzubauen, haben wir diesen Ansatz gewählt. Die verständliche Metapher erleichtert die Erklärung uns regt zugleich das Interesse und die Motivation an.
+Anstatt die \textit{Potential Fields Method} theoretisch mit mathematischen Formeln aufzubauen, haben wir diesen Ansatz gewählt. Die verständliche Metapher erleichtert die Erklärung und regt zugleich das Interesse und die Motivation an.
 Die Einstiegsabbildung zeigt R2D2 (blau markiert) und C3PO (gelb) mit einigen Gegnern zwischen den Beiden.
 
 \begin{figure}[h!]
@@ -298,9 +296,9 @@ Die Einstiegsabbildung zeigt R2D2 (blau markiert) und C3PO (gelb) mit einigen Ge
 Nach der Erklärung des Beispiels folgt eine Überleitung zum theoretischen Teil. In dieser Überleitung ("Der Algorithmus") wird der Nutzer noch einmal darauf hingewiesen, dass die \textit{Potential Fields Method} einen physikalischen Hintergrund hat und wie der Zusammenhang zu den Objekten in der Abbildung ist.
 Der Nutzer wird erst an dieser Stelle explizit auf die Möglichkeit aufmerksam gemacht, dass die Einstiegsabbildung eine interaktive Animation (Abbildung \ref{fig:sw_blackbox}) ist. Der Nutzer kann diese starten, pausieren und fortsetzen, die Objekte verschieben und so neue Szenarien kreieren. Der zurückgelegte Pfad von R2D2 wird als blaue Linie visualisiert. Sobald R2D2 seinen Freund C3PO erreicht, startet die Animation von vorne. Der alte Pfad wird transparenter dargestellt, um den Unterschied zu einem neuen Szenario zu verdeutlichen. Dies ist darauf begründet, dass ein Nutzer sich den Unterschied nicht merken muss und dadurch verständlicher wird ("Eye over Memory" \cite{munzner2015visualization}).
 
-Wir haben diesen Blackbox-Ansatz gewählt, um das Verständnis über das beschriebene Beispiel durch die interaktive Animation zu festigen. Dem interessierten Nutzer stellen sich nun Fragen bezüglich des Algorithmus, vor allem wie die \textit{Potential Fields Method} funktioniert.
+Wir haben diesen Blackbox-Ansatz gewählt, um das Verständnis über das beschriebene Beispiel durch die interaktive Animation zu festigen. Dem interessierten Nutzer stellen sich nun Fragen bezüglich des Algorithmus, vor allem, wie die \textit{Potential Fields Method} funktioniert.
 
-In dem Abschnitt "Parametererklärung" wird der Algorithmus im Whitebox-Verfahren erklärt, d.h. der Nutzer wird nun mit mathematischen Formel und deren Auswirkungen konfrontiert. Die vorherige Animation wird durch ein simpleres und nicht veränderbares Szenario ersetzt (Abbildung \ref{fig:sw_whitebox}). 
+In dem Abschnitt "Parametererklärung" wird der Algorithmus im Whitebox-Verfahren erklärt, d.h. der Nutzer wird nun mit mathematischen Formeln und deren Auswirkungen konfrontiert. Die vorherige Animation wird durch ein simpleres und nicht veränderbares Szenario ersetzt (Abbildung \ref{fig:sw_whitebox}). 
 %\begin{figure}[h!]
 %  \centering
 %  \includegraphics[width=0.7\linewidth, height=0.7\linewidth]{img/sim1.png}
@@ -337,9 +335,9 @@ Zum Abschluss der Erklärung wird die Kombination von anziehendem und abstoßend
 %\end{figure}
 
 Surface Plots und Szenario werden nebeneinander angezeigt  (Abbildung \ref{fig:combi}).
-Der Unterschied zu einem vorherigem Durchlauf der Animation wird auch hier durch eine transparentere blaue Linie visualisiert. Zusätzlich wird die Erklärung für die rote Markierung der Gegner erklärt. Diese spiegelt das nächstliegende Hindernis von R2D2 dar. 
+Der Unterschied zu einem vorherigen Durchlauf der Animation wird auch hier durch eine transparentere blaue Linie visualisiert. Zusätzlich wird die Erklärung für die rote Markierung der Gegner erklärt. Diese stellt das nächstliegende Hindernis von R2D2 dar. 
 Die gewählten Surface Plots sind keine neue Visualisierung für Potentialfelder. Wir haben sie dennoch gewählt, da die Surface Plots sehr anschaulich die Potentiale vermitteln. Im Gegensatz zu den Beispielen \ref{fig:other_pyrob}, \ref{fig:other_mcgill} und \ref{fig:other_elec} benötigt der Nutzer keine Vorkenntnisse zum Interpretieren von Vektorfeldern, Farbkarten oder elektrischen Feldern. Die Analogie der Potentialfelder zu Tal und Berg ist intuitiv und leicht verständlich.
-Darüber hinaus soll die Gegenüberstellung und gleichzeitige Verknüpfung von Surface Plot und Szenario das Verständnis fördern.
+Darüber hinaus soll die Gegenüberstellung und gleichzeitige Verknüpfung von Surface Plot und Szenario, sowie die interaktive Benutzung das Verständnis fördern.
 
 \begin{figure*}
 \centering
@@ -357,34 +355,25 @@ Darüber hinaus soll die Gegenüberstellung und gleichzeitige Verknüpfung von S
 \label{fig:combi}
 \end{figure*}
 
-Am Ende des Projekts kann der Nutzer alle Parameter auf die ursprüngliche Animation anwenden und die Auswirkungen auf verschiedene, selbst erzeugte Szenarien sehen. Dabei wird er zwangsläufig auf Limitierungen des Algorithmus aufmerksam. Weitere Informationen werden über eine Weiterleitung auf andere Seite bereitgestellt.
-%TODO Limitierungen in IdyllPage einbauen (Vermerk oder Fragestellung).
+Am Ende des Projekts kann der Nutzer alle Parameter auf die ursprüngliche Animation anwenden und die Auswirkungen auf verschiedene, selbst erzeugte Szenarien sehen. Dabei wird er zwangsläufig auf Limitierungen des Algorithmus aufmerksam. Weitere Informationen werden über eine Weiterleitung auf eine andere Seite bereitgestellt.
+
 
 \subsection{Differenz zum Prototyp}
 Unsere Implementierung hat ein paar Differenzen zum Prototyp.
-Da bei unserem Cognitive Walkthrough (\vref{sec:cogWal}) uns ein paar Unstimmigkeiten aufgefallen sind, haben wir sie sogleich verbessert.
+Da bei unserem Cognitive Walkthrough (Abschnitt \vref{sec:cogWal}) uns ein paar Unstimmigkeiten aufgefallen sind, haben wir sie sogleich verbessert.
 \begin{itemize}
 	\item Aufmerksamkeitsfluss: Wir haben den Aufmerksamkeitsfluss verändert, sodass die Simulation nicht von Anfang an spielt, sondern durch den Text gestartet werden muss. Da dies in der Presentation auf Kritik stoß, weil dieses Konzept didaktisch zu streng sei, haben wir zusätzlich noch einen Steuerknopf eingefügt. Dieser Knopf wird erst sichtbar, wenn der Nutzer etwas nach unten scrollt. Dadurch kann die Simulation auf intuitive Art auch ohne das Lesen des Textes gesteuert werden.
 	\item Metapher: Wir haben uns für eine Star Wars-Metapher entschieden, da diese Filme eine breite Zuschauerschaft haben und die Metapher somit allgeimein verständlich sein sollte. Diese Metapher haben wir auch bei der Erklärung im Text aufgegriffen.
 	\item Die Veränderung des Pfads durch das Benutzen von Parametern wurde aus der 3D-Abbildung genommen und in die Star Wars-Metapher verlagert. Die 3D-Abbildung und die Beibehaltung der Star Wars-Metapher ermöglichen einen kontinuierlichen Erzählstrang der Seite.
-	\item Die Darstellung der Isokonturen mit lokalen Vektorfeldern wurde weggelassen, da sie unserer Ansicht nach die Seite zu sehr überlädt und keinen großen Nutzen zur Erklärung beiträgt. Auch hier kam der berechtigte Vorschlag diese zusätzliche Ansicht in das Star Wars-Beispiel zu integrieren, welche über einen Steuerknopf aktiviert/deaktiviert werden kann. In einer nächsten Version wäre über eine Implementierung nachzudenken.
+	\item Die Darstellung der Isokonturen mit lokalen Vektorfeldern wurde weggelassen, da sie unserer Ansicht nach die Seite zu sehr überlädt und keinen verbesserten Nutzen zur Erklärung beiträgt. Auch hier kam der berechtigte Vorschlag, diese zusätzliche Ansicht in das Star Wars-Beispiel zu integrieren, welche über einen Steuerknopf aktiviert/deaktiviert werden kann. In einer nächsten Version wäre über eine Implementierung nachzudenken.
 	\item Der Hinweis auf Probleme des Algorithmus werden nur noch mit einer Frage angedeutet. 
+	\item Ursprünglich hatten wir noch das Einfügen von mehr Hindernissen und dynamisch bewegliche Hindernisse angedacht. Allerdings hatten wir in Hinblick auf unsere Zeitplanung diese nur als Optionen vorgemerkt. Wie sich herausgestellt hat, haben wir die Zeit an anderer Stelle benötigt (Insbesondere Schwierigkeiten mit Idyll stellten sich als schwerer als gedacht dar.)
 \end{itemize}
 
 % =============================================================================
 \section{Evaluation}
 % =============================================================================
-%TODO hier müssen wir unbedingt noch was reinschreiben
-Informatikgruppe 3+: \\
-P1:
-\begin{itemize}
-\item verständlich dank animation
-\item animation war anschaulich
-\item parameter spielen war gut
-\item star wars
-\item animation zu den kräften
-\item parametererklärung besser unterteilen
-\end{itemize}
+
 
 P2: 1.Semester
 \begin{itemize}
@@ -402,22 +391,69 @@ Wir haben nach einer ersten Implementierung in der Gruppe einen Cognitive Walkth
 	\item Die abstrakte Darstellung der Objekte im Prototyp lädt nicht sehr zum Lernen ein. Es braucht eine gute Metapher um den Algorithmus und das Problem interessant zu machen.
 	\item Statische Blackbox: Die statische Blackbox hat die Aufmerksamkeit durch die Animation sehr stark angezogen. Keiner von uns hatte noch Lust den Text zu lesen. Stattdessen haben wir die Simulation gestartet und nur noch dem Roboter zugeschaut. Danach sind wir lieber zur nächsten Visualisierung übergegangen.
 	\item Whitebox: Das gleichzeitige Anzeigen von Erklärungstext, Surface Plot, Isokonturen mit Vektordarstellung und Beispiel-Szenario haben den einfachen und klaren Aufbau der Seite gestört. Sie war an dieser Stelle zu überladen.
-	\item Limitierungen: Durch das Erstellen von eigenen Szenarien, kann der Nutzer zügig auf diese stoßen. Für ein tiefer gehendes Verständnis muss sich der Nutzer noch detaillierter mit der \textit{Potential Fields Method} und ihren Variationen beschäftigen. Für einen ersten Einstieg in die Robotik fanden wir die subtile Andeutung auf Limitierungen des Algorithmus didaktisch sinnvoller, da Informatikstudenten und -studentinnen immer über Grenzfälle und Probleme von Algorithmen nachdenken sollten. Das bloße hinnehmen von Lösungen fördert nicht die Kritikbereitschaft, die in einigen Fällen angebracht wäre.
+	\item Limitierungen: Durch das Erstellen von eigenen Szenarien, kann der Nutzer zügig auf diese stoßen. Für ein tiefer gehendes Verständnis muss sich der Nutzer noch detaillierter mit der \textit{Potential Fields Method} und ihren Variationen beschäftigen. Für einen ersten Einstieg in die Robotik fanden wir die subtile Andeutung auf Limitierungen des Algorithmus didaktisch sinnvoller, da Informatikstudenten und -studentinnen immer über Grenzfälle und Probleme von Algorithmen nachdenken sollten. Das bloße Hinnehmen von Lösungen fördert nicht die Kritikbereitschaft.
 \end{itemize}
 
 \subsection{Tester}
+
+Wir haben verschiedene Gruppen getestet:
+
+Informatik-Interessierte (Abitur):%TODO Anahid vervollständigen
+\begin{itemize}
+	\item Griechische Buchstaben sind angsteinflößend
+	\item Mathematik wirkt immer noch abschreckend
+	\item Idee des Algorithmus wird klar
+	\item Simulation hilft beim Verständnis
+	\item Hinderniseinflussbereich in der Simulation wird missverstanden
+	\item Metapher wurde verstanden
+\end{itemize}
+
+Informatik-Studierende (1.-3. Semester):%TODO Anahid vervollständigen
+\begin{itemize}
+	\item Lokale Minima wurden selbstständig als Problem erkannt
+	\item Reset-Button für eine bessere Steuerung der Simulation wurde gewünscht
+	\item Statistiken in der Simulation (Zurückgelegter Weg, benötigte Zeit zum Ziel) würden eine noch spielerische Atmosphäre erzeugen
+	\item Motivation durch das Spielen
+\end{itemize}
+
+Informatik-Studierende (über dem  3. Semester):%TODO Anahid vervollständigen
+\begin{itemize}
+	\item Verständlich dank der Animation
+	\item Animation war anschaulich
+	\item Parameter spielen war gut
+	\item Star Wars ist eine gute Metapher
+	\item Animation zu den Kräften % Eh, What?
+	\item Parametererklärung könnte besser unterteilt werden
+\end{itemize}
+
 %Flip:
 % Hat lokal minima problem herausgefunden
 % Reset-Button waere gut
 % Fancy statistiken in simulation
 
-% =============================================================================
-\section{Diskussion}
-% =============================================================================
-Abgleich mit Zielen
-Was haben wir erreicht?
-Wie waren die Testergebnisse?
-Was haben wir gelernt?
-Was wuerden wir anders machen?
+%Wie waren die Testergebnisse?
+Die Tester ab dem dritten Semester haben sehr gut auf unsere Seite reagiert. Allerdings sind sie nicht Teil der Zielgruppe, deshalb überzeugt uns dieses Feedback nur von der inhaltlichen Richtigkeit unserer Applikation.
 
-Wo ist das Video und die Seite?
+In der Kategorie der 1.-3. Semester-Studierenden %TODO Anahid Auswertung tests
+
+% =============================================================================
+\section{Fazit}
+% =============================================================================
+%Abgleich mit Zielen
+%Was haben wir erreicht?
+Wir konnten innerhalb der vorgesehenen Zeit einen Prototypen entwickeln.
+Zur Präsentation am 14.02.2019 konnten wir den Prototypen präsentieren und in der Zeit bis zur Paperabgabe noch das Feedback der Präsentation einarbeiten.
+Dabei ist es uns gelungen eine leicht verständliche Metapher für das Problem zu finden und einzusetzen. 
+Wir haben beim Cognitive Walkthrough nach einer ersten Implementierung auch Schwächen des Prototyps gefunden. 
+Die Schwächen haben wir verbessert und die Änderungen vermerkt.
+
+%TODO Anahid Kurze Zusammenfasung von tester
+
+%Was haben wir gelernt?
+%Was wuerden wir anders machen?
+Während des Projekts ist uns klar geworden, dass wir mit dem Prototypen deutlich mehr Evaluierung hätten machen sollen. 
+Dadurch wären die Schwächen, die im Cognitive Walkthrough zu Tage kamen deutlich früher erkannt worden.
+Daher würden wir bei unserem nächsten Projekt deutlich mehr auf diesen Schritt achten.
+
+
+%Wo ist das Video und die Seite?
